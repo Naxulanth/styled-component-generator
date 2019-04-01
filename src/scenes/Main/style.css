@@ -1,0 +1,15 @@
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+.pad {
+    padding-bottom: 70px;
+    padding-top: 20px;
+  }

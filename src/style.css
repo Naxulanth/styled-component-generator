@@ -1,0 +1,25 @@
+
+  body {
+    background-color: #eaeeee !important;
+    color: black !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 300 !important;
+    font-style: normal;
+    overflow-x: hidden;
+    font-size: 0.8vw !important;
+    -webkit-font-smoothing: antialiased;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+#root {
+    min-height: 100%;
+    position: relative;
+  }
