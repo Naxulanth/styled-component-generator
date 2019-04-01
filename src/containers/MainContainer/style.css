@@ -2,4 +2,18 @@
     min-height: 300px;
     min-width: 300px;
     margin-top: 50px;
+    border: 1px solid rgb(190,190,190);
+    padding: 10px;
+}
+
+input {
+    border: 1px solid rgb(190,190,190);   
+}
+
+.input-container {
+    text-align: right;
+}
+
+.margin-10 {
+    margin-bottom: 10px;
 }
