@@ -3,6 +3,8 @@ import { Row, Col, Button } from "reactstrap";
 import styled from "styled-components";
 import _ from "lodash/core";
 import Select from "react-select";
+import Slider, { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
 import { toast } from "react-toastify";
 import { components } from "constants/components";
 import "./style.css";
@@ -14,7 +16,7 @@ class MainContainer extends Component {
       params: {
         width: null,
         height: null,
-        border: null,
+        border: null, 
         "border-radius": null
       },
       code: "",
@@ -85,6 +87,11 @@ class MainContainer extends Component {
           </Col>
         </Row>
         <Row>
+            <Col lg="12">
+            <Slider/>
+            </Col>
+            </Row>
+            <Row>
           <Col lg="12">
             <Select
               options={components}
