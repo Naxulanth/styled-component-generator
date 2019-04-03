@@ -1,5 +1,14 @@
-import React, { Component } from "react";
-import { Row, Col, Button } from "reactstrap";
+import React, { Component, Fragment } from "react";
+import {
+  Row,
+  Col,
+  Button,
+  Nav,
+  NavItem,
+  NavLink,
+  TabContent,
+  TabPane
+} from "reactstrap";
 import styled from "styled-components";
 import _ from "lodash/core";
 import Select from "react-select";
@@ -8,6 +17,7 @@ import { handle } from "components/Handle";
 import "rc-slider/assets/index.css";
 import { toast } from "react-toastify";
 import { components } from "constants/components";
+import classnames from "classnames";
 import "./style.css";
 
 class MainContainer extends Component {
@@ -18,32 +28,52 @@ class MainContainer extends Component {
         width: null,
         height: null,
         border: null,
-        "border-radius": 0
+        "border-radius": null
       },
       code: "",
       Component: null,
       selected: null,
-      name: ""
+      name: "",
+      activeTab: null,
+      inputText: "Test"
     };
     this.textArea = React.createRef();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!_.isEqual(prevState.params, this.state.params)) {
+    if (
+      !_.isEqual(prevState.params, this.state.params) ||
+      !_.isEqual(prevState.selected, this.state.selected) ||
+      this.state.name !== prevState.name
+    ) {
       this.generateComponent();
     }
   }
 
   generateComponent = () => {
-    const { selected } = this.state;
+    const { selected, params, name } = this.state;
+    Object.keys(params).forEach(
+      key => params[key] == null && delete params[key]
+    );
     let label =
       selected.type === "core" ? '"' + selected.label + '"' : selected.label;
     let c = styled(selected.value)`
-      width: auto;
+      ${params}
     `;
-    let cString = `styled(${label})\`
-      width: auto;
-      \``;
+    let paramString =
+      Object.keys(params).length > 0
+        ? JSON.stringify(params)
+            .replace("{", "")
+            .replace("}", "")
+            .replace(/"/g, "")
+            .replace(/,/g, ";\n")
+            .replace(/:/g, ": ") + ";"
+        : "";
+    let cString = `const ${name} = styled(${label})\`
+${paramString}\n\`
+
+export default ${name};
+`;
     this.setState({
       Component: c,
       code: cString
@@ -63,8 +93,16 @@ class MainContainer extends Component {
   };
 
   handleSelect = e => {
+    let activeTab = !this.state.selected ? "1" : this.state.activeTab;
     this.setState({
+      activeTab,
       selected: e
+    });
+  };
+
+  handleInput = e => {
+    this.setState({
+      inputText: e.target.value
     });
   };
 
@@ -77,27 +115,29 @@ class MainContainer extends Component {
 
   handleBorderRadius = e => {
     let tempParams = Object.assign({}, this.state.params);
-    tempParams["border-radius"] = e;
+    tempParams["border-radius"] = e + "px";
     this.setState({
       params: tempParams
     });
   };
 
+  toggle = tab => {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
+    }
+  };
+
   render() {
-    const { code, Component, params, name, selected } = this.state;
+    const { code, Component, params, name, selected, inputText } = this.state;
     return (
       <div>
-        <Button onClick={this.handleClick}>test</Button>
-        <Row className="margin-10">
-          <Col md="4" lg="4">
-            <span>Component Name</span>
+        <Row className="margin-20">
+          <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
+            <span>Component</span>
           </Col>
-          <Col className="input-container" md="8" lg="8">
-            <input value={name} onChange={this.handleName} type="text" />
-          </Col>
-        </Row>
-        <Row className="margin-10">
-          <Col lg="12">
+          <Col lg={{ size: 4 }}>
             <Select
               options={components}
               value={selected}
@@ -106,22 +146,88 @@ class MainContainer extends Component {
             />
           </Col>
         </Row>
-        {selected ? (
-          <Row className="margin-20">
-            <Col lg="12">
-              <Slider
-                onChange={this.handleBorderRadius}
-                value={params["border-radius"]}
-                min={0}
-                max={100}
-                defaultValue={0}
-                handle={handle}
-              />
-            </Col>
-          </Row>
-        ) : null}
-        <Row>
-          <Col lg="12">{Component ? <Component>Test</Component> : null}</Col>
+        <Row className="margin-20">
+          <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
+            <span>Component Name</span>
+          </Col>
+          <Col className="input-container align-center" lg={{ size: 4 }}>
+            <input
+              className="full-width"
+              disabled={!selected}
+              value={name}
+              onChange={this.handleName}
+              type="text"
+            />
+          </Col>
+        </Row>
+        <Row className="margin-20">
+          <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
+            <span>Input text</span>
+          </Col>
+          <Col className="input-container align-center" lg={{ size: 4 }}>
+            <input
+              className="full-width"
+              value={inputText}
+              onChange={this.handleInput}
+              type="text"
+            />
+          </Col>
+        </Row>
+        <Row className="margin-20">
+          <Col lg="12">
+            <Nav tabs>
+              <NavItem>
+                <NavLink
+                  disabled={!selected}
+                  className={classnames({
+                    active: this.state.activeTab === "1"
+                  })}
+                  onClick={() => {
+                    this.toggle("1");
+                  }}
+                >
+                  Border
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  disabled={!selected}
+                  className={classnames({
+                    active: this.state.activeTab === "2"
+                  })}
+                  onClick={() => {
+                    this.toggle("2");
+                  }}
+                >
+                  Color
+                </NavLink>
+              </NavItem>
+            </Nav>
+          </Col>
+        </Row>
+        <TabContent activeTab={this.state.activeTab}>
+          <TabPane tabId="1">
+            <Row>
+              <Col lg={{ offset: 4, size: 4 }}>border-radius</Col>
+            </Row>
+            <Row className="margin-20">
+              <Col lg={{ offset: 4, size: 4 }}>
+                <Slider
+                  onChange={this.handleBorderRadius}
+                  value={parseInt(params["border-radius"])}
+                  min={0}
+                  max={100}
+                  defaultValue={0}
+                  handle={handle}
+                />
+              </Col>
+            </Row>
+          </TabPane>
+        </TabContent>
+        <Row className="margin-20">
+          <Col lg="12">
+            {Component ? <Component>{inputText}</Component> : null}
+          </Col>
         </Row>
         <Row>
           <Col lg="12">

@@ -3,7 +3,7 @@
     left: 50%;
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
-    max-width: 450px;
+    max-width: 50%;
     width: 100%;
     text-align: center;
     transform: translate(-50%, -50%);

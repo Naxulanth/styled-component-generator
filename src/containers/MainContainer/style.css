@@ -4,10 +4,13 @@
     margin-top: 50px;
     border: 1px solid rgb(190,190,190);
     padding: 10px;
+    border-radius: 4px;
 }
 
 input {
-    border: 1px solid rgb(190,190,190);   
+    border: 1px solid rgb(190,190,190);  
+    padding-left: 5px;
+    border-radius: 4px;
 }
 
 .input-container {
@@ -19,4 +22,24 @@ input {
 }
 .margin-20 {
     margin-bottom: 20px;
+}
+
+.rc-slider-rail {
+    background: #b0b0b0;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.vertical-center {
+    align-self: center;
 }
