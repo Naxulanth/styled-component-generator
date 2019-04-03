@@ -3,8 +3,9 @@ import { Row, Col, Button } from "reactstrap";
 import styled from "styled-components";
 import _ from "lodash/core";
 import Select from "react-select";
-import Slider, { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import Slider from "rc-slider";
+import { handle } from "components/Handle";
+import "rc-slider/assets/index.css";
 import { toast } from "react-toastify";
 import { components } from "constants/components";
 import "./style.css";
@@ -16,8 +17,8 @@ class MainContainer extends Component {
       params: {
         width: null,
         height: null,
-        border: null, 
-        "border-radius": null
+        border: null,
+        "border-radius": 0
       },
       code: "",
       Component: null,
@@ -35,7 +36,8 @@ class MainContainer extends Component {
 
   generateComponent = () => {
     const { selected } = this.state;
-    let label = selected.type === "core" ? '"' + selected.label + '"' : selected.label;
+    let label =
+      selected.type === "core" ? '"' + selected.label + '"' : selected.label;
     let c = styled(selected.value)`
       width: auto;
     `;
@@ -73,6 +75,14 @@ class MainContainer extends Component {
     toast.success("Copied to clipboard!");
   };
 
+  handleBorderRadius = e => {
+    let tempParams = Object.assign({}, this.state.params);
+    tempParams["border-radius"] = e;
+    this.setState({
+      params: tempParams
+    });
+  };
+
   render() {
     const { code, Component, params, name, selected } = this.state;
     return (
@@ -86,12 +96,7 @@ class MainContainer extends Component {
             <input value={name} onChange={this.handleName} type="text" />
           </Col>
         </Row>
-        <Row>
-            <Col lg="12">
-            <Slider/>
-            </Col>
-            </Row>
-            <Row>
+        <Row className="margin-10">
           <Col lg="12">
             <Select
               options={components}
@@ -101,6 +106,20 @@ class MainContainer extends Component {
             />
           </Col>
         </Row>
+        {selected ? (
+          <Row className="margin-20">
+            <Col lg="12">
+              <Slider
+                onChange={this.handleBorderRadius}
+                value={params["border-radius"]}
+                min={0}
+                max={100}
+                defaultValue={0}
+                handle={handle}
+              />
+            </Col>
+          </Row>
+        ) : null}
         <Row>
           <Col lg="12">{Component ? <Component>Test</Component> : null}</Col>
         </Row>
