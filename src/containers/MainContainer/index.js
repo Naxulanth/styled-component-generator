@@ -32,14 +32,16 @@ class MainContainer extends Component {
         "border-width": null,
         "border-radius": null
       },
-      code: "",
+      styled: "",
+      css: "",
       Component: null,
       selected: null,
       name: "",
       activeTab: null,
       inputText: "Test"
     };
-    this.textArea = React.createRef();
+    this.cssArea = React.createRef();
+    this.styledArea = React.createRef();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -55,7 +57,9 @@ class MainContainer extends Component {
   generateComponent = () => {
     const { selected, params, name } = this.state;
     Object.keys(params).forEach(
-      key => (params[key] == null || parseInt(params[key]) == 0 ) && delete params[key]
+      key =>
+        (params[key] == null || parseInt(params[key]) == 0) &&
+        delete params[key]
     );
     let label =
       selected.type === "core" ? '"' + selected.label + '"' : selected.label;
@@ -71,14 +75,18 @@ class MainContainer extends Component {
             .replace(/,/g, ";\n")
             .replace(/:/g, ": ") + ";"
         : "";
-    let cString = `const ${name} = styled(${label})\`
+    let styledString = `const ${name} = styled(${label})\`
 ${paramString}\n\`
 
 export default ${name};
 `;
+    let cssString = `.${name} {
+${paramString}
+}`;
     this.setState({
       Component: c,
-      code: cString
+      styled: styledString,
+      css: cssString
     });
   };
 
@@ -109,7 +117,10 @@ export default ${name};
   };
 
   handleCopy = e => {
-    this.textArea.current.select();
+    if (e.target.classList[1].includes("styled")) {
+      this.styledArea.current.select();
+    }
+    else this.cssArea.current.select();
     document.execCommand("copy");
     e.target.focus();
     toast.success("Copied to clipboard!");
@@ -140,7 +151,15 @@ export default ${name};
   };
 
   render() {
-    const { code, Component, params, name, selected, inputText } = this.state;
+    const {
+      styled,
+      css,
+      Component,
+      params,
+      name,
+      selected,
+      inputText
+    } = this.state;
     return (
       <div>
         <Row className="margin-20">
@@ -158,7 +177,7 @@ export default ${name};
         </Row>
         <Row className="margin-20">
           <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
-            <span>Component Name</span>
+            <span>Component/Class Name</span>
           </Col>
           <Col className="input-container align-center" lg={{ size: 4 }}>
             <input
@@ -255,14 +274,29 @@ export default ${name};
           </Col>
         </Row>
         <Row>
-          <Col lg="12">
+          <Col lg="6">
             <textarea
-              ref={this.textArea}
+              ref={this.styledArea}
               onClick={this.handleCopy}
               readOnly
-              className="code-area"
-              value={code}
+              className="code-area styled-area"
+              value={styled}
             />
+            <Row>
+              <Col lg="12">Styled</Col>
+            </Row>
+          </Col>
+          <Col lg="6">
+            <textarea
+              ref={this.cssArea}
+              onClick={this.handleCopy}
+              readOnly
+              className="code-area css-area"
+              value={css}
+            />
+            <Row>
+              <Col lg="12">CSS</Col>
+            </Row>
           </Col>
         </Row>
       </div>
