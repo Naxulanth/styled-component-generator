@@ -27,7 +27,9 @@ class MainContainer extends Component {
       params: {
         width: null,
         height: null,
-        border: null,
+        "border-color": null,
+        "border-style": null,
+        "border-width": null,
         "border-radius": null
       },
       code: "",
@@ -53,7 +55,7 @@ class MainContainer extends Component {
   generateComponent = () => {
     const { selected, params, name } = this.state;
     Object.keys(params).forEach(
-      key => params[key] == null && delete params[key]
+      key => (params[key] == null || parseInt(params[key]) == 0 ) && delete params[key]
     );
     let label =
       selected.type === "core" ? '"' + selected.label + '"' : selected.label;
@@ -116,6 +118,14 @@ export default ${name};
   handleBorderRadius = e => {
     let tempParams = Object.assign({}, this.state.params);
     tempParams["border-radius"] = e + "px";
+    this.setState({
+      params: tempParams
+    });
+  };
+
+  handleBorderWidth = e => {
+    let tempParams = Object.assign({}, this.state.params);
+    tempParams["border-width"] = e + "px";
     this.setState({
       params: tempParams
     });
@@ -218,6 +228,21 @@ export default ${name};
                   min={0}
                   max={100}
                   defaultValue={0}
+                  handle={handle}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={{ offset: 4, size: 4 }}>border-width</Col>
+            </Row>
+            <Row className="margin-20">
+              <Col lg={{ offset: 4, size: 4 }}>
+                <Slider
+                  onChange={this.handleBorderWidth}
+                  value={parseInt(params["border-width"])}
+                  min={0}
+                  max={10}
+                  defaultValue={1}
                   handle={handle}
                 />
               </Col>
