@@ -33,7 +33,7 @@ class MainContainer extends Component {
       css: "",
       Component: null,
       selected: null,
-      name: "",
+      name: "MyComponent",
       activeTab: null,
       inputText: "Test",
       selectComponents: []
@@ -187,7 +187,6 @@ ${paramString}
               <Col className="input-container align-center" lg={{ size: 4 }}>
                 <input
                   className="full-width"
-                  disabled={!selected}
                   value={name}
                   onChange={this.handleName}
                   type="text"

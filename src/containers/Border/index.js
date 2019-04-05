@@ -112,7 +112,7 @@ class Border extends Component {
             />
             <span className="align">dotted</span>
             <input
-              onChange={this.handleRadio}
+              onChange={this.handleRadio}   
               value="dashed"
               className="align left-10 right-5"
               type="radio"
