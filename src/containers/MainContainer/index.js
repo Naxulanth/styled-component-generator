@@ -17,6 +17,7 @@ import classnames from "classnames";
 import { toast } from "react-toastify";
 import Size from "containers/Size";
 import Border from "containers/Border";
+import Color from "containers/Color";
 import { handle } from "components/Handle";
 import { components } from "constants/components";
 
@@ -236,6 +237,19 @@ ${paramString}
                       Size
                     </NavLink>
                   </NavItem>
+                  <NavItem>
+                    <NavLink
+                      disabled={!selected}
+                      className={classnames({
+                        active: activeTab === "3"
+                      })}
+                      onClick={() => {
+                        this.toggle("3");
+                      }}
+                    >
+                      Color
+                    </NavLink>
+                  </NavItem>
                 </Nav>
               </Col>
             </Row>
@@ -247,6 +261,11 @@ ${paramString}
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="2">
                 <Size sendData={this.getData} />
+              </TabPane>
+            </TabContent>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="3">
+                <Color sendData={this.getData} />
               </TabPane>
             </TabContent>
           </Col>
