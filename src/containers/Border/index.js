@@ -43,7 +43,7 @@ class Border extends Component {
     return (
       <Fragment>
         <Row>
-          <Col lg={{ offset: 4, size: 4 }}>border-radius</Col>
+          <Col className="align-center" lg={{ offset: 4, size: 4 }}>border-radius</Col>
         </Row>
         <Row className="margin-20">
           <Col lg={{ offset: 4, size: 4 }}>
@@ -60,14 +60,14 @@ class Border extends Component {
           </Col>
         </Row>
         <Row>
-          <Col lg={{ offset: 4, size: 4 }}>border-width</Col>
+          <Col   className="align-center" lg={{ offset: 4, size: 4 }}>border-width</Col>
         </Row>
         <Row className="margin-20">
           <Col lg={{ offset: 4, size: 4 }}>
             <Slider
               onAfterChange={this.handle.bind(this, "border-width")}
               min={0}
-              max={10}
+              max={100}
               defaultValue={1}
               handle={handle}
             />

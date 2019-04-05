@@ -56,7 +56,7 @@ class Size extends Component {
     return (
       <Fragment>
         <Row>
-          <Col lg={{ offset: 4, size: 4 }}>width {px ? "(px)" : "(%)"}</Col>
+          <Col  className="align-center" lg={{ offset: 4, size: 4 }}>width {px ? "(px)" : "(%)"}</Col>
         </Row>
         <Row className="margin-20">
           <Col lg={{ offset: 4, size: 4 }}>
@@ -70,7 +70,7 @@ class Size extends Component {
           </Col>
         </Row>
         <Row>
-          <Col lg={{ offset: 4, size: 4 }}>height {px ? "(px)" : "(%)"}</Col>
+          <Col  className="align-center" lg={{ offset: 4, size: 4 }}>height {px ? "(px)" : "(%)"}</Col>
         </Row>
         <Row className="margin-20">
           <Col lg={{ offset: 4, size: 4 }}>
@@ -84,7 +84,7 @@ class Size extends Component {
           </Col>
         </Row>
         <Row>
-          <Col lg={{ offset: 4, size: 4 }}>
+          <Col  className="align-center" lg={{ offset: 4, size: 4 }}>
             min-height {px ? "(px)" : "(%)"}
           </Col>
         </Row>
@@ -100,7 +100,7 @@ class Size extends Component {
           </Col>
         </Row>
         <Row>
-          <Col lg={{ offset: 4, size: 4 }}>
+          <Col  className="align-center" lg={{ offset: 4, size: 4 }}>
             max-height {px ? "(px)" : "(%)"}
           </Col>
         </Row>
@@ -116,7 +116,7 @@ class Size extends Component {
           </Col>
         </Row>
         <Row>
-          <Col lg={{ offset: 4, size: 4 }}>min-width {px ? "(px)" : "(%)"}</Col>
+          <Col  className="align-center" lg={{ offset: 4, size: 4 }}>min-width {px ? "(px)" : "(%)"}</Col>
         </Row>
         <Row className="margin-20">
           <Col lg={{ offset: 4, size: 4 }}>
@@ -130,7 +130,7 @@ class Size extends Component {
           </Col>
         </Row>
         <Row>
-          <Col lg={{ offset: 4, size: 4 }}>max-width {px ? "(px)" : "(%)"}</Col>
+          <Col  className="align-center" lg={{ offset: 4, size: 4 }}>max-width {px ? "(px)" : "(%)"}</Col>
         </Row>
         <Row className="margin-20">
           <Col lg={{ offset: 4, size: 4 }}>
