@@ -16,7 +16,7 @@ import Slider from "rc-slider";
 import classnames from "classnames";
 import { toast } from "react-toastify";
 import Size from "containers/Size";
-import Border from "containers/Border"
+import Border from "containers/Border";
 import { handle } from "components/Handle";
 import { components } from "constants/components";
 
@@ -27,6 +27,7 @@ class MainContainer extends Component {
     super(props);
     this.state = {
       params: {
+        margin: "0 auto"
       },
       styled: "",
       css: "",
@@ -75,7 +76,8 @@ class MainContainer extends Component {
     const { selected, params, name } = this.state;
     Object.keys(params).forEach(
       key =>
-        (params[key] == null || parseInt(params[key]) == 0) &&
+        (params[key] == null ||
+          (key !== "margin" && parseInt(params[key]) === 0)) &&
         delete params[key]
     );
     let label =
@@ -239,7 +241,7 @@ ${paramString}
             </Row>
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
-              <Border sendData={this.getData}/>
+                <Border sendData={this.getData} />
               </TabPane>
             </TabContent>
             <TabContent activeTab={this.state.activeTab}>
