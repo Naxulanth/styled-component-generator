@@ -81,3 +81,11 @@ input {
     vertical-align: middle;
     display: inline-block;
 }
+
+.right-5 {
+  margin-right: 5px;
+}
+
+.left-10 {
+  margin-left: 10px;
+}

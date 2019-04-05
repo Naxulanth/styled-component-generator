@@ -39,19 +39,24 @@ class Border extends Component {
     });
   };
 
+  handleRadio = e => {
+    this.setState({
+      "border-style": e.target.value
+    });
+  };
+
   render() {
     return (
       <Fragment>
         <Row>
-          <Col className="align-center" lg={{ offset: 4, size: 4 }}>border-radius</Col>
+          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
+            border-radius
+          </Col>
         </Row>
         <Row className="margin-20">
           <Col lg={{ offset: 4, size: 4 }}>
             <Slider
-              onAfterChange={this.handle.bind(
-                this,
-                "border-radius"
-              )}
+              onAfterChange={this.handle.bind(this, "border-radius")}
               min={0}
               max={100}
               defaultValue={0}
@@ -60,7 +65,9 @@ class Border extends Component {
           </Col>
         </Row>
         <Row>
-          <Col   className="align-center" lg={{ offset: 4, size: 4 }}>border-width</Col>
+          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
+            border-width
+          </Col>
         </Row>
         <Row className="margin-20">
           <Col lg={{ offset: 4, size: 4 }}>
@@ -71,6 +78,63 @@ class Border extends Component {
               defaultValue={1}
               handle={handle}
             />
+          </Col>
+        </Row>
+        <Row>
+          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
+            border-color
+          </Col>
+        </Row>
+        <Row className="margin-20">
+          <Col lg={{ offset: 4, size: 4 }}>
+            <Slider
+              onAfterChange={this.handle.bind(this, "border-color")}
+              min={0}
+              max={100}
+              defaultValue={1}
+              handle={handle}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
+            border-style
+          </Col>
+        </Row>
+        <Row className="margin-20">
+          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
+            <input
+              onChange={this.handleRadio}
+              value="dotted"
+              className="align left-10 right-5"
+              type="radio"
+              checked={this.state["border-style"] === "dotted"}
+            />
+            <span className="align">dotted</span>
+            <input
+              onChange={this.handleRadio}
+              value="dashed"
+              className="align left-10 right-5"
+              type="radio"
+              checked={this.state["border-style"] === "dashed"}
+            />
+            <span className="align">dashed</span>
+            <input
+              onChange={this.handleRadio}
+              value="solid"
+              className="align left-10 right-5"
+              type="radio"
+              checked={this.state["border-style"] === "solid"}
+            />
+            <span className="align">solid</span>
+            <input
+              onChange={this.handleRadio}
+              value="double"
+              className="align left-10 right-5"
+              type="radio"
+              checked={this.state["border-style"] === "double"}
+            />
+            <span className="align">double</span>
           </Col>
         </Row>
       </Fragment>
