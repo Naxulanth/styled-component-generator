@@ -41,7 +41,7 @@ class Border extends Component {
 
   handleRadio = e => {
     this.setState({
-      "border-style": e.target.value
+      "border-style": (e.target.value !== "") ? e.target.value : null
     });
   };
 
@@ -102,7 +102,7 @@ class Border extends Component {
           </Col>
         </Row>
         <Row className="margin-20">
-          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
+          <Col className="align-center" lg="12">
             <input
               onChange={this.handleRadio}
               value="dotted"
@@ -135,6 +135,14 @@ class Border extends Component {
               checked={this.state["border-style"] === "double"}
             />
             <span className="align">double</span>
+            <input
+              onChange={this.handleRadio}
+              value={""}
+              className="align left-10 right-5"
+              type="radio"
+              checked={!this.state["border-style"]}
+            />
+            <span className="align">none</span>
           </Col>
         </Row>
       </Fragment>

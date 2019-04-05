@@ -161,7 +161,8 @@ ${paramString}
       name,
       selected,
       inputText,
-      selectComponents
+      selectComponents,
+      activeTab
     } = this.state;
     return (
       <div>
@@ -213,7 +214,7 @@ ${paramString}
                     <NavLink
                       disabled={!selected}
                       className={classnames({
-                        active: this.state.activeTab === "1"
+                        active: activeTab === "1"
                       })}
                       onClick={() => {
                         this.toggle("1");
@@ -226,7 +227,7 @@ ${paramString}
                     <NavLink
                       disabled={!selected}
                       className={classnames({
-                        active: this.state.activeTab === "2"
+                        active: activeTab === "2"
                       })}
                       onClick={() => {
                         this.toggle("2");
@@ -250,6 +251,14 @@ ${paramString}
             </TabContent>
           </Col>
         </Row>
+        {activeTab !== null ? (
+          <Row className="margin-20">
+            <Col className="vertical-center align-center" lg="12">
+              <span>Tip: You can use arrow keys to move the sliders.</span>
+            </Col>
+            >
+          </Row>
+        ) : null}
         <Row className="margin-20">
           <Col className="align-center" lg="12">
             {Component ? <Component>{inputText}</Component> : null}
