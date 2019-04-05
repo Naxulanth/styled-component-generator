@@ -13,24 +13,20 @@ import styled from "styled-components";
 import _ from "lodash/core";
 import Select from "react-select";
 import Slider from "rc-slider";
-import { handle } from "components/Handle";
-import "rc-slider/assets/index.css";
-import { toast } from "react-toastify";
-import { components } from "constants/components";
 import classnames from "classnames";
-import "./style.css";
+import { toast } from "react-toastify";
+import Size from "containers/Size";
+import Border from "containers/Border"
+import { handle } from "components/Handle";
+import { components } from "constants/components";
+
+import "rc-slider/assets/index.css";
 
 class MainContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       params: {
-        width: null,
-        height: null,
-        "border-color": null,
-        "border-style": null,
-        "border-width": null,
-        "border-radius": null
       },
       styled: "",
       css: "",
@@ -38,21 +34,42 @@ class MainContainer extends Component {
       selected: null,
       name: "",
       activeTab: null,
-      inputText: "Test"
+      inputText: "Test",
+      selectComponents: []
     };
     this.cssArea = React.createRef();
     this.styledArea = React.createRef();
   }
 
+  componentDidMount() {
+    let tempComponents = components.slice(0);
+    tempComponents = tempComponents.map(component => {
+      component.label += " - " + component.type;
+      return component;
+    });
+    this.setState({
+      selectComponents: tempComponents
+    });
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (
-      !_.isEqual(prevState.params, this.state.params) ||
-      !_.isEqual(prevState.selected, this.state.selected) ||
-      this.state.name !== prevState.name
+      (!_.isEqual(prevState.params, this.state.params) ||
+        !_.isEqual(prevState.selected, this.state.selected) ||
+        this.state.name !== prevState.name) &&
+      this.state.selected
     ) {
       this.generateComponent();
     }
   }
+
+  getData = data => {
+    const { params } = this.state;
+    let merged = { ...params, ...data };
+    this.setState({
+      params: merged
+    });
+  };
 
   generateComponent = () => {
     const { selected, params, name } = this.state;
@@ -62,7 +79,9 @@ class MainContainer extends Component {
         delete params[key]
     );
     let label =
-      selected.type === "core" ? '"' + selected.label + '"' : selected.label;
+      selected.type === "core"
+        ? '"' + selected.label.split(" -")[0] + '"'
+        : selected.label.split(" -")[0];
     let c = styled(selected.value)`
       ${params}
     `;
@@ -90,11 +109,7 @@ ${paramString}
     });
   };
 
-  handleClick = () => {
-    this.setState({
-      params: { test: "test" }
-    });
-  };
+  // inputs
 
   handleName = e => {
     this.setState({
@@ -119,28 +134,13 @@ ${paramString}
   handleCopy = e => {
     if (e.target.classList[1].includes("styled")) {
       this.styledArea.current.select();
-    }
-    else this.cssArea.current.select();
+    } else this.cssArea.current.select();
     document.execCommand("copy");
     e.target.focus();
     toast.success("Copied to clipboard!");
   };
 
-  handleBorderRadius = e => {
-    let tempParams = Object.assign({}, this.state.params);
-    tempParams["border-radius"] = e + "px";
-    this.setState({
-      params: tempParams
-    });
-  };
-
-  handleBorderWidth = e => {
-    let tempParams = Object.assign({}, this.state.params);
-    tempParams["border-width"] = e + "px";
-    this.setState({
-      params: tempParams
-    });
-  };
+  // tabs
 
   toggle = tab => {
     if (this.state.activeTab !== tab) {
@@ -158,144 +158,129 @@ ${paramString}
       params,
       name,
       selected,
-      inputText
+      inputText,
+      selectComponents
     } = this.state;
     return (
       <div>
-        <Row className="margin-20">
-          <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
-            <span>Component</span>
-          </Col>
-          <Col lg={{ size: 4 }}>
-            <Select
-              options={components}
-              value={selected}
-              onChange={this.handleSelect}
-              placeholder={"Select component..."}
-            />
-          </Col>
-        </Row>
-        <Row className="margin-20">
-          <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
-            <span>Component/Class Name</span>
-          </Col>
-          <Col className="input-container align-center" lg={{ size: 4 }}>
-            <input
-              className="full-width"
-              disabled={!selected}
-              value={name}
-              onChange={this.handleName}
-              type="text"
-            />
-          </Col>
-        </Row>
-        <Row className="margin-20">
-          <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
-            <span>Input text</span>
-          </Col>
-          <Col className="input-container align-center" lg={{ size: 4 }}>
-            <input
-              className="full-width"
-              value={inputText}
-              onChange={this.handleInput}
-              type="text"
-            />
-          </Col>
-        </Row>
-        <Row className="margin-20">
-          <Col lg="12">
-            <Nav tabs>
-              <NavItem>
-                <NavLink
-                  disabled={!selected}
-                  className={classnames({
-                    active: this.state.activeTab === "1"
-                  })}
-                  onClick={() => {
-                    this.toggle("1");
-                  }}
-                >
-                  Border
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  disabled={!selected}
-                  className={classnames({
-                    active: this.state.activeTab === "2"
-                  })}
-                  onClick={() => {
-                    this.toggle("2");
-                  }}
-                >
-                  Color
-                </NavLink>
-              </NavItem>
-            </Nav>
-          </Col>
-        </Row>
-        <TabContent activeTab={this.state.activeTab}>
-          <TabPane tabId="1">
-            <Row>
-              <Col lg={{ offset: 4, size: 4 }}>border-radius</Col>
-            </Row>
+        <Row>
+          <Col lg={{ offset: 2, size: 8 }}>
             <Row className="margin-20">
-              <Col lg={{ offset: 4, size: 4 }}>
-                <Slider
-                  onChange={this.handleBorderRadius}
-                  value={parseInt(params["border-radius"])}
-                  min={0}
-                  max={100}
-                  defaultValue={0}
-                  handle={handle}
+              <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
+                <span>Component</span>
+              </Col>
+              <Col lg={{ size: 4 }}>
+                <Select
+                  options={selectComponents}
+                  value={selected}
+                  onChange={this.handleSelect}
+                  placeholder={"Select component..."}
                 />
               </Col>
             </Row>
-            <Row>
-              <Col lg={{ offset: 4, size: 4 }}>border-width</Col>
-            </Row>
             <Row className="margin-20">
-              <Col lg={{ offset: 4, size: 4 }}>
-                <Slider
-                  onChange={this.handleBorderWidth}
-                  value={parseInt(params["border-width"])}
-                  min={0}
-                  max={10}
-                  defaultValue={1}
-                  handle={handle}
+              <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
+                <span>Component/Class Name</span>
+              </Col>
+              <Col className="input-container align-center" lg={{ size: 4 }}>
+                <input
+                  className="full-width"
+                  disabled={!selected}
+                  value={name}
+                  onChange={this.handleName}
+                  type="text"
                 />
               </Col>
             </Row>
-          </TabPane>
-        </TabContent>
+            <Row className="margin-20">
+              <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
+                <span>Input text</span>
+              </Col>
+              <Col className="input-container align-center" lg={{ size: 4 }}>
+                <input
+                  className="full-width"
+                  value={inputText}
+                  onChange={this.handleInput}
+                  type="text"
+                />
+              </Col>
+            </Row>
+            <Row className="margin-20">
+              <Col lg="12">
+                <Nav tabs>
+                  <NavItem>
+                    <NavLink
+                      disabled={!selected}
+                      className={classnames({
+                        active: this.state.activeTab === "1"
+                      })}
+                      onClick={() => {
+                        this.toggle("1");
+                      }}
+                    >
+                      Border
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      disabled={!selected}
+                      className={classnames({
+                        active: this.state.activeTab === "2"
+                      })}
+                      onClick={() => {
+                        this.toggle("2");
+                      }}
+                    >
+                      Size
+                    </NavLink>
+                  </NavItem>
+                </Nav>
+              </Col>
+            </Row>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="1">
+              <Border sendData={this.getData}/>
+              </TabPane>
+            </TabContent>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="2">
+                <Size sendData={this.getData} />
+              </TabPane>
+            </TabContent>
+          </Col>
+        </Row>
         <Row className="margin-20">
-          <Col lg="12">
+          <Col className="align-center" lg="12">
             {Component ? <Component>{inputText}</Component> : null}
           </Col>
         </Row>
         <Row>
-          <Col lg="6">
-            <textarea
-              ref={this.styledArea}
-              onClick={this.handleCopy}
-              readOnly
-              className="code-area styled-area"
-              value={styled}
-            />
+          <Col className="align-center" lg={{ offset: 2, size: 8 }}>
             <Row>
-              <Col lg="12">Styled</Col>
-            </Row>
-          </Col>
-          <Col lg="6">
-            <textarea
-              ref={this.cssArea}
-              onClick={this.handleCopy}
-              readOnly
-              className="code-area css-area"
-              value={css}
-            />
-            <Row>
-              <Col lg="12">CSS</Col>
+              <Col lg="6">
+                <textarea
+                  ref={this.styledArea}
+                  onClick={this.handleCopy}
+                  readOnly
+                  className="code-area styled-area"
+                  value={styled}
+                />
+                <Row>
+                  <Col lg="12">Styled</Col>
+                </Row>
+              </Col>
+              <Col lg="6">
+                <textarea
+                  ref={this.cssArea}
+                  onClick={this.handleCopy}
+                  readOnly
+                  className="code-area css-area"
+                  value={css}
+                />
+                <Row>
+                  <Col lg="12">CSS</Col>
+                </Row>
+              </Col>
             </Row>
           </Col>
         </Row>
