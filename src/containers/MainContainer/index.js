@@ -19,6 +19,7 @@ import Size from "containers/Size";
 import Border from "containers/Border";
 import Placement from "containers/Placement";
 import Color from "containers/Color";
+import Font from "containers/Font";
 import { handle } from "components/Handle";
 import { components } from "constants/components";
 
@@ -263,6 +264,19 @@ ${paramString}
                       Placement
                     </NavLink>
                   </NavItem>
+                  <NavItem>
+                    <NavLink
+                      disabled={!selected}
+                      className={classnames({
+                        active: activeTab === "5"
+                      })}
+                      onClick={() => {
+                        this.toggle("5");
+                      }}
+                    >
+                      Font
+                    </NavLink>
+                  </NavItem>
                 </Nav>
               </Col>
             </Row>
@@ -284,6 +298,11 @@ ${paramString}
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="4">
                 <Placement sendData={this.getData} />
+              </TabPane>
+            </TabContent>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="5">
+                <Font sendData={this.getData} />
               </TabPane>
             </TabContent>
           </Col>
