@@ -17,6 +17,7 @@ import classnames from "classnames";
 import { toast } from "react-toastify";
 import Size from "containers/Size";
 import Border from "containers/Border";
+import Placement from "containers/Placement";
 import Color from "containers/Color";
 import { handle } from "components/Handle";
 import { components } from "constants/components";
@@ -28,7 +29,6 @@ class MainContainer extends Component {
     super(props);
     this.state = {
       params: {
-        margin: "0 auto"
       },
       styled: "",
       css: "",
@@ -250,6 +250,19 @@ ${paramString}
                       Color
                     </NavLink>
                   </NavItem>
+                  <NavItem>
+                    <NavLink
+                      disabled={!selected}
+                      className={classnames({
+                        active: activeTab === "4"
+                      })}
+                      onClick={() => {
+                        this.toggle("4");
+                      }}
+                    >
+                      Placement
+                    </NavLink>
+                  </NavItem>
                 </Nav>
               </Col>
             </Row>
@@ -266,6 +279,11 @@ ${paramString}
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="3">
                 <Color sendData={this.getData} />
+              </TabPane>
+            </TabContent>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="4">
+                <Placement sendData={this.getData} />
               </TabPane>
             </TabContent>
           </Col>

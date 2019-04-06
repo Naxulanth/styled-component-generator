@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import {
   Row,
   Col,
-  Button,
   Nav,
   NavItem,
   NavLink,
@@ -11,20 +10,23 @@ import {
 } from "reactstrap";
 import Slider from "rc-slider";
 import _ from "lodash/core";
+import Button from "components/Button"
 import { handle } from "components/Handle";
 import "rc-slider/assets/index.css";
 
-class Size extends Component {
+class Placement extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: null,
-      height: null,
-      "min-height": null,
-      "min-width": null,
-      "max-height": null,
-      "max-width": null,
-      px: true
+      "padding-left": null,
+      "padding-right": null,
+      "padding-top": null,
+      "padding-bottom": null,
+      "margin-top": null,
+      "margin-bottom": null,
+      "margin-left": null,
+      "margin-right": null,
+      px: false
     };
   }
 
@@ -36,8 +38,6 @@ class Size extends Component {
       sendData(tempState);
     }
   }
-
-  // size
 
   handle = (key, e) => {
     this.setState({
@@ -51,37 +51,29 @@ class Size extends Component {
     });
   };
 
+  handleAuto = e => {
+      console.log(e.target.value)
+    this.setState({
+      [e.target.value]: "auto"
+    });
+  }
+
+
   render() {
     const { px } = this.state;
     return (
       <Fragment>
         <Row>
           <Col className="align-center" lg={{ offset: 4, size: 4 }}>
-            width {px ? "(px)" : "(%)"}
+            padding-left {px ? "(px)" : "(%)"}
           </Col>
         </Row>
         <Row className="margin-20">
           <Col lg={{ offset: 4, size: 4 }}>
             <Slider
-              onAfterChange={this.handle.bind(this, "width")}
+              onAfterChange={this.handle.bind(this, "padding-left")}
               min={0}
-              max={px ? 3000 : 100}
-              defaultValue={500}
-              handle={handle}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
-            height {px ? "(px)" : "(%)"}
-          </Col>
-        </Row>
-        <Row className="margin-20">
-          <Col lg={{ offset: 4, size: 4 }}>
-            <Slider
-              onAfterChange={this.handle.bind(this, "height")}
-              min={0}
-              max={px ? 3000 : 100}
+              max={px ? 500 : 100}
               defaultValue={25}
               handle={handle}
             />
@@ -89,15 +81,15 @@ class Size extends Component {
         </Row>
         <Row>
           <Col className="align-center" lg={{ offset: 4, size: 4 }}>
-            min-height {px ? "(px)" : "(%)"}
+            padding-right {px ? "(px)" : "(%)"}
           </Col>
         </Row>
         <Row className="margin-20">
           <Col lg={{ offset: 4, size: 4 }}>
             <Slider
-              onAfterChange={this.handle.bind(this, "min-height")}
+              onAfterChange={this.handle.bind(this, "padding-right")}
               min={0}
-              max={px ? 3000 : 100}
+              max={px ? 500 : 100}
               defaultValue={25}
               handle={handle}
             />
@@ -105,15 +97,15 @@ class Size extends Component {
         </Row>
         <Row>
           <Col className="align-center" lg={{ offset: 4, size: 4 }}>
-            max-height {px ? "(px)" : "(%)"}
+            padding-top {px ? "(px)" : "(%)"}
           </Col>
         </Row>
         <Row className="margin-20">
           <Col lg={{ offset: 4, size: 4 }}>
             <Slider
-              onAfterChange={this.handle.bind(this, "max-height")}
+              onAfterChange={this.handle.bind(this, "padding-top")}
               min={0}
-              max={px ? 3000 : 100}
+              max={px ? 500 : 100}
               defaultValue={25}
               handle={handle}
             />
@@ -121,15 +113,15 @@ class Size extends Component {
         </Row>
         <Row>
           <Col className="align-center" lg={{ offset: 4, size: 4 }}>
-            min-width {px ? "(px)" : "(%)"}
+            padding-bottom {px ? "(px)" : "(%)"}
           </Col>
         </Row>
         <Row className="margin-20">
           <Col lg={{ offset: 4, size: 4 }}>
             <Slider
-              onAfterChange={this.handle.bind(this, "min-width")}
+              onAfterChange={this.handle.bind(this, "padding-bottom")}
               min={0}
-              max={px ? 3000 : 100}
+              max={px ? 500 : 100}
               defaultValue={25}
               handle={handle}
             />
@@ -137,15 +129,66 @@ class Size extends Component {
         </Row>
         <Row>
           <Col className="align-center" lg={{ offset: 4, size: 4 }}>
-            max-width {px ? "(px)" : "(%)"}
+            margin-left {px ? "(px)" : "(%)"}
+          </Col>
+        </Row>
+        <Row className="vertical-center-items margin-20">
+          <Col lg={{ offset: 4, size: 4 }}>
+            <Slider
+              onAfterChange={this.handle.bind(this, "margin-left")}
+              min={0}
+              max={px ? 500 : 100}
+              defaultValue={25}
+              handle={handle}
+            />
+          </Col>
+          <Col lg="2">
+          <Button value="margin-left" onClick={this.handleAuto} className="align">auto</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
+            margin-right {px ? "(px)" : "(%)"}
           </Col>
         </Row>
         <Row className="margin-20">
           <Col lg={{ offset: 4, size: 4 }}>
             <Slider
-              onAfterChange={this.handle.bind(this, "max-width")}
+              onAfterChange={this.handle.bind(this, "margin-right")}
               min={0}
-              max={px ? 3000 : 100}
+              max={px ? 500 : 100}
+              defaultValue={25}
+              handle={handle}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
+            margin-top {px ? "(px)" : "(%)"}
+          </Col>
+        </Row>
+        <Row className="margin-20">
+          <Col lg={{ offset: 4, size: 4 }}>
+            <Slider
+              onAfterChange={this.handle.bind(this, "margin-top")}
+              min={0}
+              max={px ? 500 : 100}
+              defaultValue={25}
+              handle={handle}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
+            margin-bottom {px ? "(px)" : "(%)"}
+          </Col>
+        </Row>
+        <Row className="margin-20">
+          <Col lg={{ offset: 4, size: 4 }}>
+            <Slider
+              onAfterChange={this.handle.bind(this, "margin-bottom")}
+              min={0}
+              max={px ? 500 : 100}
               defaultValue={25}
               handle={handle}
             />
@@ -167,4 +210,4 @@ class Size extends Component {
     );
   }
 }
-export default Size;
+export default Placement;

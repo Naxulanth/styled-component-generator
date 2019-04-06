@@ -77,6 +77,10 @@ input {
     align-self: center;
 }
 
+.vertical-center-items {
+  align-items: center;
+}
+
 .align {
     vertical-align: middle;
     display: inline-block;
