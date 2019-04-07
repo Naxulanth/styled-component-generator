@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { Row, Col } from "reactstrap";
 import _ from "lodash/core";
 import Option from "containers/Option";
 
@@ -25,12 +26,30 @@ class Size extends Component {
     const { px } = this.state;
     return (
       <Fragment>
-        <Option sendData={this.getData} option="width" />
-        <Option sendData={this.getData} option="height" />
-        <Option sendData={this.getData} option="min-height" />
-        <Option sendData={this.getData} option="max-height" />
-        <Option sendData={this.getData} option="min-width" />
-        <Option sendData={this.getData} option="max-width" />
+        <Row>
+          <Col lg="6">
+            <Option sendData={this.getData} option="width" />
+          </Col>
+          <Col lg="6">
+            <Option sendData={this.getData} option="height" />
+          </Col>
+        </Row>
+        <Row>
+          <Col lg="6">
+            <Option sendData={this.getData} option="min-width" />
+          </Col>
+          <Col lg="6">
+            <Option sendData={this.getData} option="min-height" />
+          </Col>
+        </Row>
+        <Row>
+          <Col lg="6">
+            <Option sendData={this.getData} option="max-width" />
+          </Col>
+          <Col lg="6">
+            <Option sendData={this.getData} option="max-height" />
+          </Col>
+        </Row>
       </Fragment>
     );
   }

@@ -63,20 +63,24 @@ class Option extends Component {
   render() {
     const { px } = this.state;
     const { option, min, max } = this.props;
+    console.log(this.state[option]);
     return (
       <Fragment>
-        <Row>
-          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
+        <Row className="margin-20">
+          <Col className="align-center" lg={"12"}>
             {option} {px ? "(px)" : "(%)"}
           </Col>
         </Row>
         <Row className="margin-20 vertical-center-items">
-          <Col lg={{ offset: 3, size: 1 }}>
+          <Col lg="2">
             <input
               type="number"
               className="number-input"
               value={
-                parseInt(this.state[option]) ? parseInt(this.state[option]) : ""
+                parseInt(this.state[option]) ||
+                parseInt(this.state[option]) === 0
+                  ? parseInt(this.state[option])
+                  : ""
               }
               onChange={this.handleInput}
               placeholder={this.state[option] === "auto" ? "auto" : "unset"}
@@ -87,13 +91,13 @@ class Option extends Component {
               onChange={this.handle.bind(this, option)}
               min={px ? (min ? min : 0) : 0}
               max={px ? (max ? max : 2000) : 100}
-              step={px ? 10 : 1}
+              step={px ? 50 : 1}
               defaultValue={0}
               value={parseInt(this.state[option])}
               handle={handle}
             />
           </Col>
-          <Col lg="4">
+          <Col lg="6">
             <Button onClick={this.handleAuto} className="align">
               auto
             </Button>
