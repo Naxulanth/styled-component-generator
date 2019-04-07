@@ -94,7 +94,7 @@ class MainContainer extends Component {
         ? '"' + selected.label.split(" -")[0] + '"'
         : selected.label.split(" -")[0];
     let c = styled(selected.value)`
-      ${params}
+      ${JSON.parse(JSON.stringify(params).replace(/@/g, ","))}
     `;
     let paramString =
       Object.keys(params).length > 0
@@ -104,7 +104,7 @@ class MainContainer extends Component {
             .replace(/"/g, "")
             .replace(/,/g, ";\n")
             .replace(/:/g, ": ")
-            .replace(/#/g, ",") + ";"
+            .replace(/@/g, ",") + ";"
         : "";
     let styledString = `const ${name} = styled(${label})\`
 ${paramString}\n\`

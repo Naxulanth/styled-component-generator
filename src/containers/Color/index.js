@@ -34,7 +34,7 @@ class Color extends Component {
     console.log(key);
     console.log(e);
     let tempParams = Object.assign({}, this.state.params);
-    tempParams[key] = `rgba(${e.rgb.r}# ${e.rgb.g}# ${e.rgb.b}# ${e.rgb.a})`;
+    tempParams[key] = `rgba(${e.rgb.r}@ ${e.rgb.g}@ ${e.rgb.b}@ ${e.rgb.a})`;
     this.setState({
       [key]: e.rgb,
       params: tempParams
