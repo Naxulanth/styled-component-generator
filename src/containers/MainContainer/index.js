@@ -1,8 +1,7 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import {
   Row,
   Col,
-  Button,
   Nav,
   NavItem,
   NavLink,
@@ -12,7 +11,6 @@ import {
 import styled from "styled-components";
 import _ from "lodash/core";
 import Select from "react-select";
-import Slider from "rc-slider";
 import classnames from "classnames";
 import { toast } from "react-toastify";
 import Size from "containers/Size";
@@ -20,7 +18,6 @@ import Border from "containers/Border";
 import Placement from "containers/Placement";
 import Color from "containers/Color";
 import Font from "containers/Font";
-import { handle } from "components/Handle";
 import { components } from "constants/components";
 
 import "rc-slider/assets/index.css";
@@ -159,7 +156,6 @@ ${paramString}
       styled,
       css,
       Component,
-      params,
       name,
       selected,
       inputText,

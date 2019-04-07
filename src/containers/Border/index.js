@@ -1,28 +1,13 @@
 import React, { Component, Fragment } from "react";
-import {
-  Row,
-  Col,
-  Button,
-  Nav,
-  NavItem,
-  NavLink,
-  TabContent,
-  TabPane
-} from "reactstrap";
-import Slider from "rc-slider";
+import { Row, Col } from "reactstrap";
 import _ from "lodash/core";
-import { handle } from "components/Handle";
+import Option from "containers/Option";
 import "rc-slider/assets/index.css";
 
 class Border extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      "border-color": null,
-      "border-style": null,
-      "border-width": null,
-      "border-radius": null
-    };
+    this.state = {};
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -33,15 +18,14 @@ class Border extends Component {
     }
   }
 
-  handle = (key, e) => {
-    this.setState({
-      [key]: e + "px"
-    });
+  getData = data => {
+    let merged = { ...this.state, ...data };
+    this.setState(merged);
   };
 
   handleRadio = e => {
     this.setState({
-      "border-style": (e.target.value !== "") ? e.target.value : null
+      "border-style": e.target.value !== "" ? e.target.value : null
     });
   };
 
@@ -50,52 +34,10 @@ class Border extends Component {
       <Fragment>
         <Row>
           <Col className="align-center" lg={{ offset: 4, size: 4 }}>
-            border-radius
-          </Col>
-        </Row>
-        <Row className="margin-20">
-          <Col lg={{ offset: 4, size: 4 }}>
-            <Slider
-              onAfterChange={this.handle.bind(this, "border-radius")}
-              min={0}
-              max={100}
-              defaultValue={0}
-              handle={handle}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
-            border-width
-          </Col>
-        </Row>
-        <Row className="margin-20">
-          <Col lg={{ offset: 4, size: 4 }}>
-            <Slider
-              onAfterChange={this.handle.bind(this, "border-width")}
-              min={0}
-              max={100}
-              defaultValue={1}
-              handle={handle}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
             border-color
           </Col>
         </Row>
-        <Row className="margin-20">
-          <Col lg={{ offset: 4, size: 4 }}>
-            <Slider
-              onAfterChange={this.handle.bind(this, "border-color")}
-              min={0}
-              max={100}
-              defaultValue={1}
-              handle={handle}
-            />
-          </Col>
-        </Row>
+        <Option sendData={this.getData} option="border-width" />
         <Row>
           <Col className="align-center" lg={{ offset: 4, size: 4 }}>
             border-style
@@ -112,7 +54,7 @@ class Border extends Component {
             />
             <span className="align">dotted</span>
             <input
-              onChange={this.handleRadio}   
+              onChange={this.handleRadio}
               value="dashed"
               className="align left-10 right-5"
               type="radio"

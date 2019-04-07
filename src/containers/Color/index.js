@@ -1,23 +1,11 @@
 import React, { Component, Fragment } from "react";
-import {
-  Row,
-  Col,
-  Button,
-  Nav,
-  NavItem,
-  NavLink,
-  TabContent,
-  TabPane
-} from "reactstrap";
+import { Row, Col } from "reactstrap";
 import _ from "lodash/core";
 
 class Color extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-        background: null,
-        color: null,
-    };
+    this.state = {};
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -28,35 +16,13 @@ class Color extends Component {
     }
   }
 
-  handle = (key, e) => {
-    this.setState({
-      [key]: e
-    });
+  getData = data => {
+    let merged = { ...this.state, ...data };
+    this.setState(merged);
   };
 
   render() {
-    return (
-      <Fragment>
-        <Row>
-          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
-            background
-          </Col>
-        </Row>
-        <Row className="margin-20">
-        <Col className="align-center" lg={{ offset: 4, size: 4 }}>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="align-center" lg={{ offset: 4, size: 4 }}>
-            color
-          </Col>
-        </Row>
-        <Row className="margin-20">
-        <Col className="align-center" lg={{ offset: 4, size: 4 }}>
-          </Col>
-        </Row>
-      </Fragment>
-    );
+    return <Fragment />;
   }
 }
 export default Color;
