@@ -42,10 +42,16 @@ class Option extends Component {
     });
   };
 
+  handleNull = e => {
+    this.setState({
+      [this.props.option]: null
+    });
+  };
+
   handleInput = e => {
     if (e.target.value === "") {
       this.setState({
-        [this.props.option]: 0
+        [this.props.option]: null
       });
     } else
       this.setState({
@@ -71,6 +77,7 @@ class Option extends Component {
               className="number-input"
               value={parseInt(this.state[option])}
               onChange={this.handleInput}
+              placeholder={this.state[option] ? "auto" : "unset"}
             />
           </Col>
           <Col lg="4">
@@ -90,6 +97,9 @@ class Option extends Component {
             </Button>
             <Button onClick={this.handlePx} className="align">
               {px ? "%" : "px"}
+            </Button>
+            <Button onClick={this.handleNull} className="align">
+              unset
             </Button>
           </Col>
         </Row>

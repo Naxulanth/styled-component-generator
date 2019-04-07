@@ -26,8 +26,7 @@ class MainContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      params: {
-      },
+      params: {},
       styled: "",
       css: "",
       Component: null,
@@ -74,10 +73,7 @@ class MainContainer extends Component {
   generateComponent = () => {
     const { selected, params, name } = this.state;
     Object.keys(params).forEach(
-      key =>
-        (params[key] == null ||
-          (key !== "margin" && parseInt(params[key]) === 0)) &&
-        delete params[key]
+      key => params[key] == null && delete params[key]
     );
     let label =
       selected.type === "core"
