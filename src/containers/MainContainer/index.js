@@ -303,14 +303,6 @@ ${paramString}
             </TabContent>
           </Col>
         </Row>
-        {activeTab !== null ? (
-          <Row className="margin-20">
-            <Col className="vertical-center align-center" lg="12">
-              <span>Tip: You can use arrow keys to move the sliders.</span>
-            </Col>
-            >
-          </Row>
-        ) : null}
         <Row className="margin-20">
           <Col className="align-center" lg="12">
             {Component ? <Component>{inputText}</Component> : null}
