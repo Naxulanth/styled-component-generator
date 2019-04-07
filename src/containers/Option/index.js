@@ -62,7 +62,7 @@ class Option extends PureComponent {
 
   render() {
     const { px } = this.state;
-    const { option, min, max } = this.props;
+    const { option, min, max, pxOption } = this.props;
     return (
       <Fragment>
         <Row className="margin-20">
@@ -90,7 +90,7 @@ class Option extends PureComponent {
               onChange={this.handle.bind(this, option)}
               min={px ? (min ? min : 0) : 0}
               max={px ? (max ? max : 2000) : 100}
-              step={px ? 50 : 1}
+              step={px ? 5 : 1}
               defaultValue={0}
               value={parseInt(this.state[option])}
               handle={handle}
@@ -100,9 +100,11 @@ class Option extends PureComponent {
             <Button onClick={this.handleAuto} className="align">
               auto
             </Button>
-            <Button onClick={this.handlePx} className="align">
-              {px ? "%" : "px"}
-            </Button>
+            {pxOption ? (
+              <Button onClick={this.handlePx} className="align">
+                {px ? "%" : "px"}
+              </Button>
+            ) : null}
             <Button onClick={this.handleNull} className="align">
               unset
             </Button>

@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
+import { Row, Col } from "reactstrap";
 import _ from "lodash/core";
 import Option from "containers/Option";
 
@@ -25,14 +26,38 @@ class Placement extends PureComponent {
     const { px } = this.state;
     return (
       <Fragment>
-        <Option sendData={this.getData} option="padding-left" />
-        <Option sendData={this.getData} option="padding-right" />
-        <Option sendData={this.getData} option="padding-top" />
-        <Option sendData={this.getData} option="padding-bottom" />
-        <Option sendData={this.getData} option="margin-left" />
-        <Option sendData={this.getData} option="margin-right" />
-        <Option sendData={this.getData} option="margin-top" />
-        <Option sendData={this.getData} option="margin-bottom" />
+        <Row>
+          <Col lg="6">
+          <Option pxOption sendData={this.getData} option="padding-left" />
+          </Col>
+          <Col lg="6">
+          <Option pxOption sendData={this.getData} option="padding-right" />
+          </Col>
+        </Row>
+        <Row>
+          <Col lg="6">
+          <Option pxOption sendData={this.getData} option="padding-top" />
+          </Col>
+          <Col lg="6">
+          <Option pxOption sendData={this.getData} option="padding-bottom" />
+          </Col>
+        </Row>
+        <Row>
+          <Col lg="6">
+          <Option pxOption sendData={this.getData} option="margin-top" />
+          </Col>
+          <Col lg="6">
+          <Option pxOption sendData={this.getData} option="margin-bottom" />
+          </Col>
+        </Row>
+        <Row>
+          <Col lg="6">
+          <Option pxOption sendData={this.getData} option="margin-left" />
+          </Col>
+          <Col lg="6">
+          <Option pxOption sendData={this.getData} option="margin-right" />
+          </Col>
+        </Row>
       </Fragment>
     );
   }

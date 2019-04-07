@@ -29,26 +29,26 @@ class Size extends PureComponent {
       <Fragment>
         <Row>
           <Col lg="6">
-            <Option sendData={this.getData} option="width" />
+            <Option pxOption sendData={this.getData} option="width" />
           </Col>
           <Col lg="6">
-            <Option sendData={this.getData} option="height" />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg="6">
-            <Option sendData={this.getData} option="min-width" />
-          </Col>
-          <Col lg="6">
-            <Option sendData={this.getData} option="min-height" />
+            <Option pxOption sendData={this.getData} option="height" />
           </Col>
         </Row>
         <Row>
           <Col lg="6">
-            <Option sendData={this.getData} option="max-width" />
+            <Option pxOption sendData={this.getData} option="min-width" />
           </Col>
           <Col lg="6">
-            <Option sendData={this.getData} option="max-height" />
+            <Option pxOption sendData={this.getData} option="min-height" />
+          </Col>
+        </Row>
+        <Row>
+          <Col lg="6">
+            <Option pxOption sendData={this.getData} option="max-width" />
+          </Col>
+          <Col lg="6">
+            <Option pxOption sendData={this.getData} option="max-height" />
           </Col>
         </Row>
       </Fragment>
