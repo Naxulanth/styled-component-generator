@@ -81,7 +81,7 @@ class Color extends Component {
             />
           </Col>
         </Row>
-        <Row>
+        <Row className="margin-20">
           <Col className="align-center" lg="6">
             <Button onClick={this.handleImportant.bind(this, "background")}>
               important
