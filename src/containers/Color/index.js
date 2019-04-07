@@ -31,8 +31,6 @@ class Color extends PureComponent {
   };
 
   handleChange = (key, e) => {
-    console.log(key);
-    console.log(e);
     let tempParams = Object.assign({}, this.state.params);
     tempParams[key] = `rgba(${e.rgb.r}@ ${e.rgb.g}@ ${e.rgb.b}@ ${e.rgb.a})`;
     this.setState({

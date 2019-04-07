@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import Size from "containers/Size";
 import Border from "containers/Border";
 import Placement from "containers/Placement";
+import Custom from "containers/Custom";
 import Color from "containers/Color";
 import Font from "containers/Font";
 import { components } from "constants/components";
@@ -284,6 +285,19 @@ ${paramString}
                       Font
                     </NavLink>
                   </NavItem>
+                  <NavItem>
+                    <NavLink
+                      disabled={!selected}
+                      className={classnames({
+                        active: activeTab === "6"
+                      })}
+                      onClick={() => {
+                        this.toggle("6");
+                      }}
+                    >
+                      Custom
+                    </NavLink>
+                  </NavItem>
                 </Nav>
               </Col>
             </Row>
@@ -310,6 +324,11 @@ ${paramString}
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="5">
                 <Font sendData={this.getData} />
+              </TabPane>
+            </TabContent>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="6">
+                <Custom sendData={this.getData} />
               </TabPane>
             </TabContent>
           </Col>
