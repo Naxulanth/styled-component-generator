@@ -70,6 +70,20 @@ class MainContainer extends Component {
     });
   };
 
+  reload = () => {
+    this.setState({
+      params: {},
+      styled: "",
+      css: "",
+      Component: null,
+      selected: null,
+      name: "MyComponent",
+      activeTab: null,
+      inputText: "Test",
+      selectComponents: []
+    });
+  };
+
   generateComponent = () => {
     const { selected, params, name } = this.state;
     Object.keys(params).forEach(
@@ -89,7 +103,8 @@ class MainContainer extends Component {
             .replace("}", "")
             .replace(/"/g, "")
             .replace(/,/g, ";\n")
-            .replace(/:/g, ": ") + ";"
+            .replace(/:/g, ": ")
+            .replace(/#/g, ",") + ";"
         : "";
     let styledString = `const ${name} = styled(${label})\`
 ${paramString}\n\`

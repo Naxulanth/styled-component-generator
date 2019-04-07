@@ -10,7 +10,7 @@ class Option extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      [this.props.option]: null,
+      [this.props.option]: "unset",
       px: true
     };
   }
@@ -75,9 +75,11 @@ class Option extends Component {
             <input
               type="number"
               className="number-input"
-              value={parseInt(this.state[option])}
+              value={
+                parseInt(this.state[option]) ? parseInt(this.state[option]) : ""
+              }
               onChange={this.handleInput}
-              placeholder={this.state[option] ? "auto" : "unset"}
+              placeholder={this.state[option] === "auto" ? "auto" : "unset"}
             />
           </Col>
           <Col lg="4">

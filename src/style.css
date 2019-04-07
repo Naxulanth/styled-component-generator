@@ -97,3 +97,9 @@ input {
 .number-input {
   width: 100%;
 }
+
+.chrome-picker {
+  display: inline-block;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
