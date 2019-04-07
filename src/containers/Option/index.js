@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
 import Slider from "rc-slider";
 import _ from "lodash/core";
@@ -6,7 +6,7 @@ import Button from "components/Button";
 import { handle } from "components/Handle";
 import "rc-slider/assets/index.css";
 
-class Option extends Component {
+class Option extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,7 +63,6 @@ class Option extends Component {
   render() {
     const { px } = this.state;
     const { option, min, max } = this.props;
-    console.log(this.state[option]);
     return (
       <Fragment>
         <Row className="margin-20">

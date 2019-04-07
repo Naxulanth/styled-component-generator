@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
 import _ from "lodash/core";
 import Option from "containers/Option";
 import "rc-slider/assets/index.css";
 
-class Border extends Component {
+class Border extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};

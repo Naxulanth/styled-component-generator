@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
 import { ChromePicker } from "react-color";
 import Button from "components/Button";
 import _ from "lodash/core";
 
-class Color extends Component {
+class Color extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

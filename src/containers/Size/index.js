@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
 import _ from "lodash/core";
 import Option from "containers/Option";
 
-class Size extends Component {
+class Size extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
@@ -18,6 +18,7 @@ class Size extends Component {
   }
 
   getData = data => {
+    const { sendData } = this.props;
     let merged = { ...this.state, ...data };
     this.setState(merged);
   };
