@@ -60,6 +60,19 @@ class Option extends PureComponent {
       });
   };
 
+  handleImportant = (key, e) => {
+    let opt = this.state[this.props.option];
+    if (opt) {
+      let importantIndex = opt.indexOf(" !important");
+      if (importantIndex > 0) {
+        opt = opt.substr(0, importantIndex);
+      } else opt += " !important";
+    }
+    this.setState({
+      [this.props.option]: opt
+    });
+  };
+
   render() {
     const { px } = this.state;
     const { option, min, max, pxOption } = this.props;
@@ -107,6 +120,9 @@ class Option extends PureComponent {
             ) : null}
             <Button onClick={this.handleNull} className="align">
               unset
+            </Button>
+            <Button onClick={this.handleImportant.bind(this, this.option)}>
+              important
             </Button>
           </Col>
         </Row>
