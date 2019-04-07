@@ -93,3 +93,7 @@ input {
 .left-10 {
   margin-left: 10px;
 }
+
+.number-input {
+  width: 100%;
+}

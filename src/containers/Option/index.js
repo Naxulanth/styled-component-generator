@@ -10,7 +10,7 @@ class Option extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      [this.props.option]: "",
+      [this.props.option]: 0,
       px: true
     };
   }
@@ -42,9 +42,21 @@ class Option extends Component {
     });
   };
 
+  handleInput = e => {
+    if (e.target.value === "") {
+      this.setState({
+        [this.props.option]: 0
+      });
+    } else
+      this.setState({
+        [this.props.option]:
+          e.target.value.replace(/\D/, "") + (this.state.px ? "px" : "%")
+      });
+  };
+
   render() {
     const { px } = this.state;
-    const { option } = this.props;
+    const { option, min, max } = this.props;
     return (
       <Fragment>
         <Row>
@@ -53,12 +65,22 @@ class Option extends Component {
           </Col>
         </Row>
         <Row className="margin-20 vertical-center-items">
-          <Col lg={{ offset: 4, size: 4 }}>
+          <Col lg={{ offset: 3, size: 1 }}>
+            <input
+              type="number"
+              className="number-input"
+              value={parseInt(this.state[option])}
+              onChange={this.handleInput}
+            />
+          </Col>
+          <Col lg="4">
             <Slider
-              onAfterChange={this.handle.bind(this, option)}
-              min={0}
-              max={px ? 3000 : 100}
-              defaultValue={500}
+              onChange={this.handle.bind(this, option)}
+              min={px ? (min ? min : 0) : 0}
+              max={px ? (max ? max : 2000) : 100}
+              step={px ? 10 : 1}
+              defaultValue={0}
+              value={parseInt(this.state[option])}
               handle={handle}
             />
           </Col>
