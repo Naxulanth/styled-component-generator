@@ -10,7 +10,7 @@ class Option extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      [this.props.option]: 0,
+      [this.props.option]: null,
       px: true
     };
   }
