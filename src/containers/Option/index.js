@@ -10,8 +10,9 @@ class Option extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      [this.props.option]: "unset",
-      px: true
+      [this.props.option]: null,
+      px: true,
+      important: false
     };
   }
 
@@ -20,29 +21,36 @@ class Option extends PureComponent {
     if (!_.isEqual(prevState, this.state)) {
       let tempState = Object.assign({}, this.state);
       delete tempState["px"];
+      delete tempState["important"];
       sendData(tempState);
     }
   }
 
   handle = (key, e) => {
+    if (!e) {
+      e = parseInt(this.state[this.props.option]);
+    }
     this.setState({
-      [this.props.option]: e + (this.state.px ? "px" : "%")
+      [this.props.option]:
+        e +
+        (this.state.px ? "px" : "%") +
+        (this.state.important ? " !important" : "")
     });
   };
 
-  handlePx = e => {
+  handlePx = () => {
     this.setState({
       px: !this.state.px
     });
   };
 
-  handleAuto = e => {
+  handleAuto = () => {
     this.setState({
-      [this.props.option]: "auto"
+      [this.props.option]: "auto" + (this.state.important ? " !important" : "")
     });
   };
 
-  handleNull = e => {
+  handleNull = () => {
     this.setState({
       [this.props.option]: null
     });
@@ -60,17 +68,16 @@ class Option extends PureComponent {
       });
   };
 
-  handleImportant = (key, e) => {
-    let opt = this.state[this.props.option];
-    if (opt) {
-      let importantIndex = opt.indexOf(" !important");
-      if (importantIndex > 0) {
-        opt = opt.substr(0, importantIndex);
-      } else opt += " !important";
-    }
-    this.setState({
-      [this.props.option]: opt
-    });
+  handleImportant = () => {
+    if (this.state[this.props.option])
+      this.setState(
+        {
+          important: !this.state.important
+        },
+        this.state[this.props.option].includes("auto")
+          ? this.handleAuto
+          : this.handle
+      );
   };
 
   render() {
@@ -121,9 +128,7 @@ class Option extends PureComponent {
             <Button onClick={this.handleNull} className="align">
               unset
             </Button>
-            <Button onClick={this.handleImportant.bind(this, this.option)}>
-              important
-            </Button>
+            <Button onClick={this.handleImportant}>important</Button>
           </Col>
         </Row>
       </Fragment>

@@ -1,0 +1,52 @@
+.code-area {
+    min-height: 300px;
+    min-width: 300px;
+    margin-top: 50px;
+    border: 1px solid rgb(190,190,190);
+    padding: 10px;
+    border-radius: 4px;
+    resize: none;
+    overflow: auto;
+}
+
+.code-area::selection {
+    color: black;
+    background: white;
+}
+
+input {
+    border: 1px solid rgb(190,190,190);  
+    padding-left: 5px;
+    border-radius: 4px;
+}
+
+.input-container {
+    text-align: right;
+}
+
+.margin-10 {
+    margin-bottom: 10px;
+}
+.margin-20 {
+    margin-bottom: 20px;
+}
+
+.rc-slider-rail {
+    background: #b0b0b0;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.vertical-center {
+    align-self: center;
+}

@@ -10,6 +10,8 @@ class Color extends PureComponent {
     this.state = {
       color: "#333",
       background: "#333",
+      colorImportant: false,
+      backgroundImportant: false,
       params: {
         color: null,
         background: null
@@ -31,8 +33,17 @@ class Color extends PureComponent {
   };
 
   handleChange = (key, e) => {
+    console.log(key);
+    console.log(this.state);
+    if (!e) {
+      e = {};
+      e.rgb = Object.assign({}, this.state[key]);
+    }
+    console.log(this.state[key + "Important"]);
     let tempParams = Object.assign({}, this.state.params);
-    tempParams[key] = `rgba(${e.rgb.r}@ ${e.rgb.g}@ ${e.rgb.b}@ ${e.rgb.a})`;
+    tempParams[key] =
+      `rgba(${e.rgb.r}@ ${e.rgb.g}@ ${e.rgb.b}@ ${e.rgb.a})` +
+      (this.state[key + "Important"] ? " !important" : "");
     this.setState({
       [key]: e.rgb,
       params: tempParams
@@ -41,16 +52,12 @@ class Color extends PureComponent {
   };
 
   handleImportant = (key, e) => {
-    let tempParams = Object.assign({}, this.state.params);
-    if (tempParams[key]) {
-      let importantIndex = tempParams[key].indexOf(" !important");
-      if (importantIndex > 0) {
-        tempParams[key] = tempParams[key].substr(0, importantIndex);
-      } else tempParams[key] += " !important";
-    }
-    this.setState({
-      params: tempParams
-    });
+    this.setState(
+      {
+        [key + "Important"]: !this.state[key + "Important"]
+      },
+      () => this.handleChange(key)
+    );
   };
 
   render() {
