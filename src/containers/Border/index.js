@@ -3,6 +3,7 @@ import { Row, Col } from "reactstrap";
 import Button from "components/Button";
 import _ from "lodash/core";
 import Option from "containers/Option";
+import OptionColor from "containers/OptionColor";
 import Select from "react-select";
 import { borderStyle } from "constants/options";
 import { ChromePicker } from "react-color";
@@ -12,10 +13,7 @@ class Border extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      selected: null,
-      color: "#333",
-      "border-color-important": false,
-      "border-style-important": false
+      selected: null
     };
   }
 
@@ -23,25 +21,9 @@ class Border extends PureComponent {
     const { sendData } = this.props;
     if (!_.isEqual(prevState, this.state)) {
       let tempState = Object.assign({}, this.state);
-      delete tempState["important"];
-      delete tempState["color"];
       sendData(tempState);
     }
   }
-
-  handleChange = (key, e) => {
-    if (!e) {
-      e = {};
-      e.rgb = Object.assign({}, this.state["color"]);
-    }
-    let temp =
-      `rgba(${e.rgb.r}@ ${e.rgb.g}@ ${e.rgb.b}@ ${e.rgb.a})` +
-      (this.state.important ? " !important" : "");
-    this.setState({
-      color: e.rgb,
-      [key]: temp
-    });
-  };
 
   getData = data => {
     let merged = { ...this.state, ...data };
@@ -65,10 +47,7 @@ class Border extends PureComponent {
       {
         [key + "-important"]: !this.state[key + "-important"]
       },
-      () =>
-        key === "border-color"
-          ? this.handleChange()
-          : this.handleSelect()
+      () => (key === "border-color" ? this.handleChange() : this.handleSelect())
     );
   };
 
@@ -78,27 +57,7 @@ class Border extends PureComponent {
       <Fragment>
         <Row>
           <Col className="align-center" lg="6">
-            border-color
-            <Row>
-              <Col className="align-center" lg="12">
-                <ChromePicker
-                  color={color}
-                  onChangeComplete={this.handleChange.bind(
-                    this,
-                    "border-color"
-                  )}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col className="align-center" lg="12">
-                <Button
-                  onClick={this.handleImportant.bind(this, "border-color")}
-                >
-                  important
-                </Button>
-              </Col>
-            </Row>
+            <OptionColor option="border-color" sendData={this.getData} />
           </Col>
           <Col className="align-center vertical-center" lg="6">
             <Option sendData={this.getData} option="border-width" />

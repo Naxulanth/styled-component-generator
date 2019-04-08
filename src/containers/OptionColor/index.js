@@ -8,17 +8,18 @@ class OptionColor extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      color: "#333",
-      important: false,
-      params: {}
+      [this.props.option]: null,
+      optionColor: { r: 50, g: 50, b: 50, a: 1 },
+      important: false
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { sendData } = this.props;
     if (!_.isEqual(prevState, this.state)) {
-      let tempState = Object.assign({}, this.state);
-      sendData(tempState.params);
+      let tempState = {};
+      tempState[this.props.option] = this.state[this.props.option];
+      sendData(tempState);
     }
   }
 
@@ -26,15 +27,14 @@ class OptionColor extends PureComponent {
     const { option } = this.props;
     if (!e) {
       e = {};
-      e.rgb = Object.assign({}, this.state.color);
+      e.rgb = Object.assign({}, this.state.optionColor);
     }
-    let tempParams = {};
-    tempParams[option] =
+    let param =
       `rgba(${e.rgb.r}@ ${e.rgb.g}@ ${e.rgb.b}@ ${e.rgb.a})` +
       (this.state.important ? " !important" : "");
     this.setState({
-      color: e.rgb,
-      params: tempParams
+      optionColor: e.rgb,
+      [this.props.option]: param
     });
   };
 
@@ -48,7 +48,8 @@ class OptionColor extends PureComponent {
   };
 
   render() {
-    const { color } = this.state;
+    console.log(this.state);
+    const { optionColor } = this.state;
     const { option } = this.props;
     return (
       <Fragment>
@@ -60,7 +61,7 @@ class OptionColor extends PureComponent {
         <Row>
           <Col className="align-center" lg="12">
             <ChromePicker
-              color={color}
+              color={optionColor}
               onChangeComplete={this.handleChange.bind(this, option)}
             />
           </Col>
