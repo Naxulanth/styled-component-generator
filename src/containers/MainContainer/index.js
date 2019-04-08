@@ -53,12 +53,14 @@ class MainContainer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // check which object the change is made to here (hover/regular etc)
     if (
       (!_.isEqual(prevState.params, this.state.params) ||
         !_.isEqual(prevState.selected, this.state.selected) ||
         this.state.name !== prevState.name) &&
       this.state.selected
     ) {
+      // pass param on which object to manipulate
       this.generateComponent();
     }
   }
@@ -85,6 +87,8 @@ class MainContainer extends Component {
     });
   };
 
+  // this will accept a param
+  // updating the result string should be done in another function
   generateComponent = () => {
     const { selected, params, name } = this.state;
     Object.keys(params).forEach(
@@ -333,7 +337,7 @@ ${paramString}
             </TabContent>
           </Col>
         </Row>
-        <Row className="margin-20">
+        <Row className="top-50 margin-20">
           <Col className="align-center" lg="12">
             {Component ? <Component>{inputText}</Component> : null}
           </Col>
