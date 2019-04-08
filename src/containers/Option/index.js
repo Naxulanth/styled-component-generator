@@ -63,7 +63,9 @@ class Option extends PureComponent {
     } else
       this.setState({
         [this.props.option]:
-          e.target.value.replace(/\D/, "") + (this.state.px ? "px" : "%")
+          e.target.value.replace(/\D/, "") +
+          (this.state.px ? "px" : "%") +
+          (this.state.important ? " !important" : "")
       });
   };
 
@@ -109,7 +111,7 @@ class Option extends PureComponent {
               onChange={this.handle.bind(this, option)}
               min={px ? (min ? min : 0) : 0}
               max={px ? (max ? max : 2000) : 100}
-              step={px ? 5 : 1}
+              step={px ? 10 : 1}
               defaultValue={0}
               value={parseInt(this.state[option])}
               handle={handle}
