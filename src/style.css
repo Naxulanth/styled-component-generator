@@ -69,6 +69,10 @@ input {
     text-align: center;
 }
 
+.align-left {
+  text-align: left;
+}
+
 .full-width {
     width: 100%;
 }

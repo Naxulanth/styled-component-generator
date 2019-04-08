@@ -19,9 +19,8 @@ class Option extends PureComponent {
   componentDidUpdate(prevProps, prevState) {
     const { sendData } = this.props;
     if (!_.isEqual(prevState, this.state)) {
-      let tempState = Object.assign({}, this.state);
-      delete tempState["px"];
-      delete tempState["important"];
+      let tempState = {};
+      tempState[this.props.option] = this.state[this.props.option];
       sendData(tempState);
     }
   }
