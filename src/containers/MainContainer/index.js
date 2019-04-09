@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 import styled from "styled-components";
 import _ from "lodash/core";
+import { ChromePicker } from "react-color";
 import Select from "react-select";
 import classnames from "classnames";
 import { toast } from "react-toastify";
@@ -37,7 +38,9 @@ class MainContainer extends Component {
       activeTab: null,
       inputText: "Test",
       selectComponents: [],
-      testBackground: "#eaeeee"
+      testBackground: "#eaeeee",
+      testBackgroundState: "",
+      hideDetails: false
     };
     this.cssArea = React.createRef();
     this.styledArea = React.createRef();
@@ -142,6 +145,12 @@ ${paramString}
     });
   };
 
+  handleHide = () => {
+    this.setState({
+      hideDetails: !this.state.hideDetails
+    });
+  };
+
   handleCopy = e => {
     if (e.target.classList[1].includes("styled")) {
       this.styledArea.current.select();
@@ -149,6 +158,14 @@ ${paramString}
     document.execCommand("copy");
     e.target.focus();
     toast.success("Copied to clipboard!");
+  };
+
+  handleBackdrop = e => {
+    this.setState({
+      testBackgroundState: e.rgb,
+      testBackground: `rgba(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})`
+    });
+    console.log(this.state);
   };
 
   // tabs
@@ -171,7 +188,9 @@ ${paramString}
       inputText,
       selectComponents,
       activeTab,
-      testBackground
+      testBackground,
+      testBackgroundState,
+      hideDetails
     } = this.state;
     return (
       <div>
@@ -217,15 +236,23 @@ ${paramString}
               </Col>
             </Row>
             <Row className="margin-20">
-              <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
-                <span>Backdrop color</span>
-              </Col>
-              <Col lg={{ size: 4 }}>
-              color picker here
+              <Col
+                className="align-center vertical-center"
+                lg={{ offset: 6, size: 4 }}
+              >
+                <ChromePicker
+                  onChangeComplete={this.handleBackdrop}
+                  color={testBackgroundState}
+                />
+                <Row>
+                  <Col lg="12">
+                    <span>Backdrop color</span>
+                  </Col>
+                </Row>
               </Col>
             </Row>
             <Row className="margin-20">
-              <Col lg="12">
+              <Col lg="10">
                 <Nav tabs>
                   <NavItem>
                     <NavLink
@@ -307,37 +334,46 @@ ${paramString}
                   </NavItem>
                 </Nav>
               </Col>
+              <Col lg="2">
+              {selected ? 
+                <Button onClick={this.handleHide}>
+                  {hideDetails ? "Show" : "Hide"} Settings
+                </Button>
+              : ""}
+              </Col>
             </Row>
-            <TabContent activeTab={this.state.activeTab}>
-              <TabPane tabId="1">
-                <Border sendData={this.getData} />
-              </TabPane>
-            </TabContent>
-            <TabContent activeTab={this.state.activeTab}>
-              <TabPane tabId="2">
-                <Size sendData={this.getData} />
-              </TabPane>
-            </TabContent>
-            <TabContent activeTab={this.state.activeTab}>
-              <TabPane tabId="3">
-                <Color sendData={this.getData} />
-              </TabPane>
-            </TabContent>
-            <TabContent activeTab={this.state.activeTab}>
-              <TabPane tabId="4">
-                <Placement sendData={this.getData} />
-              </TabPane>
-            </TabContent>
-            <TabContent activeTab={this.state.activeTab}>
-              <TabPane tabId="5">
-                <Font sendData={this.getData} />
-              </TabPane>
-            </TabContent>
-            <TabContent activeTab={this.state.activeTab}>
-              <TabPane tabId="6">
-                <Custom sendData={this.getData} />
-              </TabPane>
-            </TabContent>
+            <div style={{ display: hideDetails ? "none" : "block" }}>
+              <TabContent activeTab={this.state.activeTab}>
+                <TabPane tabId="1">
+                  <Border sendData={this.getData} />
+                </TabPane>
+              </TabContent>
+              <TabContent activeTab={this.state.activeTab}>
+                <TabPane tabId="2">
+                  <Size sendData={this.getData} />
+                </TabPane>
+              </TabContent>
+              <TabContent activeTab={this.state.activeTab}>
+                <TabPane tabId="3">
+                  <Color sendData={this.getData} />
+                </TabPane>
+              </TabContent>
+              <TabContent activeTab={this.state.activeTab}>
+                <TabPane tabId="4">
+                  <Placement sendData={this.getData} />
+                </TabPane>
+              </TabContent>
+              <TabContent activeTab={this.state.activeTab}>
+                <TabPane tabId="5">
+                  <Font sendData={this.getData} />
+                </TabPane>
+              </TabContent>
+              <TabContent activeTab={this.state.activeTab}>
+                <TabPane tabId="6">
+                  <Custom sendData={this.getData} />
+                </TabPane>
+              </TabContent>
+            </div>
           </Col>
         </Row>
         <Row className="top-50 margin-20">
