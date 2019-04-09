@@ -4,10 +4,7 @@ import Button from "components/Button";
 import _ from "lodash/core";
 import Option from "containers/Option";
 import OptionColor from "containers/OptionColor";
-import Select from "react-select";
-import { borderStyle } from "constants/options";
-import { ChromePicker } from "react-color";
-import "rc-slider/assets/index.css";
+import OptionSelect from "containers/OptionSelect";
 
 class Border extends PureComponent {
   constructor(props) {
@@ -42,15 +39,6 @@ class Border extends PureComponent {
     });
   };
 
-  handleImportant = (key, e) => {
-    this.setState(
-      {
-        [key + "-important"]: !this.state[key + "-important"]
-      },
-      () => (key === "border-color" ? this.handleChange() : this.handleSelect())
-    );
-  };
-
   render() {
     const { color, selected } = this.state;
     return (
@@ -62,27 +50,8 @@ class Border extends PureComponent {
           <Col className="align-center vertical-center" lg="6">
             <Option sendData={this.getData} option="border-width" />
             <Option sendData={this.getData} option="border-radius" />
-            <Row>
-              <Col className="margin-10 align-center" lg="12">
-                border-style
-              </Col>
-            </Row>
-            <Row className="margin-10">
-              <Col lg="6">
-                <Select
-                  options={borderStyle}
-                  onChange={this.handleSelect}
-                  selected={selected}
-                />
-              </Col>
-              <Col className="vertical-center" lg="6">
-                <Button
-                  onClick={this.handleImportant.bind(this, "border-style")}
-                >
-                  important
-                </Button>
-              </Col>
-            </Row>
+            <OptionSelect sendData={this.getData} option="border-style" />
+            <Row />
           </Col>
         </Row>
       </Fragment>

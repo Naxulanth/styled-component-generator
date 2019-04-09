@@ -92,7 +92,9 @@ class MainContainer extends Component {
   generateComponent = () => {
     const { selected, params, name } = this.state;
     Object.keys(params).forEach(
-      key => params[key] == null && delete params[key]
+      key =>
+        (params[key] == null || params[key].includes("null")) &&
+        delete params[key]
     );
     let label =
       selected.type === "core"
