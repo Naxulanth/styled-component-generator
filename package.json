@@ -15,8 +15,7 @@
     "react-select": "^2.4.2",
     "react-toastify": "^5.0.0-rc.5",
     "reactstrap": "^7.1.0",
-    "styled-components": "^4.2.0",
-    "uuid": "^3.3.2"
+    "styled-components": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

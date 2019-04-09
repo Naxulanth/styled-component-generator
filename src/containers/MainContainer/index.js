@@ -36,7 +36,8 @@ class MainContainer extends Component {
       name: "MyComponent",
       activeTab: null,
       inputText: "Test",
-      selectComponents: []
+      selectComponents: [],
+      testBackground: "#eaeeee"
     };
     this.cssArea = React.createRef();
     this.styledArea = React.createRef();
@@ -169,7 +170,8 @@ ${paramString}
       selected,
       inputText,
       selectComponents,
-      activeTab
+      activeTab,
+      testBackground
     } = this.state;
     return (
       <div>
@@ -212,6 +214,14 @@ ${paramString}
                   onChange={this.handleInput}
                   type="text"
                 />
+              </Col>
+            </Row>
+            <Row className="margin-20">
+              <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
+                <span>Backdrop color</span>
+              </Col>
+              <Col lg={{ size: 4 }}>
+              color picker here
               </Col>
             </Row>
             <Row className="margin-20">
@@ -331,7 +341,13 @@ ${paramString}
           </Col>
         </Row>
         <Row className="top-50 margin-20">
-          <Col className="align-center" lg="12">
+          <Col
+            style={{
+              background: testBackground
+            }}
+            className="align-center"
+            lg="12"
+          >
             {Component ? <Component>{inputText}</Component> : null}
           </Col>
         </Row>
