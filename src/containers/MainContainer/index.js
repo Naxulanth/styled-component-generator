@@ -14,6 +14,7 @@ import Select from "react-select";
 import classnames from "classnames";
 import { toast } from "react-toastify";
 import Size from "containers/Size";
+import Button from "components/Button";
 import Border from "containers/Border";
 import Placement from "containers/Placement";
 import Custom from "containers/Custom";
@@ -42,14 +43,7 @@ class MainContainer extends Component {
   }
 
   componentDidMount() {
-    let tempComponents = components.slice(0);
-    tempComponents = tempComponents.map(component => {
-      component.label += " - " + component.type;
-      return component;
-    });
-    this.setState({
-      selectComponents: tempComponents
-    });
+    this.fixComponents();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -65,25 +59,22 @@ class MainContainer extends Component {
     }
   }
 
+  fixComponents = () => {
+    let tempComponents = components.slice(0);
+    tempComponents = tempComponents.map(component => {
+      component.label += " - " + component.type;
+      return component;
+    });
+    this.setState({
+      selectComponents: tempComponents
+    });
+  };
+
   getData = data => {
     const { params } = this.state;
     let merged = { ...params, ...data };
     this.setState({
       params: merged
-    });
-  };
-
-  reload = () => {
-    this.setState({
-      params: {},
-      styled: "",
-      css: "",
-      Component: null,
-      selected: null,
-      name: "MyComponent",
-      activeTab: null,
-      inputText: "Test",
-      selectComponents: []
     });
   };
 
