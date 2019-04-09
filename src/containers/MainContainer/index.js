@@ -23,6 +23,8 @@ import Color from "containers/Color";
 import Font from "containers/Font";
 import { components } from "constants/components";
 
+import "rc-slider/assets/index.css";
+
 class MainContainer extends Component {
   constructor(props) {
     super(props);
@@ -163,6 +165,7 @@ ${paramString}
       testBackgroundState: e.rgb,
       testBackground: `rgba(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})`
     });
+
   };
 
   // tabs
