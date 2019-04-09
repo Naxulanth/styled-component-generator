@@ -25,6 +25,13 @@ class Option extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    const { sendData } = this.props;
+    let tempState = {};
+    tempState[this.props.option] = null;
+    sendData(tempState);
+  }
+
   handle = (key, e) => {
     if (!e) {
       e = parseInt(this.state[this.props.option]);

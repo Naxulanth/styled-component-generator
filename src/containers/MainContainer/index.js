@@ -165,7 +165,6 @@ ${paramString}
       testBackgroundState: e.rgb,
       testBackground: `rgba(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})`
     });
-    console.log(this.state);
   };
 
   // tabs
@@ -334,7 +333,7 @@ ${paramString}
                   </NavItem>
                 </Nav>
               </Col>
-              <Col lg="2">
+              <Col className="vertical-center align-center" lg="2">
               {selected ? 
                 <Button onClick={this.handleHide}>
                   {hideDetails ? "Show" : "Hide"} Settings

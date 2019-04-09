@@ -48,7 +48,6 @@ class OptionColor extends PureComponent {
   };
 
   render() {
-    console.log(this.state);
     const { optionColor } = this.state;
     const { option } = this.props;
     return (
