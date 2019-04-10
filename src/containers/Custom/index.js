@@ -16,6 +16,7 @@ class Custom extends PureComponent {
       selected: [],
       render: []
     };
+    this.elements = [];
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -28,9 +29,19 @@ class Custom extends PureComponent {
 
   generate = () => {
     const { values, components, selected, render } = this.state;
-    let r = Object.keys(components).map( key => {
+    let r = Object.keys(components).map((key, i) => {
       let Component = components[key];
-      return <Component key={key} sendData={this.getData} option={key} />;
+      this.elements.push(
+        <Col key={key} lg="6">
+          <Component sendData={this.getData} option={key} />
+        </Col>
+      );
+      console.log(components);
+      if ((i + 1) % 2 === 0 || i === Object.keys(components).length - 1) {
+        let result = this.elements;
+        this.elements = [];
+        return <Row key={uuidv4()}>{result}</Row>;
+      } else return null;
     });
     this.setState({
       render: r
@@ -50,10 +61,13 @@ class Custom extends PureComponent {
     e.forEach(selected => {
       c[selected.label] = selected.type;
     });
-    this.setState({
-      selected: e,
-      components: c
-    }, this.generate);
+    this.setState(
+      {
+        selected: e,
+        components: c
+      },
+      this.generate
+    );
   };
 
   render() {
@@ -71,9 +85,7 @@ class Custom extends PureComponent {
             />
           </Col>
         </Row>
-        <Row>
-          <Col lg="6">{render}</Col>
-        </Row>
+        {render}
       </Fragment>
     );
   }
