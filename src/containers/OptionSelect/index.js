@@ -46,7 +46,7 @@ class OptionSelect extends PureComponent {
   };
 
   render() {
-    const { option , options} = this.props;
+    const { option, options } = this.props;
     const { optionSelect } = this.state;
     return (
       <Fragment>

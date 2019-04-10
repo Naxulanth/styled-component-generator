@@ -28,13 +28,17 @@ class Custom extends PureComponent {
   generate = () => {
     const { components } = this.state;
     let r = Object.keys(components).map((key, i) => {
-      let Component = components[key];
+      let Component = components[key].type;
+      console.log(components);
       this.elements.push(
         <Col key={key} lg="6">
-          <Component sendData={this.getData} option={key} />
+          <Component
+            options={components[key].option ? components[key].option : null}
+            sendData={this.getData}
+            option={key}
+          />
         </Col>
       );
-      console.log(components);
       if ((i + 1) % 2 === 0 || i === Object.keys(components).length - 1) {
         let result = this.elements;
         this.elements = [];
@@ -56,7 +60,7 @@ class Custom extends PureComponent {
   handleSelect = e => {
     let c = {};
     e.forEach(selected => {
-      c[selected.label] = selected.type;
+      c[selected.label] = { type: selected.type, option: selected.option };
     });
     this.setState(
       {

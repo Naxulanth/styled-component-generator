@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
 import _ from "lodash/core";
 import Option from "containers/Option";
-import { fontStyle } from "constants/options";
+import { fontStyle, fontWeight } from "constants/options";
 import OptionSelect from "containers/OptionSelect";
 
 class Font extends PureComponent {
@@ -37,6 +37,11 @@ class Font extends PureComponent {
               sendData={this.getData}
               option="font-style"
             />
+          </Col>
+        </Row>
+        <Row>
+          <Col lg="6">
+            <Option options={fontWeight} sendData={this.getData} option="font-weight" />
           </Col>
         </Row>
       </Fragment>
