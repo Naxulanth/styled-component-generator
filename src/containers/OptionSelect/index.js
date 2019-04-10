@@ -1,6 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
-import { borderStyle } from "constants/options";
 import Select from "react-select";
 import Button from "components/Button";
 import _ from "lodash/core";
@@ -47,7 +46,7 @@ class OptionSelect extends PureComponent {
   };
 
   render() {
-    const { option } = this.props;
+    const { option , options} = this.props;
     const { optionSelect } = this.state;
     return (
       <Fragment>
@@ -59,7 +58,7 @@ class OptionSelect extends PureComponent {
         <Row className="margin-10">
           <Col lg="6">
             <Select
-              options={borderStyle}
+              options={options}
               onChange={this.handleSelect}
               selected={optionSelect}
             />

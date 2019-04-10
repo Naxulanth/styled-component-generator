@@ -2,6 +2,7 @@ import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
 import _ from "lodash/core";
 import Option from "containers/Option";
+import { borderStyle } from "constants/options";
 import OptionColor from "containers/OptionColor";
 import OptionSelect from "containers/OptionSelect";
 
@@ -48,7 +49,7 @@ class Border extends PureComponent {
           <Col className="align-center vertical-center" lg="6">
             <Option sendData={this.getData} option="border-width" />
             <Option sendData={this.getData} option="border-radius" />
-            <OptionSelect sendData={this.getData} option="border-style" />
+            <OptionSelect options={borderStyle} sendData={this.getData} option="border-style" />
             <Row />
           </Col>
         </Row>

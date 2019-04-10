@@ -49,6 +49,11 @@ class Size extends PureComponent {
             <Option pxOption sendData={this.getData} option="max-height" />
           </Col>
         </Row>
+        <Row>
+          <Col lg="6">
+            <Option sendData={this.getData} option="line-height" />
+          </Col>
+        </Row>
       </Fragment>
     );
   }

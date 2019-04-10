@@ -15,6 +15,6 @@ export const attributes = [
     { label: "border-top-color", value: "border-top-color", type: OptionColor },
     { label: "border-bottom-width", value: "border-bottom-width", type: Option },
     { label: "border-bottom-style", value: "border-bottom-style", type: OptionSelect },
-    { label: "border-bottom-color", value: "border-bottom-color", type: OptionColor }
+    { label: "border-bottom-color", value: "border-bottom-color", type: OptionColor },
   ];
   
