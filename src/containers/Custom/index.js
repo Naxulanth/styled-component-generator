@@ -4,8 +4,6 @@ import { attributes } from "constants/attributes";
 import Select from "react-select";
 import _ from "lodash/core";
 import uuidv4 from "uuid/v4";
-import Option from "containers/Option";
-import { ChromePicker } from "react-color";
 
 class Custom extends PureComponent {
   constructor(props) {
@@ -28,7 +26,7 @@ class Custom extends PureComponent {
   }
 
   generate = () => {
-    const { values, components, selected, render } = this.state;
+    const { components } = this.state;
     let r = Object.keys(components).map((key, i) => {
       let Component = components[key];
       this.elements.push(
@@ -56,7 +54,6 @@ class Custom extends PureComponent {
   };
 
   handleSelect = e => {
-    const { values, components, selected } = this.state;
     let c = {};
     e.forEach(selected => {
       c[selected.label] = selected.type;
@@ -71,7 +68,7 @@ class Custom extends PureComponent {
   };
 
   render() {
-    const { values, components, selected, render } = this.state;
+    const { selected, render } = this.state;
     return (
       <Fragment>
         <Row className="margin-20">

@@ -23,7 +23,6 @@ class Color extends PureComponent {
   };
 
   render() {
-    const { color, background } = this.state;
     return (
       <Fragment>
         <Row>

@@ -1,6 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
-import Button from "components/Button";
 import _ from "lodash/core";
 import Option from "containers/Option";
 import OptionColor from "containers/OptionColor";
@@ -40,7 +39,6 @@ class Border extends PureComponent {
   };
 
   render() {
-    const { color, selected } = this.state;
     return (
       <Fragment>
         <Row>

@@ -24,7 +24,6 @@ class OptionColor extends PureComponent {
   }
 
   handleChange = (key, e) => {
-    const { option } = this.props;
     if (!e) {
       e = {};
       e.rgb = Object.assign({}, this.state.optionColor);

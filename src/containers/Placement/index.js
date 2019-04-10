@@ -23,7 +23,6 @@ class Placement extends PureComponent {
   };
 
   render() {
-    const { px } = this.state;
     return (
       <Fragment>
         <Row>

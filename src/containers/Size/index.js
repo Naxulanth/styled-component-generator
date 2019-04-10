@@ -18,13 +18,11 @@ class Size extends PureComponent {
   }
 
   getData = data => {
-    const { sendData } = this.props;
     let merged = { ...this.state, ...data };
     this.setState(merged);
   };
 
   render() {
-    const { px } = this.state;
     return (
       <Fragment>
         <Row>
