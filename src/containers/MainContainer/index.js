@@ -41,7 +41,8 @@ class MainContainer extends Component {
       selectComponents: [],
       testBackground: "#eaeeee",
       testBackgroundState: "",
-      hideDetails: false
+      hideDetails: false,
+      activeTabPseudo: null
     };
     this.cssArea = React.createRef();
     this.styledArea = React.createRef();
@@ -134,8 +135,12 @@ ${paramString}
 
   handleSelect = e => {
     let activeTab = !this.state.selected ? "1" : this.state.activeTab;
+    let activeTabPseudo = !this.state.selected
+      ? "1"
+      : this.state.activeTabPseudo;
     this.setState({
       activeTab,
+      activeTabPseudo,
       selected: e
     });
   };
@@ -178,6 +183,14 @@ ${paramString}
     }
   };
 
+  togglePseudo = tab => {
+    if (this.state.activeTabPseudo !== tab) {
+      this.setState({
+        activeTabPseudo: tab
+      });
+    }
+  };
+
   render() {
     const {
       styled,
@@ -190,7 +203,8 @@ ${paramString}
       activeTab,
       testBackground,
       testBackgroundState,
-      hideDetails
+      hideDetails,
+      activeTabPseudo
     } = this.state;
     return (
       <div>
@@ -287,6 +301,64 @@ ${paramString}
                 <ReactTooltip place="top" type="dark" effect="float">
                   ...
                 </ReactTooltip>
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="10">
+                <Nav tabs>
+                  <NavItem>
+                    <NavLink
+                      disabled={!selected}
+                      className={classnames({
+                        active: activeTabPseudo === "1"
+                      })}
+                      onClick={() => {
+                        this.togglePseudo("1");
+                      }}
+                    >
+                      None
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      disabled={!selected}
+                      className={classnames({
+                        active: activeTabPseudo === "2"
+                      })}
+                      onClick={() => {
+                        this.togglePseudo("2");
+                      }}
+                    >
+                      Hover
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      disabled={!selected}
+                      className={classnames({
+                        active: activeTabPseudo === "3"
+                      })}
+                      onClick={() => {
+                        this.togglePseudo("3");
+                      }}
+                    >
+                      Focus
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      disabled={!selected}
+                      className={classnames({
+                        active: activeTabPseudo === "4"
+                      })}
+                      onClick={() => {
+                        this.togglePseudo("4");
+                      }}
+                    >
+                      Disabled
+                    </NavLink>
+                  </NavItem>
+                </Nav>
               </Col>
             </Row>
             <Row className="margin-20">
@@ -443,7 +515,7 @@ ${paramString}
           </Col>
         </Row>
         <Row>
-          <Col className="margin-20" lg={{ offset: 2, size: 10 }}>
+          <Col lg={{ offset: 2, size: 10 }}>
             <span>
               <span className="title">Copy</span>
               <span className="tooltip-select" data-tip="tooltip-select">

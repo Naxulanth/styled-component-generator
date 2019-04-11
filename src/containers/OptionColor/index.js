@@ -68,9 +68,11 @@ class OptionColor extends PureComponent {
     const { option, className } = this.props;
     return (
       <div className={className}>
-        <Row className="margin-20">
-          <Col className="align-center" lg="12">
+        <Row>
+          <Col className="align-center" lg={{offset: 4, size: 4}}>
             {option}{" "}
+            </Col>
+            <Col lg="4">
             <span className="hide-show" onClick={this.hide}>
               {hide ? "show" : "hide"}
             </span>
