@@ -10,7 +10,7 @@ class Option extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      [this.props.option]: null,
+      [this.props.option]: this.props.noPx ? 100 : null,
       px: true,
       important: false
     };
@@ -33,13 +33,14 @@ class Option extends PureComponent {
   }
 
   handle = (key, e) => {
+    const { noPx } = this.props;
     if (!e) {
       e = parseInt(this.state[this.props.option]);
     }
     this.setState({
       [this.props.option]:
         e +
-        (this.state.px ? "px" : "%") +
+        (noPx ? "" : this.state.px ? "px" : "%") +
         (this.state.important ? " !important" : "")
     });
   };
@@ -63,6 +64,7 @@ class Option extends PureComponent {
   };
 
   handleInput = e => {
+    const { noPx } = this.props;
     if (e.target.value === "") {
       this.setState({
         [this.props.option]: null
@@ -71,7 +73,7 @@ class Option extends PureComponent {
       this.setState({
         [this.props.option]:
           e.target.value.replace(/\D/, "") +
-          (this.state.px ? "px" : "%") +
+          (noPx ? "" : this.state.px ? "px" : "%") +
           (this.state.important ? " !important" : "")
       });
   };
@@ -90,12 +92,12 @@ class Option extends PureComponent {
 
   render() {
     const { px } = this.state;
-    const { option, min, max, pxOption } = this.props;
+    const { option, min, max, pxOption, noPx, step } = this.props;
     return (
       <Fragment>
         <Row className="margin-20">
           <Col className="align-center" lg={"12"}>
-            {option} {px ? "(px)" : "(%)"}
+            {option} {noPx ? "" : px ? "(px)" : "(%)"}
           </Col>
         </Row>
         <Row className="margin-20 vertical-center-items">
@@ -116,18 +118,27 @@ class Option extends PureComponent {
           <Col lg="4">
             <Slider
               onChange={this.handle.bind(this, option)}
-              min={px ? (min ? min : 0) : 0}
-              max={px ? (max ? max : 2000) : 100}
-              step={px ? 10 : 1}
-              defaultValue={0}
-              value={parseInt(this.state[option])}
+              min={noPx ? min : px ? (min ? min : 0) : 0}
+              max={noPx ? max : px ? (max ? max : 2000) : 100}
+              step={noPx ? step : px ? 10 : 1}
+              value={
+                noPx
+                  ? isNaN(parseInt(this.state[option]))
+                    ? min
+                    : parseInt(this.state[option])
+                  : parseInt(this.state[option])
+              }
               handle={handle}
             />
           </Col>
           <Col lg="6">
-            <Button onClick={this.handleAuto} className="align">
-              auto
-            </Button>
+            {noPx ? (
+              ""
+            ) : (
+              <Button onClick={this.handleAuto} className="align">
+                auto
+              </Button>
+            )}
             {pxOption ? (
               <Button onClick={this.handlePx} className="align">
                 {px ? "%" : "px"}

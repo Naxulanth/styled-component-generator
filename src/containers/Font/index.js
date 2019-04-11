@@ -41,7 +41,15 @@ class Font extends PureComponent {
         </Row>
         <Row>
           <Col lg="6">
-            <Option options={fontWeight} sendData={this.getData} option="font-weight" />
+            <Option
+              step={100}
+              min={100}
+              max={900}
+              noPx
+              options={fontWeight}
+              sendData={this.getData}
+              option="font-weight"
+            />
           </Col>
         </Row>
       </Fragment>

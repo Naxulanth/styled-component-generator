@@ -23,6 +23,13 @@ class OptionSelect extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    const { sendData } = this.props;
+    let tempState = {};
+    tempState[this.props.option] = null;
+    sendData(tempState);
+  }
+
   handleSelect = e => {
     if (!e) {
       e = this.state.optionSelect;

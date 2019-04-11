@@ -12,7 +12,7 @@ export const fontStyle = [
   { label: "oblique", value: "oblique" }
 ];
 
-export const fontWeight = [ 
+export const fontWeight = [
   { label: "100", value: "100" },
   { label: "200", value: "200" },
   { label: "300", value: "300" },
@@ -22,4 +22,16 @@ export const fontWeight = [
   { label: "700", value: "700" },
   { label: "800", value: "800" },
   { label: "900", value: "900" }
-]
+];
+
+export const outlineStyle = [
+  { label: "none", value: "none" },
+  { label: "dotted", value: "dotted" },
+  { label: "dashed", value: "dashed" },
+  { label: "solid", value: "solid" },
+  { label: "double", value: "double" },
+  { label: "groove", value: "groove" },
+  { label: "ridge", value: "ridge" },
+  { label: "inset", value: "inset" },
+  { label: "outset", value: "outset" }
+];

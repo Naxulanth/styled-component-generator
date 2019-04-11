@@ -23,6 +23,13 @@ class OptionColor extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    const { sendData } = this.props;
+    let tempState = {};
+    tempState[this.props.option] = null;
+    sendData(tempState);
+  }
+
   handleChange = (key, e) => {
     if (!e) {
       e = {};

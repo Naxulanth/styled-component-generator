@@ -1,7 +1,7 @@
 import Option from "containers/Option";
 import OptionColor from "containers/OptionColor";
 import OptionSelect from "containers/OptionSelect";
-import { borderStyle } from "constants/options";
+import { borderStyle, outlineStyle } from "constants/options";
 
 export const attributes = [
   { label: "border-left-width", value: "border-left-width", type: Option },
@@ -43,5 +43,17 @@ export const attributes = [
     label: "border-bottom-color",
     value: "border-bottom-color",
     type: OptionColor
+  },
+  { label: "outline-color", value: "outline-color", type: OptionColor },
+  {
+    label: "outline-style",
+    value: "outline-style",
+    type: OptionSelect,
+    option: outlineStyle
+  },
+  {
+    label: "outline-width",
+    value: "outline-width",
+    type: Option
   }
 ];
