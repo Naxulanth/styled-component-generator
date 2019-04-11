@@ -3,6 +3,7 @@ import { Row, Col } from "reactstrap";
 import { attributes } from "constants/attributes";
 import Select from "react-select";
 import _ from "lodash/core";
+import uuidv4 from "uuid/v4";
 
 class Custom extends PureComponent {
   constructor(props) {
@@ -11,7 +12,8 @@ class Custom extends PureComponent {
       values: {},
       components: {},
       selected: [],
-      render: []
+      renderLeft: [],
+      renderRight: []
     };
   }
 
@@ -25,22 +27,64 @@ class Custom extends PureComponent {
 
   generate = () => {
     const { components } = this.state;
-    let r = Object.keys(components).map((key, i) => {
-      let Component = components[key].type;
-      return (
-        <Row key={key}>
-          <Col lg="12">
-            <Component
-              options={components[key].option ? components[key].option : null}
+    let tempComponents = Object.assign({}, components);
+    let map = {};
+    let l = [];
+    let r = [];
+    Object.keys(tempComponents).forEach(key => {
+      let c = tempComponents[key].type.name;
+      if (!map[c]) map[c] = {};
+      map[c][key] = tempComponents[key];
+    });
+    Object.keys(map).forEach(catKey => {
+      let cat = map[catKey];
+      for (let i = 0; i < Object.keys(cat).length; i += 2) {
+        let firstKey = Object.keys(cat)[i];
+        let f = cat[firstKey];
+        let First = f.type;
+        let s = null;
+        let Second = null;
+        let SecondRender = null;
+        let secondKey = Object.keys(cat)[i + 1]
+          ? Object.keys(cat)[i + 1]
+          : null;
+        if (secondKey) s = cat[secondKey];
+        if (s) Second = s.type;
+        if (Second)
+          SecondRender = (
+            <Second
+              options={s ? (s.option ? s.option : null) : null}
               sendData={this.getData}
-              option={key}
+              option={secondKey}
             />
-          </Col>
-        </Row>
-      );
+          );
+        l.push(
+          <Row key={uuidv4()}>
+            <Col lg="12">
+              <First
+                options={f.option ? f.option : null}
+                sendData={this.getData}
+                option={firstKey}
+              />
+            </Col>
+          </Row>
+        );
+        r.push(
+          <Row key={uuidv4()}>
+            <Col lg="12">
+              {SecondRender ? (
+                SecondRender
+              ) : (
+                <First dummy option="test" className={"hidden"} />
+              )}
+            </Col>
+          </Row>
+        );
+      }
     });
     this.setState({
-      render: r
+      renderLeft: l,
+      renderRight: r
     });
   };
 
@@ -66,7 +110,7 @@ class Custom extends PureComponent {
   };
 
   render() {
-    const { selected, render } = this.state;
+    const { selected, renderLeft, renderRight } = this.state;
     return (
       <Fragment>
         <Row className="margin-20">
@@ -82,11 +126,13 @@ class Custom extends PureComponent {
         </Row>
         <Row className="margin-20">
           <Col lg="6">
-            <Col lg="12">{render}</Col>
+            <Row>
+              <Col lg="12">{renderLeft}</Col>
+            </Row>
           </Col>
           <Col lg="6">
             <Row>
-              <Col lg="12">{render}</Col>
+              <Col lg="12">{renderRight}</Col>
             </Row>
           </Col>
         </Row>

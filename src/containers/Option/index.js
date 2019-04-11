@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import { Row, Col } from "reactstrap";
 import Slider from "rc-slider";
 import _ from "lodash/core";
@@ -27,10 +27,13 @@ class Option extends PureComponent {
   }
 
   componentWillUnmount() {
-    const { sendData } = this.props;
-    let tempState = {};
-    tempState[this.props.option] = null;
-    sendData(tempState);
+    const { dummy } = this.props;
+    if (!dummy) {
+      const { sendData } = this.props;
+      let tempState = {};
+      tempState[this.props.option] = null;
+      sendData(tempState);
+    }
   }
 
   handle = (key, e) => {
@@ -99,9 +102,9 @@ class Option extends PureComponent {
 
   render() {
     const { px, hide } = this.state;
-    const { option, min, max, pxOption, noPx, step } = this.props;
+    const { option, min, max, pxOption, noPx, step, className } = this.props;
     return (
-      <Fragment>
+      <div className={className}>
         <Row className="margin-20">
           <Col className="align-center" lg={"8"}>
             {option} {noPx ? "" : px ? "(px)" : "(%)"}{" "}
@@ -166,7 +169,7 @@ class Option extends PureComponent {
         ) : (
           ""
         )}
-      </Fragment>
+      </div>
     );
   }
 }

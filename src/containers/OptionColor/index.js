@@ -25,10 +25,13 @@ class OptionColor extends PureComponent {
   }
 
   componentWillUnmount() {
-    const { sendData } = this.props;
-    let tempState = {};
-    tempState[this.props.option] = null;
-    sendData(tempState);
+    const { dummy } = this.props;
+    if (!dummy) {
+      const { sendData } = this.props;
+      let tempState = {};
+      tempState[this.props.option] = null;
+      sendData(tempState);
+    }
   }
 
   hide = () => {
@@ -62,9 +65,9 @@ class OptionColor extends PureComponent {
 
   render() {
     const { optionColor, hide } = this.state;
-    const { option } = this.props;
+    const { option, className } = this.props;
     return (
-      <Fragment>
+      <div className={className}>
         <Row className="margin-20">
           <Col className="align-center" lg="12">
             {option}{" "}
@@ -92,7 +95,7 @@ class OptionColor extends PureComponent {
         ) : (
           ""
         )}
-      </Fragment>
+      </div>
     );
   }
 }

@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import { Row, Col } from "reactstrap";
 import Select from "react-select";
 import Button from "components/Button";
@@ -25,10 +25,13 @@ class OptionSelect extends PureComponent {
   }
 
   componentWillUnmount() {
-    const { sendData } = this.props;
-    let tempState = {};
-    tempState[this.props.option] = null;
-    sendData(tempState);
+    const { dummy } = this.props;
+    if (!dummy) {
+      const { sendData } = this.props;
+      let tempState = {};
+      tempState[this.props.option] = null;
+      sendData(tempState);
+    }
   }
 
   handleSelect = e => {
@@ -60,10 +63,10 @@ class OptionSelect extends PureComponent {
   };
 
   render() {
-    const { option, options } = this.props;
-    const { optionSelect, hide } = this.state;
+    const { option, options, className } = this.props;
+    const { optionSelect, hide  } = this.state;
     return (
-      <Fragment>
+      <div className={className}>
         <Row>
           <Col className="margin-10 align-center" lg="8">
             {option}
@@ -90,7 +93,7 @@ class OptionSelect extends PureComponent {
             </Col>
           </Row>
         ) : null}
-      </Fragment>
+      </div>
     );
   }
 }

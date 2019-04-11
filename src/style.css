@@ -141,3 +141,8 @@ input {
 .hide-show {
   cursor: pointer;
 }
+
+.hidden {
+  visibility: hidden;
+  opacity: 1.0; 
+}
