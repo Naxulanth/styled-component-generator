@@ -110,8 +110,17 @@ input {
   margin-top: 50px;
 }
 
+.top-20 {
+  margin-top: 20px;
+}
+
 .chrome-picker {
   display: inline-block;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.title {
+  font-size: 32px;
+  margin-top: 20px;
 }

@@ -23,7 +23,6 @@ import Color from "containers/Color";
 import Font from "containers/Font";
 import { components } from "constants/components";
 
-
 class MainContainer extends Component {
   constructor(props) {
     super(props);
@@ -164,7 +163,6 @@ ${paramString}
       testBackgroundState: e.rgb,
       testBackground: `rgba(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})`
     });
-
   };
 
   // tabs
@@ -195,59 +193,81 @@ ${paramString}
       <div>
         <Row>
           <Col lg={{ offset: 2, size: 8 }}>
-            <Row className="margin-20">
-              <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
-                <span>Component</span>
-              </Col>
-              <Col lg={{ size: 4 }}>
-                <Select
-                  options={selectComponents}
-                  value={selected}
-                  onChange={this.handleSelect}
-                  placeholder={"Select component..."}
-                />
+            <Row>
+              <Col lg={{ size: 12 }}>
+                <span className="title">Select</span>
               </Col>
             </Row>
-            <Row className="margin-20">
-              <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
-                <span>Component/Class Name</span>
-              </Col>
-              <Col className="input-container align-center" lg={{ size: 4 }}>
-                <input
-                  className="full-width"
-                  value={name}
-                  onChange={this.handleName}
-                  type="text"
-                />
-              </Col>
-            </Row>
-            <Row className="margin-20">
-              <Col className="vertical-center" lg={{ offset: 2, size: 4 }}>
-                <span>Input text</span>
-              </Col>
-              <Col className="input-container align-center" lg={{ size: 4 }}>
-                <input
-                  className="full-width"
-                  value={inputText}
-                  onChange={this.handleInput}
-                  type="text"
-                />
-              </Col>
-            </Row>
-            <Row className="margin-20">
-              <Col
-                className="align-center vertical-center"
-                lg={{ offset: 6, size: 4 }}
-              >
-                <ChromePicker
-                  onChangeComplete={this.handleBackdrop}
-                  color={testBackgroundState}
-                />
-                <Row>
-                  <Col lg="12">
-                    <span>Backdrop color</span>
+            <Row>
+              <Col className="top-20" lg="6">
+                <Row className="margin-20">
+                  <Col className="vertical-center" lg={{ size: 6 }}>
+                    <span>Component</span>
+                  </Col>
+                  <Col lg={{ size: 6 }}>
+                    <Select
+                      options={selectComponents}
+                      value={selected}
+                      onChange={this.handleSelect}
+                      placeholder={"Select component..."}
+                    />
                   </Col>
                 </Row>
+                <Row className="margin-20">
+                  <Col className="vertical-center" lg={{ size: 6 }}>
+                    <span>Component/Class Name</span>
+                  </Col>
+                  <Col
+                    className="input-container align-center"
+                    lg={{ size: 6 }}
+                  >
+                    <input
+                      className="full-width"
+                      value={name}
+                      onChange={this.handleName}
+                      type="text"
+                    />
+                  </Col>
+                </Row>
+                <Row className="margin-20">
+                  <Col className="vertical-center" lg={{ size: 6 }}>
+                    <span>Input text</span>
+                  </Col>
+                  <Col
+                    className="input-container align-center"
+                    lg={{ size: 6 }}
+                  >
+                    <input
+                      className="full-width"
+                      value={inputText}
+                      onChange={this.handleInput}
+                      type="text"
+                    />
+                  </Col>
+                </Row>
+              </Col>
+              <Col lg="6">
+                <Row className="margin-20">
+                  <Col
+                    className="align-center vertical-center"
+                    lg={{ size: 12 }}
+                  >
+                    <ChromePicker
+                      onChangeComplete={this.handleBackdrop}
+                      color={testBackgroundState}
+                    />
+                    <Row>
+                      <Col lg="12">
+                        <span>Backdrop color</span>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="margin-20" lg={{ size: 12 }}>
+                <span className="title">Customize</span>
               </Col>
             </Row>
             <Row className="margin-20">
@@ -334,11 +354,13 @@ ${paramString}
                 </Nav>
               </Col>
               <Col className="vertical-center align-center" lg="2">
-              {selected ? 
-                <Button onClick={this.handleHide}>
-                  {hideDetails ? "Show" : "Hide"} Settings
-                </Button>
-              : ""}
+                {selected ? (
+                  <Button onClick={this.handleHide}>
+                    {hideDetails ? "Show" : "Hide"} Settings
+                  </Button>
+                ) : (
+                  ""
+                )}
               </Col>
             </Row>
             <div style={{ display: hideDetails ? "none" : "block" }}>
@@ -375,6 +397,13 @@ ${paramString}
             </div>
           </Col>
         </Row>
+        {Component ? (
+          <Row>
+            <Col className="top-20 margin-20" lg={{ offset: 2, size: 10 }}>
+              <span className="title">Preview</span>
+            </Col>
+          </Row>
+        ) : null}
         <Row className="top-50 margin-20">
           <Col
             style={{
@@ -384,6 +413,11 @@ ${paramString}
             lg="12"
           >
             {Component ? <Component>{inputText}</Component> : null}
+          </Col>
+        </Row>
+        <Row>
+          <Col className="margin-20" lg={{ offset: 2, size: 10 }}>
+            <span className="title">Copy</span>
           </Col>
         </Row>
         <Row>
