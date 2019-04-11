@@ -1,4 +1,9 @@
 
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
   body {
     background-color: #eaeeee !important;
     color: black !important;
@@ -7,7 +12,6 @@
     font-style: normal;
     overflow-x: hidden;
     font-size: 0.8vw !important;
-    -webkit-font-smoothing: antialiased;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -86,7 +90,6 @@ input {
 }
 
 .align {
-    vertical-align: middle;
     display: inline-block;
 }
 
@@ -122,5 +125,15 @@ input {
 
 .title {
   font-size: 32px;
-  margin-top: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.tooltip-select {
+  cursor: pointer;
+  color: #5a6268;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  font-size: 16px;
 }

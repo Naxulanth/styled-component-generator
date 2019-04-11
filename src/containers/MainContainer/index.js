@@ -10,6 +10,8 @@ import {
 } from "reactstrap";
 import styled from "styled-components";
 import _ from "lodash/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { ChromePicker } from "react-color";
 import Select from "react-select";
 import classnames from "classnames";
@@ -17,6 +19,7 @@ import { toast } from "react-toastify";
 import Size from "containers/Size";
 import Button from "components/Button";
 import Border from "containers/Border";
+import ReactTooltip from "react-tooltip";
 import Placement from "containers/Placement";
 import Custom from "containers/Custom";
 import Color from "containers/Color";
@@ -194,8 +197,16 @@ ${paramString}
         <Row>
           <Col lg={{ offset: 2, size: 8 }}>
             <Row>
-              <Col lg={{ size: 12 }}>
-                <span className="title">Select</span>
+              <Col className="vertical-center" lg={{ size: 12 }}>
+                <span>
+                  <span className="title">Select</span>
+                  <span className="tooltip-select" data-tip="tooltip-select">
+                    <FontAwesomeIcon icon={faQuestionCircle} />
+                  </span>
+                </span>
+                <ReactTooltip place="top" type="dark" effect="float">
+                  ...
+                </ReactTooltip>
               </Col>
             </Row>
             <Row>
