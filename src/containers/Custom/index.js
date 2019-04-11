@@ -3,7 +3,6 @@ import { Row, Col } from "reactstrap";
 import { attributes } from "constants/attributes";
 import Select from "react-select";
 import _ from "lodash/core";
-import uuidv4 from "uuid/v4";
 
 class Custom extends PureComponent {
   constructor(props) {
