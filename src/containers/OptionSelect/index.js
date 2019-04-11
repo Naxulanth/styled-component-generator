@@ -10,7 +10,8 @@ class OptionSelect extends PureComponent {
     this.state = {
       [this.props.option]: null,
       optionSelect: null,
-      important: false
+      important: false,
+      hide: false
     };
   }
 
@@ -52,30 +53,43 @@ class OptionSelect extends PureComponent {
     );
   };
 
+  hide = () => {
+    this.setState({
+      hide: !this.state.hide
+    });
+  };
+
   render() {
     const { option, options } = this.props;
-    const { optionSelect } = this.state;
+    const { optionSelect, hide } = this.state;
     return (
       <Fragment>
         <Row>
-          <Col className="margin-10 align-center" lg="12">
+          <Col className="margin-10 align-center" lg="8">
             {option}
           </Col>
-        </Row>
-        <Row className="margin-10">
-          <Col lg="6">
-            <Select
-              options={options}
-              onChange={this.handleSelect}
-              selected={optionSelect}
-            />
-          </Col>
-          <Col className="vertical-center" lg="6">
-            <Button onClick={this.handleImportant.bind(this, option)}>
-              important
-            </Button>
+          <Col lg="4">
+            <span className="hide-show" onClick={this.hide}>
+              {hide ? "show" : "hide"}
+            </span>
           </Col>
         </Row>
+        {!hide ? (
+          <Row className="margin-10">
+            <Col lg="6">
+              <Select
+                options={options}
+                onChange={this.handleSelect}
+                selected={optionSelect}
+              />
+            </Col>
+            <Col className="align-center vertical-center" lg="6">
+              <Button onClick={this.handleImportant.bind(this, option)}>
+                important
+              </Button>
+            </Col>
+          </Row>
+        ) : null}
       </Fragment>
     );
   }

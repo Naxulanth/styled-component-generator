@@ -27,31 +27,43 @@ class Size extends PureComponent {
       <Fragment>
         <Row>
           <Col lg="6">
-            <Option pxOption sendData={this.getData} option="width" />
+            <Row>
+              <Col lg="12">
+                <Option pxOption sendData={this.getData} option="width" />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="12">
+                <Option pxOption sendData={this.getData} option="min-width" />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="12">
+                <Option pxOption sendData={this.getData} option="max-width" />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="12">
+                <Option sendData={this.getData} option="line-height" />
+              </Col>
+            </Row>
           </Col>
           <Col lg="6">
-            <Option pxOption sendData={this.getData} option="height" />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg="6">
-            <Option pxOption sendData={this.getData} option="min-width" />
-          </Col>
-          <Col lg="6">
-            <Option pxOption sendData={this.getData} option="min-height" />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg="6">
-            <Option pxOption sendData={this.getData} option="max-width" />
-          </Col>
-          <Col lg="6">
-            <Option pxOption sendData={this.getData} option="max-height" />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg="6">
-            <Option sendData={this.getData} option="line-height" />
+            <Row>
+              <Col lg="12">
+                <Option pxOption sendData={this.getData} option="height" />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="12">
+                <Option pxOption sendData={this.getData} option="min-height" />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="12">
+                <Option pxOption sendData={this.getData} option="max-height" />
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Fragment>

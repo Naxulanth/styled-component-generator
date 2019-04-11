@@ -12,7 +12,8 @@ class Option extends PureComponent {
     this.state = {
       [this.props.option]: this.props.noPx ? 100 : null,
       px: true,
-      important: false
+      important: false,
+      hide: false
     };
   }
 
@@ -78,6 +79,12 @@ class Option extends PureComponent {
       });
   };
 
+  hide = () => {
+    this.setState({
+      hide: !this.state.hide
+    });
+  };
+
   handleImportant = () => {
     if (this.state[this.props.option])
       this.setState(
@@ -91,65 +98,74 @@ class Option extends PureComponent {
   };
 
   render() {
-    const { px } = this.state;
+    const { px, hide } = this.state;
     const { option, min, max, pxOption, noPx, step } = this.props;
     return (
       <Fragment>
         <Row className="margin-20">
-          <Col className="align-center" lg={"12"}>
-            {option} {noPx ? "" : px ? "(px)" : "(%)"}
-          </Col>
-        </Row>
-        <Row className="margin-20 vertical-center-items">
-          <Col lg="2">
-            <input
-              type="number"
-              className="number-input"
-              value={
-                parseInt(this.state[option]) ||
-                parseInt(this.state[option]) === 0
-                  ? parseInt(this.state[option])
-                  : ""
-              }
-              onChange={this.handleInput}
-              placeholder={this.state[option] === "auto" ? "auto" : "unset"}
-            />
+          <Col className="align-center" lg={"8"}>
+            {option} {noPx ? "" : px ? "(px)" : "(%)"}{" "}
           </Col>
           <Col lg="4">
-            <Slider
-              onChange={this.handle.bind(this, option)}
-              min={noPx ? min : px ? (min ? min : 0) : 0}
-              max={noPx ? max : px ? (max ? max : 2000) : 100}
-              step={noPx ? step : px ? 10 : 1}
-              value={
-                noPx
-                  ? isNaN(parseInt(this.state[option]))
-                    ? min
-                    : parseInt(this.state[option])
-                  : parseInt(this.state[option])
-              }
-              handle={handle}
-            />
-          </Col>
-          <Col lg="6">
-            {noPx ? (
-              ""
-            ) : (
-              <Button onClick={this.handleAuto} className="align">
-                auto
-              </Button>
-            )}
-            {pxOption ? (
-              <Button onClick={this.handlePx} className="align">
-                {px ? "%" : "px"}
-              </Button>
-            ) : null}
-            <Button onClick={this.handleNull} className="align">
-              unset
-            </Button>
-            <Button onClick={this.handleImportant}>important</Button>
+            <span className="hide-show" onClick={this.hide}>
+              {hide ? "show" : "hide"}
+            </span>
           </Col>
         </Row>
+        {!hide ? (
+          <Row className="margin-20 vertical-center-items">
+            <Col lg="2">
+              <input
+                type="number"
+                className="number-input"
+                value={
+                  parseInt(this.state[option]) ||
+                  parseInt(this.state[option]) === 0
+                    ? parseInt(this.state[option])
+                    : ""
+                }
+                onChange={this.handleInput}
+                placeholder={this.state[option] === "auto" ? "auto" : "unset"}
+              />
+            </Col>
+            <Col lg="4">
+              <Slider
+                onChange={this.handle.bind(this, option)}
+                min={noPx ? min : px ? (min ? min : 0) : 0}
+                max={noPx ? max : px ? (max ? max : 2000) : 100}
+                step={noPx ? step : px ? 10 : 1}
+                value={
+                  noPx
+                    ? isNaN(parseInt(this.state[option]))
+                      ? min
+                      : parseInt(this.state[option])
+                    : parseInt(this.state[option])
+                }
+                handle={handle}
+              />
+            </Col>
+            <Col className="align-center vertical-center" lg="6">
+              {noPx ? (
+                ""
+              ) : (
+                <Button onClick={this.handleAuto} className="align">
+                  auto
+                </Button>
+              )}
+              {pxOption ? (
+                <Button onClick={this.handlePx} className="align">
+                  {px ? "%" : "px"}
+                </Button>
+              ) : null}
+              <Button onClick={this.handleNull} className="align">
+                unset
+              </Button>
+              <Button onClick={this.handleImportant}>important</Button>
+            </Col>
+          </Row>
+        ) : (
+          ""
+        )}
       </Fragment>
     );
   }

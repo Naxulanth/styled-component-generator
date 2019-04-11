@@ -27,36 +27,74 @@ class Placement extends PureComponent {
       <Fragment>
         <Row>
           <Col lg="6">
-          <Option pxOption sendData={this.getData} option="padding-left" />
+            <Row>
+              <Col lg="12">
+                <Option
+                  pxOption
+                  sendData={this.getData}
+                  option="padding-left"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="12">
+                <Option
+                  pxOption
+                  sendData={this.getData}
+                  option="padding-right"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="12">
+                <Option pxOption sendData={this.getData} option="padding-top" />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="12">
+                <Option
+                  pxOption
+                  sendData={this.getData}
+                  option="padding-bottom"
+                />
+              </Col>
+            </Row>
           </Col>
           <Col lg="6">
-          <Option pxOption sendData={this.getData} option="padding-right" />
+            <Row>
+              <Col lg="12">
+                <Option
+                  pxOption
+                  sendData={this.getData}
+                  option="margin-left"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="12">
+                <Option
+                  pxOption
+                  sendData={this.getData}
+                  option="margin-right"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="12">
+                <Option pxOption sendData={this.getData} option="margin-top" />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="12">
+                <Option
+                  pxOption
+                  sendData={this.getData}
+                  option="margin-bottom"
+                />
+              </Col>
+            </Row>
           </Col>
-        </Row>
-        <Row>
-          <Col lg="6">
-          <Option pxOption sendData={this.getData} option="padding-top" />
-          </Col>
-          <Col lg="6">
-          <Option pxOption sendData={this.getData} option="padding-bottom" />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg="6">
-          <Option pxOption sendData={this.getData} option="margin-top" />
-          </Col>
-          <Col lg="6">
-          <Option pxOption sendData={this.getData} option="margin-bottom" />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg="6">
-          <Option pxOption sendData={this.getData} option="margin-left" />
-          </Col>
-          <Col lg="6">
-          <Option pxOption sendData={this.getData} option="margin-right" />
-          </Col>
-        </Row>
+          </Row>
       </Fragment>
     );
   }

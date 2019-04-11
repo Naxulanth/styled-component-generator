@@ -10,7 +10,8 @@ class OptionColor extends PureComponent {
     this.state = {
       [this.props.option]: null,
       optionColor: { r: 50, g: 50, b: 50, a: 1 },
-      important: false
+      important: false,
+      hide: false
     };
   }
 
@@ -29,6 +30,12 @@ class OptionColor extends PureComponent {
     tempState[this.props.option] = null;
     sendData(tempState);
   }
+
+  hide = () => {
+    this.setState({
+      hide: !this.state.hide
+    });
+  };
 
   handleChange = (key, e) => {
     if (!e) {
@@ -54,28 +61,37 @@ class OptionColor extends PureComponent {
   };
 
   render() {
-    const { optionColor } = this.state;
+    const { optionColor, hide } = this.state;
     const { option } = this.props;
     return (
       <Fragment>
         <Row className="margin-20">
           <Col className="align-center" lg="12">
-            {option}
+            {option}{" "}
+            <span className="hide-show" onClick={this.hide}>
+              {hide ? "show" : "hide"}
+            </span>
           </Col>
         </Row>
-        <Row>
-          <Col className="align-center" lg="12">
-            <ChromePicker
-              color={optionColor}
-              onChangeComplete={this.handleChange.bind(this, option)}
-            />
-          </Col>
-        </Row>
-        <Row className="margin-20">
-          <Col className="align-center" lg="12">
-            <Button onClick={this.handleImportant}>important</Button>
-          </Col>
-        </Row>
+        {!hide ? (
+          <Fragment>
+            <Row>
+              <Col className="align-center" lg="12">
+                <ChromePicker
+                  color={optionColor}
+                  onChangeComplete={this.handleChange.bind(this, option)}
+                />
+              </Col>
+            </Row>
+            <Row className="margin-20">
+              <Col className="align-center" lg="12">
+                <Button onClick={this.handleImportant}>important</Button>
+              </Col>
+            </Row>
+          </Fragment>
+        ) : (
+          ""
+        )}
       </Fragment>
     );
   }

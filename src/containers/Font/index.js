@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import { Row, Col } from "reactstrap";
 import _ from "lodash/core";
 import Option from "containers/Option";
@@ -26,33 +26,39 @@ class Font extends PureComponent {
 
   render() {
     return (
-      <Fragment>
-        <Row>
-          <Col lg="6">
-            <Option sendData={this.getData} option="font-size" />
-          </Col>
-          <Col lg="6">
-            <OptionSelect
-              options={fontStyle}
-              sendData={this.getData}
-              option="font-style"
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg="6">
-            <Option
-              step={100}
-              min={100}
-              max={900}
-              noPx
-              options={fontWeight}
-              sendData={this.getData}
-              option="font-weight"
-            />
-          </Col>
-        </Row>
-      </Fragment>
+      <Row>
+        <Col lg="6">
+          <Row>
+            <Col lg="12">
+              <Option sendData={this.getData} option="font-size" />
+            </Col>
+          </Row>
+          <Row>
+            <Col lg="12">
+              <OptionSelect
+                options={fontStyle}
+                sendData={this.getData}
+                option="font-style"
+              />
+            </Col>
+          </Row>
+        </Col>
+        <Col lg="6">
+          <Row>
+            <Col>
+              <Option
+                step={100}
+                min={100}
+                max={900}
+                noPx
+                options={fontWeight}
+                sendData={this.getData}
+                option="font-weight"
+              />
+            </Col>
+          </Row>
+        </Col>
+      </Row>
     );
   }
 }

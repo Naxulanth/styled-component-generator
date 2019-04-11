@@ -278,7 +278,15 @@ ${paramString}
             </Row>
             <Row>
               <Col className="margin-20" lg={{ size: 12 }}>
-                <span className="title">Customize</span>
+                <span>
+                  <span className="title">Customize</span>
+                  <span className="tooltip-select" data-tip="tooltip-select">
+                    <FontAwesomeIcon icon={faQuestionCircle} />
+                  </span>
+                </span>
+                <ReactTooltip place="top" type="dark" effect="float">
+                  ...
+                </ReactTooltip>
               </Col>
             </Row>
             <Row className="margin-20">
@@ -411,7 +419,15 @@ ${paramString}
         {Component ? (
           <Row>
             <Col className="top-20 margin-20" lg={{ offset: 2, size: 10 }}>
-              <span className="title">Preview</span>
+              <span>
+                <span className="title">Preview</span>
+                <span className="tooltip-select" data-tip="tooltip-select">
+                  <FontAwesomeIcon icon={faQuestionCircle} />
+                </span>
+              </span>
+              <ReactTooltip place="top" type="dark" effect="float">
+                ...
+              </ReactTooltip>
             </Col>
           </Row>
         ) : null}
@@ -428,7 +444,15 @@ ${paramString}
         </Row>
         <Row>
           <Col className="margin-20" lg={{ offset: 2, size: 10 }}>
-            <span className="title">Copy</span>
+            <span>
+              <span className="title">Copy</span>
+              <span className="tooltip-select" data-tip="tooltip-select">
+                <FontAwesomeIcon icon={faQuestionCircle} />
+              </span>
+            </span>
+            <ReactTooltip place="top" type="dark" effect="float">
+              ...
+            </ReactTooltip>
           </Col>
         </Row>
         <Row>

@@ -1,76 +1,76 @@
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  body {
-    background-color: #eaeeee !important;
-    color: black !important;
-    font-family: 'Roboto', sans-serif !important;
-    font-weight: 300 !important;
-    font-style: normal;
-    overflow-x: hidden;
-    font-size: 0.8vw !important;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+body {
+  background-color: #eaeeee !important;
+  color: black !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 300 !important;
+  font-style: normal;
+  overflow-x: hidden;
+  font-size: 0.8vw !important;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-  html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
 #root {
-    min-height: 100%;
-    position: relative;
-  }
+  min-height: 100%;
+  position: relative;
+}
 
-  .code-area {
-    min-height: 300px;
-    min-width: 300px;
-    margin-top: 50px;
-    border: 1px solid rgb(190,190,190);
-    padding: 10px;
-    border-radius: 4px;
-    resize: none;
-    overflow: auto;
+.code-area {
+  min-height: 300px;
+  min-width: 300px;
+  margin-top: 50px;
+  border: 1px solid rgb(190, 190, 190);
+  padding: 10px;
+  border-radius: 4px;
+  resize: none;
+  overflow: auto;
 }
 
 .code-area::selection {
-    color: black;
-    background: white;
+  color: black;
+  background: white;
 }
 
 input {
-    border: 1px solid rgb(190,190,190);  
-    padding-left: 5px;
-    border-radius: 4px;
+  border: 1px solid rgb(190, 190, 190);
+  padding-left: 5px;
+  border-radius: 4px;
 }
 
 .input-container {
-    text-align: right;
+  text-align: right;
 }
 
 .margin-10 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
+
 .margin-20 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .rc-slider-rail {
-    background: #b0b0b0;
+  background: #b0b0b0;
 }
 
 .nav-link {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .align-center {
-    text-align: center;
+  text-align: center;
 }
 
 .align-left {
@@ -78,11 +78,11 @@ input {
 }
 
 .full-width {
-    width: 100%;
+  width: 100%;
 }
 
 .vertical-center {
-    align-self: center;
+  align-self: center;
 }
 
 .vertical-center-items {
@@ -90,7 +90,7 @@ input {
 }
 
 .align {
-    display: inline-block;
+  display: inline-block;
 }
 
 .right-5 {
@@ -136,4 +136,8 @@ input {
   vertical-align: middle;
   margin-left: 10px;
   font-size: 16px;
+}
+
+.hide-show {
+  cursor: pointer;
 }
