@@ -116,7 +116,7 @@ class Option extends PureComponent {
     return (
       <div className={className}>
         <Row>
-          <Col className="align-center" lg={{ offset: 2, size: 5 }}>
+          <Col className={"align-center" + (!hide ? " margin-10" : "")} lg={{ offset: 2, size: 5 }}>
             {option} {noPx ? "" : px ? "(px)" : "(%)"}{" "}
           </Col>
           <Col lg="4">

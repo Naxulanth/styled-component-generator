@@ -90,7 +90,8 @@ class MainContainer extends Component {
     const { selected, params, name } = this.state;
     Object.keys(params).forEach(
       key =>
-        (params[key] == null || params[key].includes("null")) &&
+        (params[key] == null ||
+          (typeof params[key] === "string" && params[key].includes("null"))) &&
         delete params[key]
     );
     let label =

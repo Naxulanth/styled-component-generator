@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const ButtonComponent = styled(Button)`
 margin-right: 10px;
-font-size: 10px !important;
+font-size: 14px !important;
 `
 
 export default ButtonComponent;

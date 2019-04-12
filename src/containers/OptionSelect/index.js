@@ -23,7 +23,7 @@ class OptionSelect extends PureComponent {
       this.setState({
         [this.props.option]: data,
         optionSelect: options.find(option => {
-          return data === option.label;
+          return data.includes(option.label);
         }),
         important: data.includes("important")
       });
