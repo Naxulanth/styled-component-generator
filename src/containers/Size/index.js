@@ -1,6 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
-import _ from "lodash/core";
 import Option from "containers/Option";
 
 class Size extends PureComponent {

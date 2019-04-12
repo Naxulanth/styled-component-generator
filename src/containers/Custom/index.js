@@ -24,11 +24,13 @@ class Custom extends PureComponent {
       let tempState = Object.assign({}, this.state.values);
       sendData(tempState);
     }
-    console.log(this.state.hiders);
+    if (!_.isEqual(prevState.hiders, this.state.hiders)) {
+      this.generate();
+    }
   }
 
   generate = () => {
-    const { components } = this.state;
+    const { components, hiders } = this.state;
     let tempComponents = Object.assign({}, components);
     let map = {};
     let l = [];
@@ -59,7 +61,7 @@ class Custom extends PureComponent {
               sendData={this.getData}
               option={secondKey}
               data={s.data}
-              hide={s.hide}
+              hide={hiders[secondKey]}
             />
           );
         l.push(
@@ -70,7 +72,7 @@ class Custom extends PureComponent {
                 sendData={this.getData}
                 option={firstKey}
                 data={f.data}
-                hide={f.hide}
+                hide={hiders[firstKey]}
               />
             </Col>
           </Row>
@@ -81,7 +83,12 @@ class Custom extends PureComponent {
               {SecondRender ? (
                 SecondRender
               ) : (
-                <First dummy option="test" className={"hidden"} />
+                <First
+                  hide={hiders[firstKey]}
+                  dummy
+                  option="test"
+                  className={"hidden"}
+                />
               )}
             </Col>
           </Row>

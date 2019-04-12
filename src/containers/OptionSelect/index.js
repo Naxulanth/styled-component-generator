@@ -36,8 +36,9 @@ class OptionSelect extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { sendData } = this.props;
-    if (!_.isEqual(prevState, this.state)) {
+    const { dummy } = this.props;
+    if (!_.isEqual(prevState, this.state) && !dummy) {
+      const { sendData } = this.props;
       let tempState = {};
       tempState[this.props.option] = this.state[this.props.option];
       let tempHiders = {};

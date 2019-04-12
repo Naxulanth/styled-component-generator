@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import { Row, Col } from "reactstrap";
-import _ from "lodash/core";
 import Option from "containers/Option";
 import { fontStyle, fontWeight } from "constants/options";
 import OptionSelect from "containers/OptionSelect";

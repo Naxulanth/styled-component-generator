@@ -1,7 +1,6 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
 import OptionColor from "containers/OptionColor";
-import _ from "lodash/core";
 
 class Color extends PureComponent {
   constructor(props) {

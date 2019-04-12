@@ -25,19 +25,20 @@ class Option extends PureComponent {
       this.setState({
         [this.props.option]: data,
         px: data.includes("px"),
-        important: data.includes("important"),
+        important: data.includes("important")
       });
     }
     if (hide) {
       this.setState({
         hide: hide
-      })
+      });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { sendData } = this.props;
-    if (!_.isEqual(prevState, this.state)) {
+    const { dummy } = this.props;
+    if (!_.isEqual(prevState, this.state) && !dummy) {
+      const { sendData } = this.props;
       let tempState = {};
       tempState[this.props.option] = this.state[this.props.option];
       let tempHiders = {};
@@ -116,7 +117,10 @@ class Option extends PureComponent {
     return (
       <div className={className}>
         <Row>
-          <Col className={"align-center" + (!hide ? " margin-10" : "")} lg={{ offset: 2, size: 5 }}>
+          <Col
+            className={"align-center" + (!hide ? " margin-10" : "")}
+            lg={{ offset: 2, size: 5 }}
+          >
             {option} {noPx ? "" : px ? "(px)" : "(%)"}{" "}
           </Col>
           <Col lg="4">
