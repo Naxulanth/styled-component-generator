@@ -17,21 +17,24 @@ class OptionSelect extends PureComponent {
     };
   }
 
+  componentDidMount() {
+    const { data, options } = this.props;
+    if (data) {
+      this.setState({
+        [this.props.option]: data,
+        optionSelect: options.find(option => {
+          return data === option.label;
+        }),
+        important: data.includes("important")
+      });
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { sendData } = this.props;
     if (!_.isEqual(prevState, this.state)) {
       let tempState = {};
       tempState[this.props.option] = this.state[this.props.option];
-      sendData(tempState);
-    }
-  }
-
-  componentWillUnmount() {
-    const { dummy } = this.props;
-    if (!dummy) {
-      const { sendData } = this.props;
-      let tempState = {};
-      tempState[this.props.option] = null;
       sendData(tempState);
     }
   }
@@ -66,26 +69,30 @@ class OptionSelect extends PureComponent {
 
   render() {
     const { option, options, className } = this.props;
-    const { optionSelect, hide  } = this.state;
+    const { optionSelect, hide } = this.state;
     return (
       <div className={className}>
         <Row>
-          <Col className="margin-10 align-center" lg="8">
+          <Col className="align-center" lg={{ offset: 2, size: 5 }}>
             {option}
           </Col>
           <Col lg="4">
             <span className="hide-show" onClick={this.hide}>
-            {hide ? <FontAwesomeIcon icon={faEye}/> : <FontAwesomeIcon icon={faEyeSlash}/>}
+              {hide ? (
+                <FontAwesomeIcon icon={faEye} />
+              ) : (
+                <FontAwesomeIcon icon={faEyeSlash} />
+              )}
             </span>
           </Col>
         </Row>
         {!hide ? (
-          <Row className="margin-10">
+          <Row className="top-10 margin-10">
             <Col lg="6">
               <Select
                 options={options}
                 onChange={this.handleSelect}
-                selected={optionSelect}
+                value={optionSelect}
               />
             </Col>
             <Col className="align-center vertical-center" lg="6">

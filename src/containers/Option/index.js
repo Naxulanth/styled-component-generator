@@ -19,6 +19,17 @@ class Option extends PureComponent {
     };
   }
 
+  componentDidMount() {
+    const { data } = this.props;
+    if (data) {
+      this.setState({
+        [this.props.option]: data,
+        px: data.includes("px"),
+        important: data.includes("important")
+      });
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { sendData } = this.props;
     if (!_.isEqual(prevState, this.state)) {
@@ -28,15 +39,6 @@ class Option extends PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    const { dummy } = this.props;
-    if (!dummy) {
-      const { sendData } = this.props;
-      let tempState = {};
-      tempState[this.props.option] = null;
-      sendData(tempState);
-    }
-  }
 
   handle = (key, e) => {
     const { noPx } = this.props;
@@ -107,13 +109,17 @@ class Option extends PureComponent {
     const { option, min, max, pxOption, noPx, step, className } = this.props;
     return (
       <div className={className}>
-        <Row className="margin-20">
-          <Col className="align-center" lg={"8"}>
+        <Row>
+          <Col className="align-center" lg={{ offset: 2, size: 5 }}>
             {option} {noPx ? "" : px ? "(px)" : "(%)"}{" "}
           </Col>
           <Col lg="4">
             <span className="hide-show" onClick={this.hide}>
-              {hide ? <FontAwesomeIcon icon={faEye}/> : <FontAwesomeIcon icon={faEyeSlash}/>}
+              {hide ? (
+                <FontAwesomeIcon icon={faEye} />
+              ) : (
+                <FontAwesomeIcon icon={faEyeSlash} />
+              )}
             </span>
           </Col>
         </Row>

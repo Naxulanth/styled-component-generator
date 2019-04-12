@@ -56,6 +56,7 @@ class Custom extends PureComponent {
               options={s ? (s.option ? s.option : null) : null}
               sendData={this.getData}
               option={secondKey}
+              data={s.data}
             />
           );
         l.push(
@@ -65,6 +66,7 @@ class Custom extends PureComponent {
                 options={f.option ? f.option : null}
                 sendData={this.getData}
                 option={firstKey}
+                data={f.data}
               />
             </Col>
           </Row>
@@ -96,14 +98,24 @@ class Custom extends PureComponent {
   };
 
   handleSelect = e => {
+    const { values } = this.state;
     let c = {};
     e.forEach(selected => {
-      c[selected.label] = { type: selected.type, option: selected.option };
+      c[selected.label] = {
+        type: selected.type,
+        option: selected.option,
+        data: values[selected.label]
+      };
+    });
+    let v = Object.assign({}, values);
+    Object.keys(v).forEach(key => {
+      if (!JSON.stringify(e).includes(key)) v[key] = null;
     });
     this.setState(
       {
         selected: e,
-        components: c
+        components: c,
+        values: v
       },
       this.generate
     );
