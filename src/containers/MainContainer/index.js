@@ -503,7 +503,7 @@ ${paramString}
             </Col>
           </Row>
         ) : null}
-        <Row className="top-50 margin-20">
+        <Row className="margin-20">
           <Col
             style={{
               background: testBackground

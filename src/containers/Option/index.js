@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import { Row, Col } from "reactstrap";
 import Slider from "rc-slider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import _ from "lodash/core";
 import Button from "components/Button";
 import { handle } from "components/Handle";
@@ -111,7 +113,7 @@ class Option extends PureComponent {
           </Col>
           <Col lg="4">
             <span className="hide-show" onClick={this.hide}>
-              {hide ? "show" : "hide"}
+              {hide ? <FontAwesomeIcon icon={faEye}/> : <FontAwesomeIcon icon={faEyeSlash}/>}
             </span>
           </Col>
         </Row>

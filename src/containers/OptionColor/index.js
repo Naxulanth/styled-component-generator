@@ -1,5 +1,7 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { ChromePicker } from "react-color";
 import Button from "components/Button";
 import _ from "lodash/core";
@@ -74,7 +76,7 @@ class OptionColor extends PureComponent {
             </Col>
             <Col lg="4">
             <span className="hide-show" onClick={this.hide}>
-              {hide ? "show" : "hide"}
+              {hide ? <FontAwesomeIcon icon={faEye}/> : <FontAwesomeIcon icon={faEyeSlash}/>}
             </span>
           </Col>
         </Row>
