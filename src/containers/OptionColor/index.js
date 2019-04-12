@@ -18,7 +18,7 @@ class OptionColor extends PureComponent {
   }
 
   componentDidMount() {
-    const { data } = this.props;
+    const { data, hide } = this.props;
     if (data) {
       let colorSplit = data.split("(")[1].split("@");
       this.setState({
@@ -32,6 +32,11 @@ class OptionColor extends PureComponent {
         }
       });
     }
+    if (hide) {
+      this.setState({
+        hide: hide
+      })
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -39,7 +44,9 @@ class OptionColor extends PureComponent {
     if (!_.isEqual(prevState, this.state)) {
       let tempState = {};
       tempState[this.props.option] = this.state[this.props.option];
-      sendData(tempState);
+      let tempHiders = {};
+      tempHiders[this.props.option] = this.state.hide;
+      sendData({ tempState, tempHiders });
     }
   }
 

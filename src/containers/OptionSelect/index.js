@@ -18,7 +18,7 @@ class OptionSelect extends PureComponent {
   }
 
   componentDidMount() {
-    const { data, options } = this.props;
+    const { data, options, hide } = this.props;
     if (data) {
       this.setState({
         [this.props.option]: data,
@@ -28,6 +28,11 @@ class OptionSelect extends PureComponent {
         important: data.includes("important")
       });
     }
+    if (hide) {
+      this.setState({
+        hide: hide
+      });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -35,7 +40,9 @@ class OptionSelect extends PureComponent {
     if (!_.isEqual(prevState, this.state)) {
       let tempState = {};
       tempState[this.props.option] = this.state[this.props.option];
-      sendData(tempState);
+      let tempHiders = {};
+      tempHiders[this.props.option] = this.state.hide;
+      sendData({ tempState, tempHiders });
     }
   }
 

@@ -10,6 +10,7 @@ class Custom extends PureComponent {
     super(props);
     this.state = {
       values: {},
+      hiders: {},
       components: {},
       selected: [],
       renderLeft: [],
@@ -23,6 +24,7 @@ class Custom extends PureComponent {
       let tempState = Object.assign({}, this.state.values);
       sendData(tempState);
     }
+    console.log(this.state.hiders);
   }
 
   generate = () => {
@@ -57,6 +59,7 @@ class Custom extends PureComponent {
               sendData={this.getData}
               option={secondKey}
               data={s.data}
+              hide={s.hide}
             />
           );
         l.push(
@@ -67,6 +70,7 @@ class Custom extends PureComponent {
                 sendData={this.getData}
                 option={firstKey}
                 data={f.data}
+                hide={f.hide}
               />
             </Col>
           </Row>
@@ -91,31 +95,39 @@ class Custom extends PureComponent {
   };
 
   getData = data => {
-    let merged = { ...this.state.values, ...data };
+    let merged = { ...this.state.values, ...data.tempState };
+    let mergedHiders = { ...this.state.hiders, ...data.tempHiders };
     this.setState({
-      values: merged
+      values: merged,
+      hiders: mergedHiders
     });
   };
 
   handleSelect = e => {
-    const { values } = this.state;
+    const { values, hiders } = this.state;
     let c = {};
     e.forEach(selected => {
       c[selected.label] = {
         type: selected.type,
         option: selected.option,
-        data: values[selected.label]
+        data: values[selected.label],
+        hide: hiders[selected.label]
       };
     });
     let v = Object.assign({}, values);
     Object.keys(v).forEach(key => {
       if (!JSON.stringify(e).includes(key)) v[key] = null;
     });
+    let h = Object.assign({}, hiders);
+    Object.keys(h).forEach(key => {
+      if (!JSON.stringify(e).includes(key)) v[key] = null;
+    });
     this.setState(
       {
         selected: e,
         components: c,
-        values: v
+        values: v,
+        hiders: h
       },
       this.generate
     );

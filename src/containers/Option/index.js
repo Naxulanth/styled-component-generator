@@ -20,13 +20,18 @@ class Option extends PureComponent {
   }
 
   componentDidMount() {
-    const { data } = this.props;
+    const { data, hide } = this.props;
     if (data) {
       this.setState({
         [this.props.option]: data,
         px: data.includes("px"),
-        important: data.includes("important")
+        important: data.includes("important"),
       });
+    }
+    if (hide) {
+      this.setState({
+        hide: hide
+      })
     }
   }
 
@@ -35,10 +40,11 @@ class Option extends PureComponent {
     if (!_.isEqual(prevState, this.state)) {
       let tempState = {};
       tempState[this.props.option] = this.state[this.props.option];
-      sendData(tempState);
+      let tempHiders = {};
+      tempHiders[this.props.option] = this.state.hide;
+      sendData({ tempState, tempHiders });
     }
   }
-
 
   handle = (key, e) => {
     const { noPx } = this.props;
