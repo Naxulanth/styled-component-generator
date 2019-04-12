@@ -57,6 +57,7 @@ class Custom extends PureComponent {
         if (Second)
           SecondRender = (
             <Second
+              pseudo={this.props.pseudo}
               options={s ? (s.option ? s.option : null) : null}
               sendData={this.getData}
               option={secondKey}
@@ -68,6 +69,7 @@ class Custom extends PureComponent {
           <Row key={uuidv4()}>
             <Col lg="12">
               <First
+                pseudo={this.props.pseudo}
                 options={f.option ? f.option : null}
                 sendData={this.getData}
                 option={firstKey}

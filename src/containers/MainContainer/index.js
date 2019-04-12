@@ -42,7 +42,7 @@ class MainContainer extends Component {
       testBackground: "#eaeeee",
       testBackgroundState: "",
       hideDetails: false,
-      activeTabPseudo: null
+      activeTabPseudo: ""
     };
     this.cssArea = React.createRef();
     this.styledArea = React.createRef();
@@ -134,7 +134,7 @@ ${paramString}
   handleSelect = e => {
     let activeTab = !this.state.selected ? "1" : this.state.activeTab;
     let activeTabPseudo = !this.state.selected
-      ? "1"
+      ? ""
       : this.state.activeTabPseudo;
     this.setState({
       activeTab,
@@ -308,10 +308,10 @@ ${paramString}
                     <NavLink
                       disabled={!selected}
                       className={classnames({
-                        active: activeTabPseudo === "1"
+                        active: activeTabPseudo === ""
                       })}
                       onClick={() => {
-                        this.togglePseudo("1");
+                        this.togglePseudo("");
                       }}
                     >
                       None
@@ -321,10 +321,10 @@ ${paramString}
                     <NavLink
                       disabled={!selected}
                       className={classnames({
-                        active: activeTabPseudo === "2"
+                        active: activeTabPseudo === "-hover"
                       })}
                       onClick={() => {
-                        this.togglePseudo("2");
+                        this.togglePseudo("-hover");
                       }}
                     >
                       Hover
@@ -334,10 +334,10 @@ ${paramString}
                     <NavLink
                       disabled={!selected}
                       className={classnames({
-                        active: activeTabPseudo === "3"
+                        active: activeTabPseudo === "-focus"
                       })}
                       onClick={() => {
-                        this.togglePseudo("3");
+                        this.togglePseudo("-focus");
                       }}
                     >
                       Focus
@@ -347,10 +347,10 @@ ${paramString}
                     <NavLink
                       disabled={!selected}
                       className={classnames({
-                        active: activeTabPseudo === "4"
+                        active: activeTabPseudo === "-disabled"
                       })}
                       onClick={() => {
-                        this.togglePseudo("4");
+                        this.togglePseudo("-disabled");
                       }}
                     >
                       Disabled
@@ -455,32 +455,32 @@ ${paramString}
             <div style={{ display: hideDetails ? "none" : "block" }}>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="1">
-                  <Border sendData={this.getData} />
+                  <Border pseudo={ activeTabPseudo} sendData={this.getData} />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="2">
-                  <Size sendData={this.getData} />
+                  <Size pseudo={activeTabPseudo} sendData={this.getData} />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="3">
-                  <Color sendData={this.getData} />
+                  <Color pseudo={activeTabPseudo} sendData={this.getData} />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="4">
-                  <Placement sendData={this.getData} />
+                  <Placement pseudo={ activeTabPseudo} sendData={this.getData} />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="5">
-                  <Font sendData={this.getData} />
+                  <Font pseudo={activeTabPseudo} sendData={this.getData} />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="6">
-                  <Custom sendData={this.getData} />
+                  <Custom pseudo={activeTabPseudo} sendData={this.getData} />
                 </TabPane>
               </TabContent>
             </div>

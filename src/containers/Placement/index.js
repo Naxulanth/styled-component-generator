@@ -10,9 +10,8 @@ class Placement extends PureComponent {
 
   getData = data => {
     const { sendData } = this.props;
-      sendData(data);
+      sendData(data.tempState);
   };
-
   render() {
     return (
       <Fragment>
@@ -21,6 +20,7 @@ class Placement extends PureComponent {
             <Row>
               <Col lg="12">
                 <Option
+                  pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}
                   option="padding-left"
@@ -30,6 +30,7 @@ class Placement extends PureComponent {
             <Row>
               <Col lg="12">
                 <Option
+                  pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}
                   option="padding-right"
@@ -38,12 +39,18 @@ class Placement extends PureComponent {
             </Row>
             <Row>
               <Col lg="12">
-                <Option pxOption sendData={this.getData} option="padding-top" />
+                <Option
+                  pseudo={this.props.pseudo}
+                  pxOption
+                  sendData={this.getData}
+                  option="padding-top"
+                />
               </Col>
             </Row>
             <Row>
               <Col lg="12">
                 <Option
+                  pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}
                   option="padding-bottom"
@@ -55,6 +62,7 @@ class Placement extends PureComponent {
             <Row>
               <Col lg="12">
                 <Option
+                  pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}
                   option="margin-left"
@@ -64,6 +72,7 @@ class Placement extends PureComponent {
             <Row>
               <Col lg="12">
                 <Option
+                  pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}
                   option="margin-right"
@@ -72,12 +81,18 @@ class Placement extends PureComponent {
             </Row>
             <Row>
               <Col lg="12">
-                <Option pxOption sendData={this.getData} option="margin-top" />
+                <Option
+                  pseudo={this.props.pseudo}
+                  pxOption
+                  sendData={this.getData}
+                  option="margin-top"
+                />
               </Col>
             </Row>
             <Row>
               <Col lg="12">
                 <Option
+                  pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}
                   option="margin-bottom"
@@ -85,7 +100,7 @@ class Placement extends PureComponent {
               </Col>
             </Row>
           </Col>
-          </Row>
+        </Row>
       </Fragment>
     );
   }
