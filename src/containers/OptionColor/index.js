@@ -10,7 +10,7 @@ class OptionColor extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      [this.props.option]: null,
+      [this.props.option + this.props.pseudo]: null,
       optionColor: { r: 50, g: 50, b: 50, a: 1 },
       important: false,
       hide: false

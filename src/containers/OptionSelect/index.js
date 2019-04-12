@@ -10,7 +10,7 @@ class OptionSelect extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      [this.props.option]: null,
+      [this.props.option + this.props.pseudo]: null,
       optionSelect: null,
       important: false,
       hide: false

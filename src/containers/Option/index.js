@@ -12,7 +12,7 @@ class Option extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      [this.props.option]: this.props.noPx ? 100 : null,
+      [this.props.option + this.props.pseudo]: this.props.noPx ? 100 : null,
       px: true,
       important: false,
       hide: false
