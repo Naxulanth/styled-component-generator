@@ -23,7 +23,7 @@ class Option extends PureComponent {
     const { data, hide } = this.props;
     if (data) {
       this.setState({
-        [this.props.option]: data,
+        [this.props.option + this.props.pseudo]: data,
         px: data.includes("px"),
         important: data.includes("important")
       });
@@ -40,9 +40,11 @@ class Option extends PureComponent {
     if (!_.isEqual(prevState, this.state) && !dummy) {
       const { sendData } = this.props;
       let tempState = {};
-      tempState[this.props.option] = this.state[this.props.option];
+      tempState[this.props.option + this.props.pseudo] = this.state[
+        this.props.option + this.props.pseudo
+      ];
       let tempHiders = {};
-      tempHiders[this.props.option] = this.state.hide;
+      tempHiders[this.props.option + this.props.pseudo] = this.state.hide;
       sendData({ tempState, tempHiders });
     }
   }
@@ -50,10 +52,10 @@ class Option extends PureComponent {
   handle = (key, e) => {
     const { noPx } = this.props;
     if (!e) {
-      e = parseInt(this.state[this.props.option]);
+      e = parseInt(this.state[this.props.option + this.props.pseudo]);
     }
     this.setState({
-      [this.props.option]:
+      [this.props.option + this.props.pseudo]:
         e +
         (noPx ? "" : this.state.px ? "px" : "%") +
         (this.state.important ? " !important" : "")
@@ -68,13 +70,14 @@ class Option extends PureComponent {
 
   handleAuto = () => {
     this.setState({
-      [this.props.option]: "auto" + (this.state.important ? " !important" : "")
+      [this.props.option + this.props.pseudo]:
+        "auto" + (this.state.important ? " !important" : "")
     });
   };
 
   handleNull = () => {
     this.setState({
-      [this.props.option]: null
+      [this.props.option + this.props.pseudo]: null
     });
   };
 
@@ -82,11 +85,11 @@ class Option extends PureComponent {
     const { noPx } = this.props;
     if (e.target.value === "") {
       this.setState({
-        [this.props.option]: null
+        [this.props.option + this.props.pseudo]: null
       });
     } else
       this.setState({
-        [this.props.option]:
+        [this.props.option + this.props.pseudo]:
           e.target.value.replace(/\D/, "") +
           (noPx ? "" : this.state.px ? "px" : "%") +
           (this.state.important ? " !important" : "")
@@ -100,7 +103,7 @@ class Option extends PureComponent {
   };
 
   handleImportant = () => {
-    if (this.state[this.props.option])
+    if (this.state[this.props.option + this.props.pseudo])
       this.setState(
         {
           important: !this.state.important

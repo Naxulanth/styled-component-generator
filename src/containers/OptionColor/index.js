@@ -22,7 +22,7 @@ class OptionColor extends PureComponent {
     if (data) {
       let colorSplit = data.split("(")[1].split("@");
       this.setState({
-        [this.props.option]: data,
+        [this.props.option + this.props.pseudo]: data,
         important: data.includes("important"),
         optionColor: {
           r: colorSplit[0],
@@ -44,9 +44,11 @@ class OptionColor extends PureComponent {
     if (!_.isEqual(prevState, this.state) && !dummy) {
       const { sendData } = this.props;
       let tempState = {};
-      tempState[this.props.option] = this.state[this.props.option];
+      tempState[this.props.option + this.props.pseudo] = this.state[
+        this.props.option + this.props.pseudo
+      ];
       let tempHiders = {};
-      tempHiders[this.props.option] = this.state.hide;
+      tempHiders[this.props.option + this.props.pseudo] = this.state.hide;
       sendData({ tempState, tempHiders });
     }
   }
@@ -67,7 +69,7 @@ class OptionColor extends PureComponent {
       (this.state.important ? " !important" : "");
     this.setState({
       optionColor: e.rgb,
-      [this.props.option]: param
+      [this.props.option + this.props.pseudo]: param
     });
   };
 

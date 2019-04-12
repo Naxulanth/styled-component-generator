@@ -21,7 +21,7 @@ class OptionSelect extends PureComponent {
     const { data, options, hide } = this.props;
     if (data) {
       this.setState({
-        [this.props.option]: data,
+        [this.props.option + this.props.pseudo]: data,
         optionSelect: options.find(option => {
           return data.includes(option.label);
         }),
@@ -40,9 +40,11 @@ class OptionSelect extends PureComponent {
     if (!_.isEqual(prevState, this.state) && !dummy) {
       const { sendData } = this.props;
       let tempState = {};
-      tempState[this.props.option] = this.state[this.props.option];
+      tempState[this.props.option + this.props.pseudo] = this.state[
+        this.props.option + this.props.pseudo
+      ];
       let tempHiders = {};
-      tempHiders[this.props.option] = this.state.hide;
+      tempHiders[this.props.option + this.props.pseudo] = this.state.hide;
       sendData({ tempState, tempHiders });
     }
   }
@@ -56,7 +58,7 @@ class OptionSelect extends PureComponent {
       (this.state.important ? " !important" : "");
     this.setState({
       optionSelect: e,
-      [this.props.option]: param
+      [this.props.option + this.props.pseudo]: param
     });
   };
 

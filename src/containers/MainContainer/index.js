@@ -53,14 +53,12 @@ class MainContainer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // check which object the change is made to here (hover/regular etc)
     if (
       (!_.isEqual(prevState.params, this.state.params) ||
         !_.isEqual(prevState.selected, this.state.selected) ||
         this.state.name !== prevState.name) &&
       this.state.selected
     ) {
-      // pass param on which object to manipulate
       this.generateComponent();
     }
   }
@@ -77,15 +75,14 @@ class MainContainer extends Component {
   };
 
   getData = data => {
+    // check if hover in name to sort into different objects?
+    // custom sends object rest send string
     const { params } = this.state;
     let merged = { ...params, ...data };
     this.setState({
       params: merged
     });
   };
-
-  // this will accept a param
-  // updating the result string should be done in another function
   generateComponent = () => {
     const { selected, params, name } = this.state;
     Object.keys(params).forEach(
