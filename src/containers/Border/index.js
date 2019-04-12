@@ -14,19 +14,12 @@ class Border extends PureComponent {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { sendData } = this.props;
-    if (!_.isEqual(prevState, this.state)) {
-      let tempState = Object.assign({}, this.state);
-      sendData(tempState);
-    }
-  }
-
   getData = data => {
-    let merged = { ...this.state, ...data };
-    this.setState(merged);
+    const { sendData } = this.props;
+      sendData(data);
   };
 
+  
   handleSelect = e => {
     if (!e) {
       e = this.state.selected;
