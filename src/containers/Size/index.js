@@ -1,6 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
-import _ from "lodash/core";
 import Option from "containers/Option";
 
 class Size extends PureComponent {
@@ -11,7 +10,7 @@ class Size extends PureComponent {
 
   getData = data => {
     const { sendData } = this.props;
-    sendData(data);
+      sendData(data.tempState);
   };
 
   render() {
@@ -21,39 +20,39 @@ class Size extends PureComponent {
           <Col lg="6">
             <Row>
               <Col lg="12">
-                <Option pxOption sendData={this.getData} option="width" />
+                <Option pseudo={this.props.pseudo} pxOption sendData={this.getData} option="width" />
               </Col>
             </Row>
             <Row>
               <Col lg="12">
-                <Option pxOption sendData={this.getData} option="min-width" />
+                <Option pseudo={this.props.pseudo} pxOption sendData={this.getData} option="min-width" />
               </Col>
             </Row>
             <Row>
               <Col lg="12">
-                <Option pxOption sendData={this.getData} option="max-width" />
+                <Option pseudo={this.props.pseudo} pxOption sendData={this.getData} option="max-width" />
               </Col>
             </Row>
             <Row>
               <Col lg="12">
-                <Option sendData={this.getData} option="line-height" />
+                <Option pseudo={this.props.pseudo} sendData={this.getData} option="line-height" />
               </Col>
             </Row>
           </Col>
           <Col lg="6">
             <Row>
               <Col lg="12">
-                <Option pxOption sendData={this.getData} option="height" />
+                <Option pseudo={this.props.pseudo} pxOption sendData={this.getData} option="height" />
               </Col>
             </Row>
             <Row>
               <Col lg="12">
-                <Option pxOption sendData={this.getData} option="min-height" />
+                <Option pseudo={this.props.pseudo} pxOption sendData={this.getData} option="min-height" />
               </Col>
             </Row>
             <Row>
               <Col lg="12">
-                <Option pxOption sendData={this.getData} option="max-height" />
+                <Option pseudo={this.props.pseudo} pxOption sendData={this.getData} option="max-height" />
               </Col>
             </Row>
           </Col>

@@ -10,29 +10,42 @@ class OptionSelect extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      [this.props.option]: null,
+      [this.props.option + this.props.pseudo]: null,
       optionSelect: null,
       important: false,
       hide: false
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { sendData } = this.props;
-    if (!_.isEqual(prevState, this.state)) {
-      let tempState = {};
-      tempState[this.props.option] = this.state[this.props.option];
-      sendData(tempState);
+  componentDidMount() {
+    const { data, options, hide } = this.props;
+    if (data) {
+      this.setState({
+        [this.props.option + this.props.pseudo]: data,
+        optionSelect: options.find(option => {
+          return data.includes(option.label);
+        }),
+        important: data.includes("important")
+      });
+    }
+    if (hide) {
+      this.setState({
+        hide: hide
+      });
     }
   }
 
-  componentWillUnmount() {
+  componentDidUpdate(prevProps, prevState) {
     const { dummy } = this.props;
-    if (!dummy) {
+    if (!_.isEqual(prevState, this.state) && !dummy) {
       const { sendData } = this.props;
       let tempState = {};
-      tempState[this.props.option] = null;
-      sendData(tempState);
+      tempState[this.props.option + this.props.pseudo] = this.state[
+        this.props.option + this.props.pseudo
+      ];
+      let tempHiders = {};
+      tempHiders[this.props.option + this.props.pseudo] = this.state.hide;
+      sendData({ tempState, tempHiders });
     }
   }
 
@@ -45,7 +58,7 @@ class OptionSelect extends PureComponent {
       (this.state.important ? " !important" : "");
     this.setState({
       optionSelect: e,
-      [this.props.option]: param
+      [this.props.option + this.props.pseudo]: param
     });
   };
 
@@ -66,26 +79,30 @@ class OptionSelect extends PureComponent {
 
   render() {
     const { option, options, className } = this.props;
-    const { optionSelect, hide  } = this.state;
+    const { optionSelect, hide } = this.state;
     return (
       <div className={className}>
         <Row>
-          <Col className="margin-10 align-center" lg="8">
+          <Col className="align-center" lg={{ offset: 2, size: 5 }}>
             {option}
           </Col>
           <Col lg="4">
             <span className="hide-show" onClick={this.hide}>
-            {hide ? <FontAwesomeIcon icon={faEye}/> : <FontAwesomeIcon icon={faEyeSlash}/>}
+              {hide ? (
+                <FontAwesomeIcon icon={faEye} />
+              ) : (
+                <FontAwesomeIcon icon={faEyeSlash} />
+              )}
             </span>
           </Col>
         </Row>
         {!hide ? (
-          <Row className="margin-10">
+          <Row className="top-10 margin-10">
             <Col lg="6">
               <Select
                 options={options}
                 onChange={this.handleSelect}
-                selected={optionSelect}
+                value={optionSelect}
               />
             </Col>
             <Col className="align-center vertical-center" lg="6">

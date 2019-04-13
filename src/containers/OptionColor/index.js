@@ -10,29 +10,46 @@ class OptionColor extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      [this.props.option]: null,
+      [this.props.option + this.props.pseudo]: null,
       optionColor: { r: 50, g: 50, b: 50, a: 1 },
       important: false,
       hide: false
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { sendData } = this.props;
-    if (!_.isEqual(prevState, this.state)) {
-      let tempState = {};
-      tempState[this.props.option] = this.state[this.props.option];
-      sendData(tempState);
+  componentDidMount() {
+    const { data, hide } = this.props;
+    if (data) {
+      let colorSplit = data.split("(")[1].split("@");
+      this.setState({
+        [this.props.option + this.props.pseudo]: data,
+        important: data.includes("important"),
+        optionColor: {
+          r: colorSplit[0],
+          g: colorSplit[1],
+          b: colorSplit[2],
+          a: colorSplit[3].split(")")[0]
+        }
+      });
+    }
+    if (hide) {
+      this.setState({
+        hide: hide
+      });
     }
   }
 
-  componentWillUnmount() {
+  componentDidUpdate(prevProps, prevState) {
     const { dummy } = this.props;
-    if (!dummy) {
+    if (!_.isEqual(prevState, this.state) && !dummy) {
       const { sendData } = this.props;
       let tempState = {};
-      tempState[this.props.option] = null;
-      sendData(tempState);
+      tempState[this.props.option + this.props.pseudo] = this.state[
+        this.props.option + this.props.pseudo
+      ];
+      let tempHiders = {};
+      tempHiders[this.props.option + this.props.pseudo] = this.state.hide;
+      sendData({ tempState, tempHiders });
     }
   }
 
@@ -52,7 +69,7 @@ class OptionColor extends PureComponent {
       (this.state.important ? " !important" : "");
     this.setState({
       optionColor: e.rgb,
-      [this.props.option]: param
+      [this.props.option + this.props.pseudo]: param
     });
   };
 
@@ -71,19 +88,23 @@ class OptionColor extends PureComponent {
     return (
       <div className={className}>
         <Row>
-          <Col className="align-center" lg={{offset: 4, size: 4}}>
+          <Col className="align-center" lg={{ offset: 2, size: 5 }}>
             {option}{" "}
-            </Col>
-            <Col lg="4">
+          </Col>
+          <Col lg="4">
             <span className="hide-show" onClick={this.hide}>
-              {hide ? <FontAwesomeIcon icon={faEye}/> : <FontAwesomeIcon icon={faEyeSlash}/>}
+              {hide ? (
+                <FontAwesomeIcon icon={faEye} />
+              ) : (
+                <FontAwesomeIcon icon={faEyeSlash} />
+              )}
             </span>
           </Col>
         </Row>
         {!hide ? (
           <Fragment>
             <Row>
-              <Col className="align-center" lg="12">
+              <Col className="align-center" lg={{ offset: 2, size: 5 }}>
                 <ChromePicker
                   color={optionColor}
                   onChangeComplete={this.handleChange.bind(this, option)}
@@ -91,7 +112,7 @@ class OptionColor extends PureComponent {
               </Col>
             </Row>
             <Row className="margin-20">
-              <Col className="align-center" lg="12">
+              <Col className="align-center" lg={{ offset: 2, size: 5 }}>
                 <Button onClick={this.handleImportant}>important</Button>
               </Col>
             </Row>

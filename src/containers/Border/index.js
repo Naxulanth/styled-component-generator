@@ -1,6 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
-import _ from "lodash/core";
 import Option from "containers/Option";
 import { borderStyle } from "constants/options";
 import OptionColor from "containers/OptionColor";
@@ -16,7 +15,11 @@ class Border extends PureComponent {
 
   getData = data => {
     const { sendData } = this.props;
+<<<<<<< HEAD
     sendData(data);
+=======
+    sendData(data.tempState);
+>>>>>>> 438b6eaf0224bc02812d3138c7465acd094afc65
   };
 
 
@@ -37,12 +40,29 @@ class Border extends PureComponent {
       <Fragment>
         <Row>
           <Col className="align-center" lg="6">
-            <OptionColor option="border-color" sendData={this.getData} />
+            <OptionColor
+              pseudo={this.props.pseudo}
+              option="border-color"
+              sendData={this.getData}
+            />
           </Col>
           <Col className="align-center vertical-center" lg="6">
-            <Option sendData={this.getData} option="border-width" />
-            <Option sendData={this.getData} option="border-radius" />
-            <OptionSelect options={borderStyle} sendData={this.getData} option="border-style" />
+            <Option
+              pseudo={this.props.pseudo}
+              sendData={this.getData}
+              option="border-width"
+            />
+            <Option
+              pseudo={this.props.pseudo}
+              sendData={this.getData}
+              option="border-radius"
+            />
+            <OptionSelect
+              pseudo={this.props.pseudo}
+              options={borderStyle}
+              sendData={this.getData}
+              option="border-style"
+            />
             <Row />
           </Col>
         </Row>

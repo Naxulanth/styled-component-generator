@@ -12,39 +12,52 @@ class Option extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      [this.props.option]: this.props.noPx ? 100 : null,
+      [this.props.option + this.props.pseudo]: this.props.noPx
+        ? 100
+        : null,
       px: true,
       important: false,
       hide: false
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { sendData } = this.props;
-    if (!_.isEqual(prevState, this.state)) {
-      let tempState = {};
-      tempState[this.props.option] = this.state[this.props.option];
-      sendData(tempState);
+  componentDidMount() {
+    const { data, hide } = this.props;
+    if (data) {
+      this.setState({
+        [this.props.option + this.props.pseudo]: data,
+        px: data.includes("px"),
+        important: data.includes("important")
+      });
+    }
+    if (hide) {
+      this.setState({
+        hide: hide
+      });
     }
   }
 
-  componentWillUnmount() {
+  componentDidUpdate(prevProps, prevState) {
     const { dummy } = this.props;
-    if (!dummy) {
+    if (!_.isEqual(prevState, this.state) && !dummy) {
       const { sendData } = this.props;
       let tempState = {};
-      tempState[this.props.option] = null;
-      sendData(tempState);
+      tempState[this.props.option + this.props.pseudo] = this.state[
+        this.props.option + this.props.pseudo
+      ];
+      let tempHiders = {};
+      tempHiders[this.props.option + this.props.pseudo] = this.state.hide;
+      sendData({ tempState, tempHiders });
     }
   }
 
   handle = (key, e) => {
     const { noPx } = this.props;
     if (!e) {
-      e = parseInt(this.state[this.props.option]);
+      e = parseInt(this.state[this.props.option + this.props.pseudo]);
     }
     this.setState({
-      [this.props.option]:
+      [this.props.option + this.props.pseudo]:
         e +
         (noPx ? "" : this.state.px ? "px" : "%") +
         (this.state.important ? " !important" : "")
@@ -59,13 +72,14 @@ class Option extends PureComponent {
 
   handleAuto = () => {
     this.setState({
-      [this.props.option]: "auto" + (this.state.important ? " !important" : "")
+      [this.props.option + this.props.pseudo]:
+        "auto" + (this.state.important ? " !important" : "")
     });
   };
 
   handleNull = () => {
     this.setState({
-      [this.props.option]: null
+      [this.props.option + this.props.pseudo]: null
     });
   };
 
@@ -73,11 +87,11 @@ class Option extends PureComponent {
     const { noPx } = this.props;
     if (e.target.value === "") {
       this.setState({
-        [this.props.option]: null
+        [this.props.option + this.props.pseudo]: null
       });
     } else
       this.setState({
-        [this.props.option]:
+        [this.props.option + this.props.pseudo]:
           e.target.value.replace(/\D/, "") +
           (noPx ? "" : this.state.px ? "px" : "%") +
           (this.state.important ? " !important" : "")
@@ -91,7 +105,7 @@ class Option extends PureComponent {
   };
 
   handleImportant = () => {
-    if (this.state[this.props.option])
+    if (this.state[this.props.option + this.props.pseudo])
       this.setState(
         {
           important: !this.state.important
@@ -107,13 +121,20 @@ class Option extends PureComponent {
     const { option, min, max, pxOption, noPx, step, className } = this.props;
     return (
       <div className={className}>
-        <Row className="margin-20">
-          <Col className="align-center" lg={"8"}>
+        <Row>
+          <Col
+            className={"align-center" + (!hide ? " margin-10" : "")}
+            lg={{ offset: 2, size: 5 }}
+          >
             {option} {noPx ? "" : px ? "(px)" : "(%)"}{" "}
           </Col>
           <Col lg="4">
             <span className="hide-show" onClick={this.hide}>
-              {hide ? <FontAwesomeIcon icon={faEye}/> : <FontAwesomeIcon icon={faEyeSlash}/>}
+              {hide ? (
+                <FontAwesomeIcon icon={faEye} />
+              ) : (
+                <FontAwesomeIcon icon={faEyeSlash} />
+              )}
             </span>
           </Col>
         </Row>

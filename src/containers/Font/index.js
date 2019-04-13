@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import { Row, Col } from "reactstrap";
-import _ from "lodash/core";
 import Option from "containers/Option";
 import { fontStyle, fontWeight } from "constants/options";
 import OptionSelect from "containers/OptionSelect";
@@ -13,7 +12,11 @@ class Font extends PureComponent {
 
   getData = data => {
     const { sendData } = this.props;
+<<<<<<< HEAD
     sendData(data);
+=======
+      sendData(data.tempState);
+>>>>>>> 438b6eaf0224bc02812d3138c7465acd094afc65
   };
 
 
@@ -23,12 +26,17 @@ class Font extends PureComponent {
         <Col lg="6">
           <Row>
             <Col lg="12">
-              <Option sendData={this.getData} option="font-size" />
+              <Option
+                pseudo={this.props.pseudo}
+                sendData={this.getData}
+                option="font-size"
+              />
             </Col>
           </Row>
           <Row>
             <Col lg="12">
               <OptionSelect
+                pseudo={this.props.pseudo}
                 options={fontStyle}
                 sendData={this.getData}
                 option="font-style"
@@ -40,6 +48,7 @@ class Font extends PureComponent {
           <Row>
             <Col>
               <Option
+                pseudo={this.props.pseudo}
                 step={100}
                 min={100}
                 max={900}

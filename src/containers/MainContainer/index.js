@@ -42,7 +42,7 @@ class MainContainer extends Component {
       testBackground: "#eaeeee",
       testBackgroundState: "",
       hideDetails: false,
-      activeTabPseudo: null
+      activeTabPseudo: ""
     };
     this.cssArea = React.createRef();
     this.styledArea = React.createRef();
@@ -53,14 +53,12 @@ class MainContainer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // check which object the change is made to here (hover/regular etc)
     if (
       (!_.isEqual(prevState.params, this.state.params) ||
         !_.isEqual(prevState.selected, this.state.selected) ||
         this.state.name !== prevState.name) &&
       this.state.selected
     ) {
-      // pass param on which object to manipulate
       this.generateComponent();
     }
   }
@@ -77,20 +75,20 @@ class MainContainer extends Component {
   };
 
   getData = data => {
+    // check if hover in name to sort into different objects?
+    // custom sends object rest send string
     const { params } = this.state;
     let merged = { ...params, ...data };
     this.setState({
       params: merged
     });
   };
-
-  // this will accept a param
-  // updating the result string should be done in another function
   generateComponent = () => {
     const { selected, params, name } = this.state;
     Object.keys(params).forEach(
       key =>
-        (params[key] == null || params[key].includes("null")) &&
+        (params[key] == null ||
+          (typeof params[key] === "string" && params[key].includes("null"))) &&
         delete params[key]
     );
     let label =
@@ -136,7 +134,7 @@ ${paramString}
   handleSelect = e => {
     let activeTab = !this.state.selected ? "1" : this.state.activeTab;
     let activeTabPseudo = !this.state.selected
-      ? "1"
+      ? ""
       : this.state.activeTabPseudo;
     this.setState({
       activeTab,
@@ -310,10 +308,10 @@ ${paramString}
                     <NavLink
                       disabled={!selected}
                       className={classnames({
-                        active: activeTabPseudo === "1"
+                        active: activeTabPseudo === ""
                       })}
                       onClick={() => {
-                        this.togglePseudo("1");
+                        this.togglePseudo("");
                       }}
                     >
                       None
@@ -323,10 +321,10 @@ ${paramString}
                     <NavLink
                       disabled={!selected}
                       className={classnames({
-                        active: activeTabPseudo === "2"
+                        active: activeTabPseudo === "-hover"
                       })}
                       onClick={() => {
-                        this.togglePseudo("2");
+                        this.togglePseudo("-hover");
                       }}
                     >
                       Hover
@@ -336,10 +334,10 @@ ${paramString}
                     <NavLink
                       disabled={!selected}
                       className={classnames({
-                        active: activeTabPseudo === "3"
+                        active: activeTabPseudo === "-focus"
                       })}
                       onClick={() => {
-                        this.togglePseudo("3");
+                        this.togglePseudo("-focus");
                       }}
                     >
                       Focus
@@ -349,10 +347,10 @@ ${paramString}
                     <NavLink
                       disabled={!selected}
                       className={classnames({
-                        active: activeTabPseudo === "4"
+                        active: activeTabPseudo === "-disabled"
                       })}
                       onClick={() => {
-                        this.togglePseudo("4");
+                        this.togglePseudo("-disabled");
                       }}
                     >
                       Disabled
@@ -457,32 +455,32 @@ ${paramString}
             <div style={{ display: hideDetails ? "none" : "block" }}>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="1">
-                  <Border sendData={this.getData} />
+                  <Border pseudo={ activeTabPseudo} sendData={this.getData} />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="2">
-                  <Size sendData={this.getData} />
+                  <Size pseudo={activeTabPseudo} sendData={this.getData} />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="3">
-                  <Color sendData={this.getData} />
+                  <Color pseudo={activeTabPseudo} sendData={this.getData} />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="4">
-                  <Placement sendData={this.getData} />
+                  <Placement pseudo={ activeTabPseudo} sendData={this.getData} />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="5">
-                  <Font sendData={this.getData} />
+                  <Font pseudo={activeTabPseudo} sendData={this.getData} />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="6">
-                  <Custom sendData={this.getData} />
+                  <Custom pseudo={activeTabPseudo} sendData={this.getData} />
                 </TabPane>
               </TabContent>
             </div>
