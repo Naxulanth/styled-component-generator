@@ -30,7 +30,7 @@ class Customizer extends Component {
   shouldComponentUpdate(prevProps, prevState) {
     return (
       !_.isEqual(prevState, this.state) ||
-      !_.isEqual(prevProps.selected, this.props.selected)
+      !this.props.selected
     );
   }
 
