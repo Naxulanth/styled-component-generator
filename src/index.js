@@ -6,8 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 
-const { whyDidYouUpdate } = require("why-did-you-update");
-whyDidYouUpdate(React);
+//const { whyDidYouUpdate } = require("why-did-you-update");
+//whyDidYouUpdate(React);
 
 ReactDOM.render(
   <Fragment>

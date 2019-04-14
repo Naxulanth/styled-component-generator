@@ -74,7 +74,6 @@ class Customizer extends Component {
   render() {
     const { selected, params } = this.props;
     const { activeTabPseudo, activeTab, hideDetails } = this.state;
-    console.log("re-render");
     return (
       <Fragment>
         <Row>
