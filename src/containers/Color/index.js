@@ -10,19 +10,29 @@ class Color extends PureComponent {
 
   getData = data => {
     const { sendData } = this.props;
-      sendData(data.tempState);
+    sendData(data.tempState);
   };
 
   render() {
-    const { data } = this.props
+    const { data } = this.props;
     return (
       <Fragment>
         <Row>
           <Col className="align-center" lg="6">
-            <OptionColor data={data["border-width" + this.props.pseudo]} pseudo={this.props.pseudo} option="color" sendData={this.getData} />
+            <OptionColor
+              data={data["border-width" + this.props.pseudo]}
+              pseudo={this.props.pseudo}
+              option="color"
+              sendData={this.getData}
+            />
           </Col>
           <Col className="align-center" lg="6">
-            <OptionColor data={data["border-width" + this.props.pseudo]} pseudo={this.props.pseudo} option="background" sendData={this.getData} />
+            <OptionColor
+              data={data["border-width" + this.props.pseudo]}
+              pseudo={this.props.pseudo}
+              option="background"
+              sendData={this.getData}
+            />
           </Col>
         </Row>
       </Fragment>
