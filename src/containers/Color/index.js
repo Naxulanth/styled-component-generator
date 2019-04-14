@@ -20,7 +20,7 @@ class Color extends PureComponent {
         <Row>
           <Col className="align-center" lg="6">
             <OptionColor
-              data={data["border-width" + this.props.pseudo]}
+              data={data["color" + this.props.pseudo]}
               pseudo={this.props.pseudo}
               option="color"
               sendData={this.getData}
@@ -28,7 +28,7 @@ class Color extends PureComponent {
           </Col>
           <Col className="align-center" lg="6">
             <OptionColor
-              data={data["border-width" + this.props.pseudo]}
+              data={data["background" + this.props.pseudo]}
               pseudo={this.props.pseudo}
               option="background"
               sendData={this.getData}

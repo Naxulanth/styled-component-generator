@@ -64,7 +64,7 @@ class OptionSelect extends PureComponent {
       e = this.state.optionSelect;
     }
     let param =
-      (e.value !== "" ? e.value : null) +
+      (e && e.value !== "" ? e.value : null) +
       (this.state.important ? " !important" : "");
     this.setState({
       optionSelect: e,

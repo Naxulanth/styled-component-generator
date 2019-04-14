@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
 import { attributes } from "constants/attributes";
+import { model } from "constants/custom";
 import Select from "react-select";
 import _ from "lodash/core";
 import uuidv4 from "uuid/v4";
@@ -9,29 +10,30 @@ class Custom extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      values: {},
-      hiders: {},
-      components: {},
-      selected: [],
-      renderLeft: [],
-      renderRight: []
+      "": Object.assign({}, model),
+      "-hover": Object.assign({}, model),
+      "-disabled": Object.assign({}, model),
+      "-focus": Object.assign({}, model)
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { sendData } = this.props;
-    if (!_.isEqual(prevState, this.state)) {
-      let tempState = Object.assign({}, this.state.values);
+    const { sendData, pseudo } = this.props;
+    if (!_.isEqual(prevState[pseudo], this.state[pseudo])) {
+      let tempState = Object.assign({}, this.state[pseudo].values);
       sendData(tempState);
     }
-    if (!_.isEqual(prevState.hiders, this.state.hiders)) {
+    if (
+      !_.isEqual(prevState[pseudo].hiders, this.state[pseudo].hiders) ||
+      prevProps.pseudo !== pseudo
+    ) {
       this.generate();
     }
   }
 
   generate = () => {
-    const { components, hiders } = this.state;
-    let tempComponents = Object.assign({}, components);
+    const { pseudo } = this.props;
+    let tempComponents = Object.assign({}, this.state[pseudo].components);
     let map = {};
     let l = [];
     let r = [];
@@ -57,24 +59,32 @@ class Custom extends PureComponent {
         if (Second)
           SecondRender = (
             <Second
-              pseudo={this.props.pseudo}
+              pseudo={pseudo}
               options={s ? (s.option ? s.option : null) : null}
               sendData={this.getData}
               option={secondKey}
-              data={s.data}
-              hide={hiders[secondKey]}
+              data={
+                this.state[pseudo].values[secondKey + pseudo]
+                  ? this.state[pseudo].values[secondKey + pseudo]
+                  : null
+              }
+              hide={this.state[pseudo].hiders[secondKey + pseudo]}
             />
           );
         l.push(
           <Row key={uuidv4()}>
             <Col lg="12">
               <First
-                pseudo={this.props.pseudo}
+                pseudo={pseudo}
                 options={f.option ? f.option : null}
                 sendData={this.getData}
                 option={firstKey}
-                data={f.data}
-                hide={hiders[firstKey]}
+                data={
+                  this.state[pseudo].values[firstKey + pseudo]
+                    ? this.state[pseudo].values[firstKey + pseudo]
+                    : null
+                }
+                hide={this.state[pseudo].hiders[firstKey + pseudo]}
               />
             </Col>
           </Row>
@@ -86,7 +96,7 @@ class Custom extends PureComponent {
                 SecondRender
               ) : (
                 <First
-                  hide={hiders[firstKey]}
+                  hide={this.state[pseudo].hiders[firstKey + pseudo]}
                   dummy
                   option="test"
                   className={"hidden"}
@@ -97,53 +107,61 @@ class Custom extends PureComponent {
         );
       }
     });
+    let tempState = Object.assign({}, this.state[pseudo]);
+    tempState["renderLeft"] = l;
+    tempState["renderRight"] = r;
     this.setState({
-      renderLeft: l,
-      renderRight: r
+      [pseudo]: tempState
     });
   };
 
   getData = data => {
-    let merged = { ...this.state.values, ...data.tempState };
-    let mergedHiders = { ...this.state.hiders, ...data.tempHiders };
+    const { pseudo } = this.props;
+    let merged = { ...this.state[pseudo].values, ...data.tempState };
+    let mergedHiders = { ...this.state[pseudo].hiders, ...data.tempHiders };
+    let tempState = Object.assign({}, this.state[pseudo]);
+    tempState["values"] = merged;
+    tempState["hiders"] = mergedHiders;
     this.setState({
-      values: merged,
-      hiders: mergedHiders
+      [pseudo]: tempState
     });
   };
 
   handleSelect = e => {
-    const { values, hiders } = this.state;
+    const { pseudo } = this.props;
     let c = {};
     e.forEach(selected => {
       c[selected.label] = {
         type: selected.type,
         option: selected.option,
-        data: values[selected.label],
-        hide: hiders[selected.label]
+        data: this.state[pseudo].values[selected.label],
+        hide: this.state[pseudo].hiders[selected.label]
       };
     });
-    let v = Object.assign({}, values);
+    let v = Object.assign({}, this.state[pseudo].values);
     Object.keys(v).forEach(key => {
       if (!JSON.stringify(e).includes(key)) v[key] = null;
     });
-    let h = Object.assign({}, hiders);
+    let h = Object.assign({}, this.state[pseudo].hiders);
     Object.keys(h).forEach(key => {
       if (!JSON.stringify(e).includes(key)) v[key] = null;
     });
+    let tempState = Object.assign({}, this.state[pseudo]);
+    tempState["selected"] = e;
+    tempState["components"] = c;
+    tempState["values"] = v;
+    tempState["hiders"] = h;
     this.setState(
       {
-        selected: e,
-        components: c,
-        values: v,
-        hiders: h
+        [pseudo]: tempState
       },
       this.generate
     );
   };
 
   render() {
-    const { selected, renderLeft, renderRight } = this.state;
+    const { pseudo } = this.props;
+    const { selected, renderLeft, renderRight } = this.state[pseudo];
     return (
       <Fragment>
         <Row className="margin-20">

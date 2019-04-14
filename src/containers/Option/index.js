@@ -12,11 +12,7 @@ class Option extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      [this.props.option + this.props.pseudo]: this.props.data
-        ? this.props.data
-        : this.props.noPx
-        ? 100
-        : null,
+      [this.props.option + this.props.pseudo]: this.props.noPx ? 100 : null,
       px: true,
       important: false,
       hide: false
@@ -48,7 +44,6 @@ class Option extends PureComponent {
         this.props.option + this.props.pseudo
       ];
       let tempHiders = {};
-      tempHiders[this.props.option + this.props.pseudo] = this.state.hide;
       sendData({ tempState, tempHiders });
     }
   }
@@ -112,7 +107,7 @@ class Option extends PureComponent {
         {
           important: !this.state.important
         },
-        this.state[this.props.option].includes("auto")
+        this.state[this.props.option + this.props.pseudo].includes("auto")
           ? this.handleAuto
           : this.handle
       );
@@ -120,7 +115,16 @@ class Option extends PureComponent {
 
   render() {
     const { px, hide } = this.state;
-    const { option, min, max, pxOption, noPx, step, className, pseudo } = this.props;
+    const {
+      option,
+      min,
+      max,
+      pxOption,
+      noPx,
+      step,
+      className,
+      pseudo
+    } = this.props;
     return (
       <div className={className}>
         <Row>
@@ -153,7 +157,9 @@ class Option extends PureComponent {
                     : ""
                 }
                 onChange={this.handleInput}
-                placeholder={this.state[option + pseudo] === "auto" ? "auto" : "unset"}
+                placeholder={
+                  this.state[option + pseudo] === "auto" ? "auto" : "unset"
+                }
               />
             </Col>
             <Col lg="4">
