@@ -77,6 +77,7 @@ class MainContainer extends Component {
     let tempParams = Object.assign({}, params);
     let tempSplitParams = Object.assign({}, splitParams);
     Object.keys(tempParams).forEach(key => {
+      console.log(tempParams[key])
       if (
         tempParams[key] == null ||
         (typeof tempParams[key] === "string" &&
@@ -94,16 +95,17 @@ class MainContainer extends Component {
       }
       tempSplitParams[""] = tempParams;
     });
+    console.log(tempParams)
     let label =
       selected.type === "core"
         ? '"' + selected.label.split(" -")[0] + '"'
         : selected.label.split(" -")[0];
     let c = styled(selected.value)`
-      ${JSON.parse(JSON.stringify(params).replace(/@/g, ","))}
+      ${JSON.parse(JSON.stringify(tempParams).replace(/@/g, ","))}
     `;
     let paramString =
-      Object.keys(params).length > 0
-        ? JSON.stringify(params)
+      Object.keys(tempParams).length > 0
+        ? JSON.stringify(tempParams)
             .replace("{", "")
             .replace("}", "")
             .replace(/"/g, "")
