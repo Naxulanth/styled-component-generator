@@ -10,49 +10,91 @@ class Size extends PureComponent {
 
   getData = data => {
     const { sendData } = this.props;
-      sendData(data.tempState);
+    sendData(data.tempState);
   };
 
   render() {
+    const { data } = this.props;
     return (
       <Fragment>
         <Row>
           <Col lg="6">
             <Row>
               <Col lg="12">
-                <Option pseudo={this.props.pseudo} pxOption sendData={this.getData} option="width" />
+                <Option
+                  data={data["width" + this.props.pseudo]}
+                  pseudo={this.props.pseudo}
+                  pxOption
+                  sendData={this.getData}
+                  option="width"
+                />
               </Col>
             </Row>
             <Row>
               <Col lg="12">
-                <Option pseudo={this.props.pseudo} pxOption sendData={this.getData} option="min-width" />
+                <Option
+                  data={data["min-width" + this.props.pseudo]}
+                  pseudo={this.props.pseudo}
+                  pxOption
+                  sendData={this.getData}
+                  option="min-width"
+                />
               </Col>
             </Row>
             <Row>
               <Col lg="12">
-                <Option pseudo={this.props.pseudo} pxOption sendData={this.getData} option="max-width" />
+                <Option
+                  data={data["max-width" + this.props.pseudo]}
+                  pseudo={this.props.pseudo}
+                  pxOption
+                  sendData={this.getData}
+                  option="max-width"
+                />
               </Col>
             </Row>
             <Row>
               <Col lg="12">
-                <Option pseudo={this.props.pseudo} sendData={this.getData} option="line-height" />
+                <Option
+                  data={data["line-height" + this.props.pseudo]}
+                  pseudo={this.props.pseudo}
+                  sendData={this.getData}
+                  option="line-height"
+                />
               </Col>
             </Row>
           </Col>
           <Col lg="6">
             <Row>
               <Col lg="12">
-                <Option pseudo={this.props.pseudo} pxOption sendData={this.getData} option="height" />
+                <Option
+                  data={data["height" + this.props.pseudo]}
+                  pseudo={this.props.pseudo}
+                  pxOption
+                  sendData={this.getData}
+                  option="height"
+                />
               </Col>
             </Row>
             <Row>
               <Col lg="12">
-                <Option pseudo={this.props.pseudo} pxOption sendData={this.getData} option="min-height" />
+                <Option
+                  data={data["min-height" + this.props.pseudo]}
+                  pseudo={this.props.pseudo}
+                  pxOption
+                  sendData={this.getData}
+                  option="min-height"
+                />
               </Col>
             </Row>
             <Row>
               <Col lg="12">
-                <Option pseudo={this.props.pseudo} pxOption sendData={this.getData} option="max-height" />
+                <Option
+                  data={data["max-height" + this.props.pseudo]}
+                  pseudo={this.props.pseudo}
+                  pxOption
+                  sendData={this.getData}
+                  option="max-height"
+                />
               </Col>
             </Row>
           </Col>

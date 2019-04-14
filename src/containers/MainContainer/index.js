@@ -202,7 +202,8 @@ ${paramString}
       testBackground,
       testBackgroundState,
       hideDetails,
-      activeTabPseudo
+      activeTabPseudo,
+      params
     } = this.state;
     return (
       <div>
@@ -455,32 +456,55 @@ ${paramString}
             <div style={{ display: hideDetails ? "none" : "block" }}>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="1">
-                  <Border pseudo={ activeTabPseudo} sendData={this.getData} />
+                  <Border
+                    data={params}
+                    pseudo={activeTabPseudo}
+                    sendData={this.getData}
+                  />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="2">
-                  <Size pseudo={activeTabPseudo} sendData={this.getData} />
+                  <Size
+                    data={params}
+                    pseudo={activeTabPseudo}
+                    sendData={this.getData}
+                  />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="3">
-                  <Color pseudo={activeTabPseudo} sendData={this.getData} />
+                  <Color
+                    data={params}
+                    pseudo={activeTabPseudo}
+                    sendData={this.getData}
+                  />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="4">
-                  <Placement pseudo={ activeTabPseudo} sendData={this.getData} />
+                  <Placement
+                    data={params}
+                    pseudo={activeTabPseudo}
+                    sendData={this.getData}
+                  />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="5">
-                  <Font pseudo={activeTabPseudo} sendData={this.getData} />
+                  <Font
+                    data={params}
+                    pseudo={activeTabPseudo}
+                    sendData={this.getData}
+                  />
                 </TabPane>
               </TabContent>
               <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="6">
-                  <Custom pseudo={activeTabPseudo} sendData={this.getData} />
+                  <Custom
+                    pseudo={activeTabPseudo}
+                    sendData={this.getData}
+                  />
                 </TabPane>
               </TabContent>
             </div>

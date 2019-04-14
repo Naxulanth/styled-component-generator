@@ -18,25 +18,15 @@ class Border extends PureComponent {
     sendData(data.tempState);
   };
 
-  handleSelect = e => {
-    if (!e) {
-      e = this.state.selected;
-    }
-    this.setState({
-      selected: e,
-      "border-style":
-        (e.value !== "" ? e.value : null) +
-        (this.state["border-style-important"] ? " !important" : "")
-    });
-  };
-
   render() {
+    const { data } = this.props
     return (
       <Fragment>
         <Row>
           <Col className="align-center" lg="6">
             <OptionColor
               pseudo={this.props.pseudo}
+              data={data["border-color" + this.props.pseudo]}
               option="border-color"
               sendData={this.getData}
             />
@@ -45,16 +35,19 @@ class Border extends PureComponent {
             <Option
               pseudo={this.props.pseudo}
               sendData={this.getData}
+              data={data["border-width" + this.props.pseudo]}
               option="border-width"
             />
             <Option
               pseudo={this.props.pseudo}
+              data={data["border-radius" + this.props.pseudo]}
               sendData={this.getData}
               option="border-radius"
             />
             <OptionSelect
               pseudo={this.props.pseudo}
               options={borderStyle}
+              data={data["border-style" + this.props.pseudo]}
               sendData={this.getData}
               option="border-style"
             />

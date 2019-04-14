@@ -23,7 +23,7 @@ class OptionColor extends PureComponent {
       let colorSplit = data.split("(")[1].split("@");
       this.setState({
         [this.props.option + this.props.pseudo]: data,
-        important: data.includes("important"),
+        important: data ? data.includes("important") : false,
         optionColor: {
           r: colorSplit[0],
           g: colorSplit[1],
@@ -40,7 +40,22 @@ class OptionColor extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { dummy } = this.props;
+    const { dummy, pseudo, data } = this.props;
+    if (prevProps.pseudo !== pseudo) {
+      let colorSplit = data ? data.split("(")[1].split("@") : null;
+      this.setState({
+        [this.props.option + this.props.pseudo]: data ? data : null,
+        important: data ? data.includes("important") : false,
+        optionColor: data
+          ? {
+              r: colorSplit[0],
+              g: colorSplit[1],
+              b: colorSplit[2],
+              a: colorSplit[3].split(")")[0]
+            }
+          : { r: 50, g: 50, b: 50, a: 1 }
+      });
+    }
     if (!_.isEqual(prevState, this.state) && !dummy) {
       const { sendData } = this.props;
       let tempState = {};
@@ -84,7 +99,7 @@ class OptionColor extends PureComponent {
 
   render() {
     const { optionColor, hide } = this.state;
-    const { option, className } = this.props;
+    const { option, className, pseudo } = this.props;
     return (
       <div className={className}>
         <Row>
@@ -107,7 +122,10 @@ class OptionColor extends PureComponent {
               <Col className="align-center" lg={{ offset: 2, size: 5 }}>
                 <ChromePicker
                   color={optionColor}
-                  onChangeComplete={this.handleChange.bind(this, option)}
+                  onChangeComplete={this.handleChange.bind(
+                    this,
+                    option + pseudo
+                  )}
                 />
               </Col>
             </Row>

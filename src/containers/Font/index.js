@@ -12,16 +12,18 @@ class Font extends PureComponent {
 
   getData = data => {
     const { sendData } = this.props;
-      sendData(data.tempState);
+    sendData(data.tempState);
   };
 
   render() {
+    const { data } = this.props;
     return (
       <Row>
         <Col lg="6">
           <Row>
             <Col lg="12">
               <Option
+                data={data["font-size" + this.props.pseudo]}
                 pseudo={this.props.pseudo}
                 sendData={this.getData}
                 option="font-size"
@@ -31,6 +33,7 @@ class Font extends PureComponent {
           <Row>
             <Col lg="12">
               <OptionSelect
+                data={data["font-style" + this.props.pseudo]}
                 pseudo={this.props.pseudo}
                 options={fontStyle}
                 sendData={this.getData}
@@ -43,6 +46,7 @@ class Font extends PureComponent {
           <Row>
             <Col>
               <Option
+                data={data["font-weight" + this.props.pseudo]}
                 pseudo={this.props.pseudo}
                 step={100}
                 min={100}

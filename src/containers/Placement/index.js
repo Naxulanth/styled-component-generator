@@ -10,9 +10,10 @@ class Placement extends PureComponent {
 
   getData = data => {
     const { sendData } = this.props;
-      sendData(data.tempState);
+    sendData(data.tempState);
   };
   render() {
+    const { data } = this.props;
     return (
       <Fragment>
         <Row>
@@ -20,6 +21,7 @@ class Placement extends PureComponent {
             <Row>
               <Col lg="12">
                 <Option
+                  data={data["padding-left" + this.props.pseudo]}
                   pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}
@@ -30,6 +32,7 @@ class Placement extends PureComponent {
             <Row>
               <Col lg="12">
                 <Option
+                  data={data["padding-right" + this.props.pseudo]}
                   pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}
@@ -40,6 +43,7 @@ class Placement extends PureComponent {
             <Row>
               <Col lg="12">
                 <Option
+                  data={data["padding-top" + this.props.pseudo]}
                   pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}
@@ -50,6 +54,7 @@ class Placement extends PureComponent {
             <Row>
               <Col lg="12">
                 <Option
+                  data={data["padding-bottom" + this.props.pseudo]}
                   pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}
@@ -62,6 +67,7 @@ class Placement extends PureComponent {
             <Row>
               <Col lg="12">
                 <Option
+                  data={data["margin-left" + this.props.pseudo]}
                   pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}
@@ -72,6 +78,7 @@ class Placement extends PureComponent {
             <Row>
               <Col lg="12">
                 <Option
+                  data={data["margin-right" + this.props.pseudo]}
                   pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}
@@ -82,6 +89,7 @@ class Placement extends PureComponent {
             <Row>
               <Col lg="12">
                 <Option
+                  data={data["margin-top" + this.props.pseudo]}
                   pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}
@@ -92,6 +100,7 @@ class Placement extends PureComponent {
             <Row>
               <Col lg="12">
                 <Option
+                  data={data["margin-bottom" + this.props.pseudo]}
                   pseudo={this.props.pseudo}
                   pxOption
                   sendData={this.getData}

@@ -36,6 +36,16 @@ class OptionSelect extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const { pseudo, data, options } = this.props
+    if (prevProps.pseudo !== pseudo) {
+      this.setState({
+        [this.props.option + this.props.pseudo]: data ? data : null,
+        optionSelect: data ?  options.find(option => {
+          return data.includes(option.label);
+        }) : null,
+        important: data ? data.includes("important") : false
+      });
+    }
     const { dummy } = this.props;
     if (!_.isEqual(prevState, this.state) && !dummy) {
       const { sendData } = this.props;
@@ -78,7 +88,7 @@ class OptionSelect extends PureComponent {
   };
 
   render() {
-    const { option, options, className } = this.props;
+    const { option, options, className, pseudo } = this.props;
     const { optionSelect, hide } = this.state;
     return (
       <div className={className}>
@@ -106,7 +116,9 @@ class OptionSelect extends PureComponent {
               />
             </Col>
             <Col className="align-center vertical-center" lg="6">
-              <Button onClick={this.handleImportant.bind(this, option)}>
+              <Button
+                onClick={this.handleImportant.bind(this, option + pseudo)}
+              >
                 important
               </Button>
             </Col>

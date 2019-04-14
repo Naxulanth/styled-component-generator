@@ -12,7 +12,9 @@ class Option extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      [this.props.option + this.props.pseudo]: this.props.noPx
+      [this.props.option + this.props.pseudo]: this.props.data
+        ? this.props.data
+        : this.props.noPx
         ? 100
         : null,
       px: true,
@@ -118,7 +120,7 @@ class Option extends PureComponent {
 
   render() {
     const { px, hide } = this.state;
-    const { option, min, max, pxOption, noPx, step, className } = this.props;
+    const { option, min, max, pxOption, noPx, step, className, pseudo } = this.props;
     return (
       <div className={className}>
         <Row>
@@ -145,27 +147,27 @@ class Option extends PureComponent {
                 type="number"
                 className="number-input"
                 value={
-                  parseInt(this.state[option]) ||
-                  parseInt(this.state[option]) === 0
-                    ? parseInt(this.state[option])
+                  parseInt(this.state[option + pseudo]) ||
+                  parseInt(this.state[option + pseudo]) === 0
+                    ? parseInt(this.state[option + pseudo])
                     : ""
                 }
                 onChange={this.handleInput}
-                placeholder={this.state[option] === "auto" ? "auto" : "unset"}
+                placeholder={this.state[option + pseudo] === "auto" ? "auto" : "unset"}
               />
             </Col>
             <Col lg="4">
               <Slider
-                onChange={this.handle.bind(this, option)}
+                onChange={this.handle.bind(this, option + pseudo)}
                 min={noPx ? min : px ? (min ? min : 0) : 0}
                 max={noPx ? max : px ? (max ? max : 2000) : 100}
                 step={noPx ? step : px ? 10 : 1}
                 value={
                   noPx
-                    ? isNaN(parseInt(this.state[option]))
+                    ? isNaN(parseInt(this.state[option + pseudo]))
                       ? min
-                      : parseInt(this.state[option])
-                    : parseInt(this.state[option])
+                      : parseInt(this.state[option + pseudo])
+                    : parseInt(this.state[option + pseudo])
                 }
                 handle={handle}
               />
