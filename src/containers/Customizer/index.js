@@ -36,7 +36,7 @@ class Customizer extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { activeTab } = this.state;
-    if (!prevProps.selected && !activeTab) {
+    if (!prevProps.selected && this.props.selected && !activeTab) {
       let activeTab = "1";
       this.setState({
         activeTab
