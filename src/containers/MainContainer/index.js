@@ -1,29 +1,14 @@
 import React, { Component } from "react";
-import {
-  Row,
-  Col,
-  Nav,
-  NavItem,
-  NavLink,
-  TabContent,
-  TabPane
-} from "reactstrap";
+import { Row, Col } from "reactstrap";
 import styled from "styled-components";
 import _ from "lodash/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { ChromePicker } from "react-color";
 import Select from "react-select";
-import classnames from "classnames";
 import { toast } from "react-toastify";
-import Size from "containers/Size";
-import Button from "components/Button";
-import Border from "containers/Border";
 import ReactTooltip from "react-tooltip";
-import Placement from "containers/Placement";
-import Custom from "containers/Custom";
-import Color from "containers/Color";
-import Font from "containers/Font";
+import Customizer from "containers/Customizer";
 import { components } from "constants/components";
 
 class MainContainer extends Component {
@@ -36,13 +21,10 @@ class MainContainer extends Component {
       Component: null,
       selected: null,
       name: "MyComponent",
-      activeTab: null,
       inputText: "Test",
       selectComponents: [],
       testBackground: "#eaeeee",
-      testBackgroundState: "",
-      hideDetails: false,
-      activeTabPseudo: ""
+      testBackgroundState: ""
     };
     this.cssArea = React.createRef();
     this.styledArea = React.createRef();
@@ -83,6 +65,7 @@ class MainContainer extends Component {
       params: merged
     });
   };
+
   generateComponent = () => {
     const { selected, params, name } = this.state;
     Object.keys(params).forEach(
@@ -132,13 +115,7 @@ ${paramString}
   };
 
   handleSelect = e => {
-    let activeTab = !this.state.selected ? "1" : this.state.activeTab;
-    let activeTabPseudo = !this.state.selected
-      ? ""
-      : this.state.activeTabPseudo;
     this.setState({
-      activeTab,
-      activeTabPseudo,
       selected: e
     });
   };
@@ -146,12 +123,6 @@ ${paramString}
   handleInput = e => {
     this.setState({
       inputText: e.target.value
-    });
-  };
-
-  handleHide = () => {
-    this.setState({
-      hideDetails: !this.state.hideDetails
     });
   };
 
@@ -171,24 +142,6 @@ ${paramString}
     });
   };
 
-  // tabs
-
-  toggle = tab => {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      });
-    }
-  };
-
-  togglePseudo = tab => {
-    if (this.state.activeTabPseudo !== tab) {
-      this.setState({
-        activeTabPseudo: tab
-      });
-    }
-  };
-
   render() {
     const {
       styled,
@@ -198,11 +151,8 @@ ${paramString}
       selected,
       inputText,
       selectComponents,
-      activeTab,
       testBackground,
       testBackgroundState,
-      hideDetails,
-      activeTabPseudo,
       params
     } = this.state;
     return (
@@ -302,212 +252,11 @@ ${paramString}
                 </ReactTooltip>
               </Col>
             </Row>
-            <Row>
-              <Col lg="10">
-                <Nav tabs>
-                  <NavItem>
-                    <NavLink
-                      disabled={!selected}
-                      className={classnames({
-                        active: activeTabPseudo === ""
-                      })}
-                      onClick={() => {
-                        this.togglePseudo("");
-                      }}
-                    >
-                      None
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      disabled={!selected}
-                      className={classnames({
-                        active: activeTabPseudo === "-hover"
-                      })}
-                      onClick={() => {
-                        this.togglePseudo("-hover");
-                      }}
-                    >
-                      Hover
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      disabled={!selected}
-                      className={classnames({
-                        active: activeTabPseudo === "-focus"
-                      })}
-                      onClick={() => {
-                        this.togglePseudo("-focus");
-                      }}
-                    >
-                      Focus
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      disabled={!selected}
-                      className={classnames({
-                        active: activeTabPseudo === "-disabled"
-                      })}
-                      onClick={() => {
-                        this.togglePseudo("-disabled");
-                      }}
-                    >
-                      Disabled
-                    </NavLink>
-                  </NavItem>
-                </Nav>
-              </Col>
-            </Row>
-            <Row className="margin-20">
-              <Col lg="10">
-                <Nav tabs>
-                  <NavItem>
-                    <NavLink
-                      disabled={!selected}
-                      className={classnames({
-                        active: activeTab === "1"
-                      })}
-                      onClick={() => {
-                        this.toggle("1");
-                      }}
-                    >
-                      Border
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      disabled={!selected}
-                      className={classnames({
-                        active: activeTab === "2"
-                      })}
-                      onClick={() => {
-                        this.toggle("2");
-                      }}
-                    >
-                      Size
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      disabled={!selected}
-                      className={classnames({
-                        active: activeTab === "3"
-                      })}
-                      onClick={() => {
-                        this.toggle("3");
-                      }}
-                    >
-                      Color
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      disabled={!selected}
-                      className={classnames({
-                        active: activeTab === "4"
-                      })}
-                      onClick={() => {
-                        this.toggle("4");
-                      }}
-                    >
-                      Placement
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      disabled={!selected}
-                      className={classnames({
-                        active: activeTab === "5"
-                      })}
-                      onClick={() => {
-                        this.toggle("5");
-                      }}
-                    >
-                      Font
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      disabled={!selected}
-                      className={classnames({
-                        active: activeTab === "6"
-                      })}
-                      onClick={() => {
-                        this.toggle("6");
-                      }}
-                    >
-                      Custom
-                    </NavLink>
-                  </NavItem>
-                </Nav>
-              </Col>
-              <Col className="vertical-center align-center" lg="2">
-                {selected ? (
-                  <Button onClick={this.handleHide}>
-                    {hideDetails ? "Show" : "Hide"} Settings
-                  </Button>
-                ) : (
-                  ""
-                )}
-              </Col>
-            </Row>
-            <div style={{ display: hideDetails ? "none" : "block" }}>
-              <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId="1">
-                  <Border
-                    data={params}
-                    pseudo={activeTabPseudo}
-                    sendData={this.getData}
-                  />
-                </TabPane>
-              </TabContent>
-              <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId="2">
-                  <Size
-                    data={params}
-                    pseudo={activeTabPseudo}
-                    sendData={this.getData}
-                  />
-                </TabPane>
-              </TabContent>
-              <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId="3">
-                  <Color
-                    data={params}
-                    pseudo={activeTabPseudo}
-                    sendData={this.getData}
-                  />
-                </TabPane>
-              </TabContent>
-              <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId="4">
-                  <Placement
-                    data={params}
-                    pseudo={activeTabPseudo}
-                    sendData={this.getData}
-                  />
-                </TabPane>
-              </TabContent>
-              <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId="5">
-                  <Font
-                    data={params}
-                    pseudo={activeTabPseudo}
-                    sendData={this.getData}
-                  />
-                </TabPane>
-              </TabContent>
-              <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId="6">
-                  <Custom
-                    pseudo={activeTabPseudo}
-                    sendData={this.getData}
-                  />
-                </TabPane>
-              </TabContent>
-            </div>
+            <Customizer
+              sendData={this.getData}
+              params={params}
+              selected={selected}
+            />
           </Col>
         </Row>
         {Component ? (
