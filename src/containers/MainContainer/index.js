@@ -24,7 +24,13 @@ class MainContainer extends Component {
       inputText: "Test",
       selectComponents: [],
       testBackground: "#eaeeee",
-      testBackgroundState: ""
+      testBackgroundState: "",
+      splitParams: {
+        hover: {},
+        disabled: {},
+        focus: {},
+        "": {}
+      }
     };
     this.cssArea = React.createRef();
     this.styledArea = React.createRef();
@@ -67,13 +73,27 @@ class MainContainer extends Component {
   };
 
   generateComponent = () => {
-    const { selected, params, name } = this.state;
-    Object.keys(params).forEach(
-      key =>
-        (params[key] == null ||
-          (typeof params[key] === "string" && params[key].includes("null"))) &&
-        delete params[key]
-    );
+    const { selected, params, name, splitParams } = this.state;
+    let tempParams = Object.assign({}, params);
+    let tempSplitParams = Object.assign({}, splitParams);
+    Object.keys(tempParams).forEach(key => {
+      if (
+        tempParams[key] == null ||
+        (typeof tempParams[key] === "string" &&
+          tempParams[key].includes("null"))
+      ) {
+        delete tempParams[key];
+      } else {
+        Object.keys(tempSplitParams).forEach(splitKey => {
+          if (splitKey !== "" && key.includes(splitKey)) {
+            tempSplitParams[splitKey][key.substr(0, key.lastIndexOf("-"))] =
+              tempParams[key];
+            delete tempParams[key];
+          }
+        });
+      }
+      tempSplitParams[""] = tempParams;
+    });
     let label =
       selected.type === "core"
         ? '"' + selected.label.split(" -")[0] + '"'
