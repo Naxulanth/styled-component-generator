@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { Row, Col } from "reactstrap";
 import Option from "containers/Option";
-import { fontStyle, fontWeight } from "constants/options";
+import { fontStyle } from "constants/options";
 import OptionSelect from "containers/OptionSelect";
 
 class Font extends PureComponent {
@@ -52,7 +52,6 @@ class Font extends PureComponent {
                 min={100}
                 max={900}
                 noPx
-                options={fontWeight}
                 sendData={this.getData}
                 option="font-weight"
               />
