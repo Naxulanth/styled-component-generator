@@ -121,6 +121,7 @@ ${tempSplitParams[tempParams]}
 ${tempParams === "" ? "" : "}"}`;
       })
       .join("");
+
     let styledString = `const ${name} = styled(${label})\` ${styledInner} \n\`
 export default ${name};
 `;
@@ -133,7 +134,6 @@ ${tempSplitParams[tempParams]}
 }\n`;
       })
       .join("");
-    console.log(styledInner);
     let c = styled(selected.value)`
       ${styledInner}
     `;
