@@ -77,7 +77,6 @@ class MainContainer extends Component {
     let tempParams = Object.assign({}, params);
     let tempSplitParams = Object.assign({}, splitParams);
     Object.keys(tempParams).forEach(key => {
-      console.log(tempParams[key])
       if (
         tempParams[key] == null ||
         (typeof tempParams[key] === "string" &&
@@ -95,7 +94,6 @@ class MainContainer extends Component {
       }
       tempSplitParams[""] = tempParams;
     });
-    console.log(tempParams)
     let label =
       selected.type === "core"
         ? '"' + selected.label.split(" -")[0] + '"'
@@ -177,6 +175,7 @@ ${paramString}
       testBackgroundState,
       params
     } = this.state;
+    console.log(selected);
     return (
       <div>
         <Row>
@@ -304,7 +303,13 @@ ${paramString}
             className="align-center"
             lg="12"
           >
-            {Component ? <Component>{inputText}</Component> : null}
+            {Component ? (
+              selected.nochildren ? (
+                <Component />
+              ) : (
+                <Component>{inputText}</Component>
+              )
+            ) : null}
           </Col>
         </Row>
         <Row>
