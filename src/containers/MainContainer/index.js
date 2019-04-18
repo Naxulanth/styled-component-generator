@@ -98,9 +98,6 @@ class MainContainer extends Component {
       selected.type === "core"
         ? '"' + selected.label.split(" -")[0] + '"'
         : selected.label.split(" -")[0];
-    let c = styled(selected.value)`
-      ${JSON.parse(JSON.stringify(tempParams).replace(/@/g, ","))}
-    `;
     Object.keys(tempSplitParams).forEach(key => {
       let tempParams = tempSplitParams[key];
       tempSplitParams[key] =
@@ -114,27 +111,32 @@ class MainContainer extends Component {
               .replace(/@/g, ",") + ";"
           : "";
     });
-
-    let styledString = `const ${name} = styled(${label})\` ${Object.keys(
-      tempSplitParams
-    ).map(tempParams => {
-      if (tempSplitParams[tempParams].length > 0)
-        return `${tempParams === "" ? "" : "&::" + tempParams} ${
-          tempParams === "" ? "" : "{"
-        }
+    let styledInner = Object.keys(tempSplitParams)
+      .map(tempParams => {
+        if (tempSplitParams[tempParams].length > 0)
+          return `${tempParams === "" ? "" : "&:" + tempParams} ${
+            tempParams === "" ? "" : "{"
+          }
 ${tempSplitParams[tempParams]}
 ${tempParams === "" ? "" : "}"}`;
-    })}\n\`
+      })
+      .join("");
+    let styledString = `const ${name} = styled(${label})\` ${styledInner} \n\`
 export default ${name};
-`.replace(/,/g, "");
+`;
 
-    let cssString = `${Object.keys(tempSplitParams).map(tempParams => {
-      if (tempSplitParams[tempParams].length > 0)
-        return `.${name}${tempParams === "" ? "" : "::"}${tempParams} {
+    let cssString = Object.keys(tempSplitParams)
+      .map(tempParams => {
+        if (tempSplitParams[tempParams].length > 0)
+          return `.${name}${tempParams === "" ? "" : ":"}${tempParams} {
 ${tempSplitParams[tempParams]}
 }\n`;
-    })}
-`.replace(/,/g, "");
+      })
+      .join("");
+    console.log(styledInner);
+    let c = styled(selected.value)`
+      ${styledInner}
+    `;
     this.setState({
       Component: c,
       styled: styledString,
