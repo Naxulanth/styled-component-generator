@@ -26,10 +26,10 @@ class MainContainer extends Component {
       testBackground: "#eaeeee",
       testBackgroundState: "",
       splitParams: {
+        "": {},
         hover: {},
         disabled: {},
-        focus: {},
-        "": {}
+        focus: {}
       }
     };
     this.cssArea = React.createRef();
@@ -101,24 +101,40 @@ class MainContainer extends Component {
     let c = styled(selected.value)`
       ${JSON.parse(JSON.stringify(tempParams).replace(/@/g, ","))}
     `;
-    let paramString =
-      Object.keys(tempParams).length > 0
-        ? JSON.stringify(tempParams)
-            .replace("{", "")
-            .replace("}", "")
-            .replace(/"/g, "")
-            .replace(/,/g, ";\n")
-            .replace(/:/g, ": ")
-            .replace(/@/g, ",") + ";"
-        : "";
-    let styledString = `const ${name} = styled(${label})\`
-${paramString}\n\`
+    Object.keys(tempSplitParams).forEach(key => {
+      let tempParams = tempSplitParams[key];
+      tempSplitParams[key] =
+        Object.keys(tempParams).length > 0
+          ? JSON.stringify(tempParams)
+              .replace("{", "")
+              .replace("}", "")
+              .replace(/"/g, "")
+              .replace(/,/g, ";\n")
+              .replace(/:/g, ": ")
+              .replace(/@/g, ",") + ";"
+          : "";
+    });
 
+    let styledString = `const ${name} = styled(${label})\` ${Object.keys(
+      tempSplitParams
+    ).map(tempParams => {
+      if (tempSplitParams[tempParams].length > 0)
+        return `${tempParams === "" ? "" : "&::" + tempParams} ${
+          tempParams === "" ? "" : "{"
+        }
+${tempSplitParams[tempParams]}
+${tempParams === "" ? "" : "}"}`;
+    })}\n\`
 export default ${name};
-`;
-    let cssString = `.${name} {
-${paramString}
-}`;
+`.replace(/,/g, "");
+
+    let cssString = `${Object.keys(tempSplitParams).map(tempParams => {
+      if (tempSplitParams[tempParams].length > 0)
+        return `.${name}${tempParams === "" ? "" : "::"}${tempParams} {
+${tempSplitParams[tempParams]}
+}\n`;
+    })}
+`.replace(/,/g, "");
     this.setState({
       Component: c,
       styled: styledString,
