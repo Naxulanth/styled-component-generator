@@ -65,5 +65,9 @@ export const attributes = [
   { label: "left", value: "left", type: Option },
   { label: "bottom", value: "bottom", type: Option },
   { label: "right", value: "right", type: Option },
-  { label: "overflow", value: "overflow", type: OptionSelect }
+  { label: "overflow", value: "overflow", type: OptionSelect }, //
+  { label: "position", value: "position", type: OptionSelect }, //
+  { label: "vertical-align", value: "vertical-align", type: OptionSelect }, //
+  { label: "z-index", value: "z-index", type: Option },
+  { label: "letter-spacing", value: "letter-spacing", type: Option, pxOption: true }
 ];

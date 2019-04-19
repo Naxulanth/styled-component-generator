@@ -16,6 +16,7 @@ class Custom extends PureComponent {
       "-disabled": Object.assign({}, model),
       "-focus": Object.assign({}, model)
     };
+   
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -70,6 +71,7 @@ class Custom extends PureComponent {
                   : null
               }
               hide={this.state[pseudo].hiders[secondKey + pseudo]}
+              pxOption={!s.pxOption}
             />
           );
         l.push(
@@ -86,6 +88,7 @@ class Custom extends PureComponent {
                     : null
                 }
                 hide={this.state[pseudo].hiders[firstKey + pseudo]}
+                pxOption={!f.pxOption}
               />
             </Col>
           </Row>
@@ -136,7 +139,8 @@ class Custom extends PureComponent {
         type: selected.type,
         option: selected.option,
         data: this.state[pseudo].values[selected.label],
-        hide: this.state[pseudo].hiders[selected.label]
+        hide: this.state[pseudo].hiders[selected.label],
+        pxOption: selected.pxOption
       };
     });
     let v = Object.assign({}, this.state[pseudo].values);

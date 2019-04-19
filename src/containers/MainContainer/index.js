@@ -193,7 +193,6 @@ ${tempSplitParams[tempParams]}
       testBackgroundState,
       params
     } = this.state;
-    console.log(selected);
     return (
       <div>
         <Row>
