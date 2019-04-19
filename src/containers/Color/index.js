@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
-import OptionColor from "containers/OptionColor";
 import PropTypes from "prop-types";
+import OptionColor from "containers/OptionColor";
 
 class Color extends PureComponent {
   constructor(props) {
@@ -11,29 +11,19 @@ class Color extends PureComponent {
 
   getData = data => {
     const { sendData } = this.props;
-    sendData(data.tempState);
+      sendData(data.tempState);
   };
 
+
   render() {
-    const { data } = this.props;
     return (
       <Fragment>
         <Row>
           <Col className="align-center" lg="6">
-            <OptionColor
-              data={data["color" + this.props.pseudo]}
-              pseudo={this.props.pseudo}
-              option="color"
-              sendData={this.getData}
-            />
+            <OptionColor pseudo={this.props.pseudo} option="color" sendData={this.getData} />
           </Col>
           <Col className="align-center" lg="6">
-            <OptionColor
-              data={data["background" + this.props.pseudo]}
-              pseudo={this.props.pseudo}
-              option="background"
-              sendData={this.getData}
-            />
+            <OptionColor pseudo={this.props.pseudo} option="background" sendData={this.getData} />
           </Col>
         </Row>
       </Fragment>
@@ -42,10 +32,9 @@ class Color extends PureComponent {
 }
 
 Color.propTypes = {
-  data: PropTypes.object,
   pseudo: PropTypes.string,
+  data: PropTypes.object,
   sendData: PropTypes.func
-};
-
+}
 
 export default Color;

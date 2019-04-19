@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import { Row, Col } from "reactstrap";
-import Option from "containers/Option";
-import { fontStyle } from "constants/options";
-import OptionSelect from "containers/OptionSelect";
 import PropTypes from "prop-types";
+import Option from "containers/Option";
+import { fontStyle, fontWeight } from "constants/options";
+import OptionSelect from "containers/OptionSelect";
 
 class Font extends PureComponent {
   constructor(props) {
@@ -13,18 +13,17 @@ class Font extends PureComponent {
 
   getData = data => {
     const { sendData } = this.props;
-    sendData(data.tempState);
+      sendData(data.tempState);
   };
 
+
   render() {
-    const { data } = this.props;
     return (
       <Row>
         <Col lg="6">
           <Row>
             <Col lg="12">
               <Option
-                data={data["font-size" + this.props.pseudo]}
                 pseudo={this.props.pseudo}
                 sendData={this.getData}
                 option="font-size"
@@ -34,7 +33,6 @@ class Font extends PureComponent {
           <Row>
             <Col lg="12">
               <OptionSelect
-                data={data["font-style" + this.props.pseudo]}
                 pseudo={this.props.pseudo}
                 options={fontStyle}
                 sendData={this.getData}
@@ -47,12 +45,12 @@ class Font extends PureComponent {
           <Row>
             <Col>
               <Option
-                data={data["font-weight" + this.props.pseudo]}
                 pseudo={this.props.pseudo}
                 step={100}
                 min={100}
                 max={900}
                 noPx
+                options={fontWeight}
                 sendData={this.getData}
                 option="font-weight"
               />
@@ -64,10 +62,10 @@ class Font extends PureComponent {
   }
 }
 
-Color.propTypes = {
-  data: PropTypes.object,
+Font.propTypes = {
   pseudo: PropTypes.string,
+  data: PropTypes.object,
   sendData: PropTypes.func
-};
+}
 
 export default Font;
