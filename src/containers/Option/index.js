@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { Row, Col } from "reactstrap";
 import Slider from "rc-slider";
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import _ from "lodash/core";
@@ -204,4 +205,13 @@ class Option extends PureComponent {
     );
   }
 }
+
+Option.propTypes = {
+  data: PropTypes.string,
+  pseudo: PropTypes.string,
+  sendData: PropTypes.func,
+  option: PropTypes.string
+};
+
+
 export default Option;

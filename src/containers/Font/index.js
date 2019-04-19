@@ -3,6 +3,7 @@ import { Row, Col } from "reactstrap";
 import Option from "containers/Option";
 import { fontStyle } from "constants/options";
 import OptionSelect from "containers/OptionSelect";
+import PropTypes from "prop-types";
 
 class Font extends PureComponent {
   constructor(props) {
@@ -62,4 +63,11 @@ class Font extends PureComponent {
     );
   }
 }
+
+Color.propTypes = {
+  data: PropTypes.object,
+  pseudo: PropTypes.string,
+  sendData: PropTypes.func
+};
+
 export default Font;

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import { Row, Col } from "reactstrap";
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Select from "react-select";
@@ -128,4 +129,14 @@ class OptionSelect extends PureComponent {
     );
   }
 }
+
+OptionSelect.propTypes = {
+  data: PropTypes.string,
+  pseudo: PropTypes.string,
+  sendData: PropTypes.func,
+  option: PropTypes.string,
+  options: PropTypes.array
+};
+
+
 export default OptionSelect;

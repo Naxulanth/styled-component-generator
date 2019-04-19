@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
+import PropTypes from "prop-types";
 import Option from "containers/Option";
 
 class Placement extends PureComponent {
@@ -114,4 +115,11 @@ class Placement extends PureComponent {
     );
   }
 }
+
+Placement.propTypes = {
+  pseudo: PropTypes.string,
+  sendData: PropTypes.func
+};
+
+
 export default Placement;

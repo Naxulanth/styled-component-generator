@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
+import PropTypes from "prop-types";
 import Option from "containers/Option";
 
 class Size extends PureComponent {
@@ -103,4 +104,10 @@ class Size extends PureComponent {
     );
   }
 }
+
+Size.propTypes = {
+  pseudo: PropTypes.string,
+  sendData: PropTypes.func
+};
+
 export default Size;

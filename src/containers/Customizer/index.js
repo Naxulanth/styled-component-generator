@@ -9,6 +9,7 @@ import {
   TabPane
 } from "reactstrap";
 import classnames from "classnames";
+import PropTypes from "prop-types";
 import Size from "containers/Size";
 import Button from "components/Button";
 import _ from "lodash/core";
@@ -28,10 +29,7 @@ class Customizer extends Component {
   }
 
   shouldComponentUpdate(prevProps, prevState) {
-    return (
-      !_.isEqual(prevState, this.state) ||
-      !this.props.selected
-    );
+    return !_.isEqual(prevState, this.state) || !this.props.selected;
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -283,5 +281,11 @@ class Customizer extends Component {
     );
   }
 }
+
+Customizer.propTypes = {
+  params: PropTypes.object,
+  pseudo: PropTypes.string,
+  selected: PropTypes.object
+};
 
 export default Customizer;

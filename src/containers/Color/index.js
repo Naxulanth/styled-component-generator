@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
 import OptionColor from "containers/OptionColor";
+import PropTypes from "prop-types";
 
 class Color extends PureComponent {
   constructor(props) {
@@ -39,4 +40,12 @@ class Color extends PureComponent {
     );
   }
 }
+
+Color.propTypes = {
+  data: PropTypes.object,
+  pseudo: PropTypes.string,
+  sendData: PropTypes.func
+};
+
+
 export default Color;

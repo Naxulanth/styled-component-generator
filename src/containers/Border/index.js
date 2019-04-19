@@ -4,6 +4,7 @@ import Option from "containers/Option";
 import { borderStyle } from "constants/options";
 import OptionColor from "containers/OptionColor";
 import OptionSelect from "containers/OptionSelect";
+import PropTypes from "prop-types";
 
 class Border extends PureComponent {
   constructor(props) {
@@ -19,7 +20,7 @@ class Border extends PureComponent {
   };
 
   render() {
-    const { data } = this.props
+    const { data } = this.props;
     return (
       <Fragment>
         <Row>
@@ -58,4 +59,11 @@ class Border extends PureComponent {
     );
   }
 }
+
+Border.propTypes = {
+  data: PropTypes.object,
+  pseudo: PropTypes.string,
+  sendData: PropTypes.func
+};
+
 export default Border;

@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { ChromePicker } from "react-color";
@@ -142,4 +143,12 @@ class OptionColor extends PureComponent {
     );
   }
 }
+
+OptionColor.propTypes = {
+  data: PropTypes.string,
+  pseudo: PropTypes.string,
+  sendData: PropTypes.func,
+  option: PropTypes.string,
+};
+
 export default OptionColor;

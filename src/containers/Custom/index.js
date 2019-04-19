@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from "react";
 import { Row, Col } from "reactstrap";
 import { attributes } from "constants/attributes";
+import PropTypes from "prop-types";
 import { model } from "constants/custom";
 import Select from "react-select";
 import _ from "lodash/core";
@@ -191,4 +192,11 @@ class Custom extends PureComponent {
     );
   }
 }
+
+Custom.propTypes = {
+  pseudo: PropTypes.string,
+  sendData: PropTypes.func
+};
+
+
 export default Custom;
