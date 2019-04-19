@@ -8,4 +8,7 @@ export const components = [
   { label: "p", value: "p", type: "core" },
   { label: "hr", value: "hr", type: "core", nochildren: true },
   { label: "textarea", value: "textarea", type: "core", nochildren: true },
+  { label: "a", value: "a", type: "core" },
+  { label: "button", value: "button", type: "core" },
+  { label: "label", value: "label", type: "core" }
 ];
