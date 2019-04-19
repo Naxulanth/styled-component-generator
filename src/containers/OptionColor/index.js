@@ -104,10 +104,10 @@ class OptionColor extends PureComponent {
     return (
       <div className={className}>
         <Row>
-          <Col className="align-center" lg={{ offset: 2, size: 5 }}>
+          <Col className="align-center" lg={{ offset: 2, size: 8 }}>
             {option}{" "}
           </Col>
-          <Col lg="4">
+          <Col lg="2">
             <span className="hide-show" onClick={this.hide}>
               {hide ? (
                 <FontAwesomeIcon icon={faEye} />
@@ -120,7 +120,7 @@ class OptionColor extends PureComponent {
         {!hide ? (
           <Fragment>
             <Row>
-              <Col className="align-center" lg={{ offset: 2, size: 5 }}>
+              <Col className="align-center" lg={{ offset: 2, size: 8 }}>
                 <ChromePicker
                   color={optionColor}
                   onChangeComplete={this.handleChange.bind(
@@ -131,7 +131,7 @@ class OptionColor extends PureComponent {
               </Col>
             </Row>
             <Row className="margin-20">
-              <Col className="align-center" lg={{ offset: 2, size: 5 }}>
+              <Col className="align-center" lg={{ offset: 2, size: 8 }}>
                 <Button onClick={this.handleImportant}>important</Button>
               </Col>
             </Row>
