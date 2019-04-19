@@ -63,8 +63,6 @@ class MainContainer extends Component {
   };
 
   getData = data => {
-    // check if hover in name to sort into different objects?
-    // custom sends object rest send string
     const { params } = this.state;
     let merged = { ...params, ...data };
     this.setState({
@@ -207,7 +205,10 @@ ${tempSplitParams[tempParams]}
                   </span>
                 </span>
                 <ReactTooltip place="top" type="dark" effect="float">
-                  ...
+                  Choose the HTML element you would like to customize, input the
+                  name you would like to use for your component/class, and
+                  adjust the backdrop (for preview purposes only, the backdrop
+                  color won't carry over to the actual code)
                 </ReactTooltip>
               </Col>
             </Row>
@@ -286,9 +287,10 @@ ${tempSplitParams[tempParams]}
                     <FontAwesomeIcon icon={faQuestionCircle} />
                   </span>
                 </span>
-                <ReactTooltip place="top" type="dark" effect="float">
-                  ...
-                </ReactTooltip>
+                <ReactTooltip place="top" type="dark" effect="float" />
+                Customize your component by using the provided fields. If you'd
+                like to use an attribute that isn't specified in the pre-defined
+                tabs, you can find all CSS attributes in the Custom tab.
               </Col>
             </Row>
             <Customizer
@@ -308,7 +310,8 @@ ${tempSplitParams[tempParams]}
                 </span>
               </span>
               <ReactTooltip place="top" type="dark" effect="float">
-                ...
+                See a preview of your component as you are customizing it, all
+                changes will be reflected to the preview as a change is made.
               </ReactTooltip>
             </Col>
           </Row>
@@ -339,7 +342,8 @@ ${tempSplitParams[tempParams]}
               </span>
             </span>
             <ReactTooltip place="top" type="dark" effect="float">
-              ...
+              Simply click either the Styled or the CSS code to copy it to your
+              clipboard, and paste into your project!
             </ReactTooltip>
           </Col>
         </Row>
