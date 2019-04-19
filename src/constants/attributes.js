@@ -69,5 +69,15 @@ export const attributes = [
   { label: "position", value: "position", type: OptionSelect }, //
   { label: "vertical-align", value: "vertical-align", type: OptionSelect }, //
   { label: "z-index", value: "z-index", type: Option },
-  { label: "letter-spacing", value: "letter-spacing", type: Option, pxOption: true }
+  {
+    label: "letter-spacing",
+    value: "letter-spacing",
+    type: Option,
+    pxOption: true
+  },
+  { label: "text-align", value: "text-align", type: OptionSelect }, //
+  { label: "text-decoration", value: "text-decoration", type: OptionSelect }, //
+  { label: "text-indent", value: "text-indent", type: Option },
+  { label: "text-capitalize", value: "text-capitalize", type: OptionSelect }, //
+  { label: "word-spacing", value: "word-spacing", type: Option, pxOption: true }
 ];
