@@ -1,7 +1,7 @@
 import Option from "containers/Option";
 import OptionColor from "containers/OptionColor";
 import OptionSelect from "containers/OptionSelect";
-import { borderStyle, outlineStyle } from "constants/options";
+import { borderStyle, outlineStyle, clearStyle } from "constants/options";
 
 export const attributes = [
   { label: "border-left-width", value: "border-left-width", type: Option },
@@ -56,9 +56,9 @@ export const attributes = [
     value: "outline-width",
     type: Option
   },
-  {label: "clear", value:"clear", type: OptionSelect}, 
-  {label: "cursor", value:"cursor", type: OptionSelect}, //
-  {label: "display", value: "display", type: OptionSelect}, //
-  {label: "float", value: "float", type: OptionSelect}, //
-  {label: "position", value: "position", type: OptionSelect} //
+  { label: "clear", value: "clear", type: OptionSelect, option: clearStyle },
+  { label: "cursor", value: "cursor", type: OptionSelect }, //
+  { label: "display", value: "display", type: OptionSelect }, //
+  { label: "float", value: "float", type: OptionSelect }, //
+  { label: "position", value: "position", type: OptionSelect } //
 ];
