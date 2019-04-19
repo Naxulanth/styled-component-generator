@@ -23,3 +23,10 @@ export const outlineStyle = [
   { label: "inset", value: "inset" },
   { label: "outset", value: "outset" }
 ];
+
+export const clearStyle = [
+  { label: "none", value: "none" },
+  { label: "left", value: "left" },
+  { label: "right", value: "right" },
+  { label: "none", value: "none" }
+];

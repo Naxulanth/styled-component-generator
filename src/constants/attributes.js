@@ -55,5 +55,10 @@ export const attributes = [
     label: "outline-width",
     value: "outline-width",
     type: Option
-  }
+  },
+  {label: "clear", value:"clear", type: OptionSelect}, 
+  {label: "cursor", value:"cursor", type: OptionSelect}, //
+  {label: "display", value: "display", type: OptionSelect}, //
+  {label: "float", value: "float", type: OptionSelect}, //
+  {label: "position", value: "position", type: OptionSelect} //
 ];
