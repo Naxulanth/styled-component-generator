@@ -60,5 +60,10 @@ export const attributes = [
   { label: "cursor", value: "cursor", type: OptionSelect }, //
   { label: "display", value: "display", type: OptionSelect }, //
   { label: "float", value: "float", type: OptionSelect }, //
-  { label: "position", value: "position", type: OptionSelect } //
+  { label: "position", value: "position", type: OptionSelect }, //
+  { label: "top", value: "top", type: Option },
+  { label: "left", value: "left", type: Option },
+  { label: "bottom", value: "bottom", type: Option },
+  { label: "right", value: "right", type: Option },
+  { label: "overflow", value: "overflow", type: OptionSelect }
 ];
