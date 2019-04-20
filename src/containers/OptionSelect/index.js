@@ -36,14 +36,22 @@ class OptionSelect extends PureComponent {
     }
   }
 
+  handleNull = () => {
+    this.setState({
+      [this.props.option + this.props.pseudo]: null
+    });
+  };
+
   componentDidUpdate(prevProps, prevState) {
-    const { pseudo, data, options } = this.props
+    const { pseudo, data, options } = this.props;
     if (prevProps.pseudo !== pseudo) {
       this.setState({
         [this.props.option + this.props.pseudo]: data ? data : null,
-        optionSelect: data ?  options.find(option => {
-          return data.includes(option.label);
-        }) : null,
+        optionSelect: data
+          ? options.find(option => {
+              return data.includes(option.label);
+            })
+          : null,
         important: data ? data.includes("important") : false
       });
     }
@@ -117,7 +125,11 @@ class OptionSelect extends PureComponent {
               />
             </Col>
             <Col className="align-center vertical-center" lg="6">
+              <Button onClick={this.handleNull} className="align">
+                unset
+              </Button>
               <Button
+                className="align"
                 onClick={this.handleImportant.bind(this, option + pseudo)}
               >
                 important
@@ -137,6 +149,5 @@ OptionSelect.propTypes = {
   option: PropTypes.string,
   options: PropTypes.array
 };
-
 
 export default OptionSelect;

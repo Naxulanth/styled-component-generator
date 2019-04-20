@@ -98,6 +98,12 @@ class OptionColor extends PureComponent {
     );
   };
 
+  handleNull = () => {
+    this.setState({
+      [this.props.option + this.props.pseudo]: null
+    });
+  };
+
   render() {
     const { optionColor, hide } = this.state;
     const { option, className, pseudo } = this.props;
@@ -132,7 +138,10 @@ class OptionColor extends PureComponent {
             </Row>
             <Row className="margin-20">
               <Col className="align-center" lg={{ offset: 2, size: 8 }}>
-                <Button onClick={this.handleImportant}>important</Button>
+                <Button onClick={this.handleNull} className="align">
+                  unset
+                </Button>
+                <Button className="align" onClick={this.handleImportant}>important</Button>
               </Col>
             </Row>
           </Fragment>
@@ -148,7 +157,7 @@ OptionColor.propTypes = {
   data: PropTypes.string,
   pseudo: PropTypes.string,
   sendData: PropTypes.func,
-  option: PropTypes.string,
+  option: PropTypes.string
 };
 
 export default OptionColor;
