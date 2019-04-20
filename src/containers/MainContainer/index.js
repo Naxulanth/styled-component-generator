@@ -20,6 +20,7 @@ class MainContainer extends Component {
       css: "",
       Component: null,
       selected: null,
+      nochildren: false,
       name: "MyComponent",
       inputText: "Test",
       selectComponents: [],
@@ -140,7 +141,8 @@ ${tempSplitParams[tempParams]}
     this.setState({
       Component: c,
       styled: styledString,
-      css: cssString
+      css: cssString,
+      nochildren: selected.nochildren
     });
   };
 
@@ -191,7 +193,8 @@ ${tempSplitParams[tempParams]}
       selectComponents,
       testBackground,
       testBackgroundState,
-      params
+      params,
+      nochildren
     } = this.state;
     return (
       <div>
@@ -201,15 +204,26 @@ ${tempSplitParams[tempParams]}
               <Col className="vertical-center" lg={{ size: 12 }}>
                 <span>
                   <span className="title">Select</span>
-                  <span className="tooltip-select" data-tip data-for="tooltip-select">
+                  <span
+                    className="tooltip-select"
+                    data-tip
+                    data-for="tooltip-select"
+                  >
                     <FontAwesomeIcon icon={faQuestionCircle} />
                   </span>
                 </span>
-                <ReactTooltip id="tooltip-select" place="top" type="dark" effect="float">
-                  <div style={{maxWidth: "800px"}}>Choose the HTML element you would like to customize, input the
-                  name you would like to use for your component/class, and
-                  adjust the backdrop (for preview purposes only, the backdrop
-                  color won't carry over to the actual code)</div>
+                <ReactTooltip
+                  id="tooltip-select"
+                  place="top"
+                  type="dark"
+                  effect="float"
+                >
+                  <div style={{ maxWidth: "800px" }}>
+                    Choose the HTML element you would like to customize, input
+                    the name you would like to use for your component/class, and
+                    adjust the backdrop (for preview purposes only, the backdrop
+                    color won't carry over to the actual code)
+                  </div>
                 </ReactTooltip>
               </Col>
             </Row>
@@ -284,11 +298,20 @@ ${tempSplitParams[tempParams]}
               <Col className="margin-20" lg={{ size: 12 }}>
                 <span>
                   <span className="title">Customize</span>
-                  <span className="tooltip-select" data-tip data-for="tooltip-customize">
+                  <span
+                    className="tooltip-select"
+                    data-tip
+                    data-for="tooltip-customize"
+                  >
                     <FontAwesomeIcon icon={faQuestionCircle} />
                   </span>
                 </span>
-                <ReactTooltip id="tooltip-customize" place="top" type="dark" effect="float">
+                <ReactTooltip
+                  id="tooltip-customize"
+                  place="top"
+                  type="dark"
+                  effect="float"
+                >
                   Customize your component by using the provided fields. If
                   you'd like to use an attribute that isn't specified in the
                   pre-defined tabs, you can find all CSS attributes in the
@@ -308,11 +331,20 @@ ${tempSplitParams[tempParams]}
             <Col className="top-20 margin-20" lg={{ offset: 2, size: 10 }}>
               <span>
                 <span className="title">Preview</span>
-                <span className="tooltip-select" data-tip data-for="tooltip-preview">
+                <span
+                  className="tooltip-select"
+                  data-tip
+                  data-for="tooltip-preview"
+                >
                   <FontAwesomeIcon icon={faQuestionCircle} />
                 </span>
               </span>
-              <ReactTooltip id="tooltip-preview" place="top" type="dark" effect="float">
+              <ReactTooltip
+                id="tooltip-preview"
+                place="top"
+                type="dark"
+                effect="float"
+              >
                 See a preview of your component as you are customizing it, all
                 changes will be reflected to the preview as a change is made.
               </ReactTooltip>
@@ -320,18 +352,26 @@ ${tempSplitParams[tempParams]}
           </Row>
         ) : null}
         <Row className="margin-20">
-          <Col
-            style={{
-              background: testBackground
-            }}
-            className="align-center"
-            lg="12"
-          >
+          <Col className="align-center" lg={{ offset: 1, size: 10 }}>
             {Component ? (
-              selected.nochildren ? (
-                <Component />
+              nochildren ? (
+                <div
+                  style={{
+                    background: testBackground
+                  }}
+                  className="backdrop"
+                >
+                  <Component />
+                </div>
               ) : (
-                <Component>{inputText}</Component>
+                <div
+                  style={{
+                    background: testBackground
+                  }}
+                  className="backdrop"
+                >
+                  <Component>{inputText}</Component>
+                </div>
               )
             ) : null}
           </Col>
@@ -344,7 +384,12 @@ ${tempSplitParams[tempParams]}
                 <FontAwesomeIcon icon={faQuestionCircle} />
               </span>
             </span>
-            <ReactTooltip id="tooltip-code" place="top" type="dark" effect="float">
+            <ReactTooltip
+              id="tooltip-code"
+              place="top"
+              type="dark"
+              effect="float"
+            >
               Simply click either the Styled or the CSS code to copy it to your
               clipboard, and paste into your project!
             </ReactTooltip>
