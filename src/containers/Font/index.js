@@ -20,7 +20,6 @@ class Font extends PureComponent {
   };
 
   loadFont = e => {
-    console.log("tests");
     WebFont.load({
       google: {
         families: [
@@ -29,6 +28,7 @@ class Font extends PureComponent {
         ]
       }
     });
+    this.getData({ tempState: {} });
   };
 
   handleFamily = e => {
