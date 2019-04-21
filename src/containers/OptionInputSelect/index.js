@@ -2,8 +2,12 @@ import React, { PureComponent } from "react";
 import { Row, Col } from "reactstrap";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import Select from "react-select";
+import {
+  faEye,
+  faEyeSlash,
+  faQuestionCircle
+} from "@fortawesome/free-solid-svg-icons";
+import ReactTooltip from "react-tooltip";
 import WebFont from "webfontloader";
 import Button from "components/Button";
 import _ from "lodash/core";
@@ -25,7 +29,8 @@ class OptionInputSelect extends PureComponent {
       {
         focus: false,
         [this.props.option + this.props.pseudo]:
-          this.state.rawInput + (this.state.important ? " !important" : "")
+          (this.state.rawInput ? this.state.rawInput : null) +
+          (this.state.important ? " !important" : "")
       },
       WebFont.load({
         google: {
@@ -56,10 +61,10 @@ class OptionInputSelect extends PureComponent {
   }
 
   handleFamily = e => {
-    this.setState({
-      rawInput:
-        e && e.target && e.target.value ? e.target.value : this.state.rawInput
-    });
+    if (e)
+      this.setState({
+        rawInput: e && e.target ? e.target.value : this.state.rawInput
+      });
   };
 
   handleNull = () => {
@@ -86,12 +91,27 @@ class OptionInputSelect extends PureComponent {
 
   render() {
     const { option, className, pseudo } = this.props;
-    const { serif, hide, rawInput } = this.state;
+    const { hide, rawInput } = this.state;
     return (
       <div className={className}>
         <Row>
           <Col className="align-center" lg={{ offset: 2, size: 5 }}>
-            {option}
+            {option}{" "}
+            <span className="tooltip-select" data-tip data-for="font-family">
+              <FontAwesomeIcon icon={faQuestionCircle} />
+            </span>
+            <ReactTooltip
+              id="font-family"
+              place="top"
+              type="dark"
+              effect="float"
+            >
+              <div style={{ maxWidth: "800px" }}>
+                Simply type the name of the font you'd like to choose from
+                Google Fonts, and your font will be loaded when you leave focus
+                of the textbox!
+              </div>
+            </ReactTooltip>
           </Col>
           <Col lg="4">
             <span className="hide-show" onClick={this.hide}>
