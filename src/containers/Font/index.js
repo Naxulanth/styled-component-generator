@@ -3,19 +3,29 @@ import { Row, Col } from "reactstrap";
 import PropTypes from "prop-types";
 import Option from "containers/Option";
 import { fontStyle } from "constants/options";
+import WebFont from "webfontloader";
 import OptionSelect from "containers/OptionSelect";
 
 class Font extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      "font-family": "Roboto"
+    };
   }
 
   getData = data => {
     const { sendData } = this.props;
-      sendData(data.tempState);
+    sendData({ ...this.state, ...data.tempState });
   };
 
+  loadFont = e => {
+    WebFont.load({
+      google: {
+        families: ["Roboto:100,200,300,400,500,600,700,800,900", "sans-serif"]
+      }
+    });
+  };
 
   render() {
     return (
@@ -65,6 +75,6 @@ Font.propTypes = {
   pseudo: PropTypes.string,
   data: PropTypes.object,
   sendData: PropTypes.func
-}
+};
 
 export default Font;
