@@ -16,7 +16,6 @@ class Custom extends PureComponent {
       "-disabled": Object.assign({}, model),
       "-focus": Object.assign({}, model)
     };
-   
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -72,6 +71,9 @@ class Custom extends PureComponent {
               }
               hide={this.state[pseudo].hiders[secondKey + pseudo]}
               pxOption={!s.pxOption}
+              min={s.min}
+              max={s.max}
+              noPx={s.noPx}
             />
           );
         l.push(
@@ -89,6 +91,9 @@ class Custom extends PureComponent {
                 }
                 hide={this.state[pseudo].hiders[firstKey + pseudo]}
                 pxOption={!f.pxOption}
+                min={f.min}
+                max={f.max}
+                noPx={f.noPx}
               />
             </Col>
           </Row>
@@ -140,7 +145,10 @@ class Custom extends PureComponent {
         option: selected.option,
         data: this.state[pseudo].values[selected.label],
         hide: this.state[pseudo].hiders[selected.label],
-        pxOption: selected.pxOption
+        pxOption: selected.pxOption,
+        min: selected.min,
+        max: selected.max,
+        noPx: selected.noPx
       };
     });
     let v = Object.assign({}, this.state[pseudo].values);
@@ -201,6 +209,5 @@ Custom.propTypes = {
   pseudo: PropTypes.string,
   sendData: PropTypes.func
 };
-
 
 export default Custom;

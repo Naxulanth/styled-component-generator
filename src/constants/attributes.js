@@ -68,7 +68,15 @@ export const attributes = [
   { label: "overflow", value: "overflow", type: OptionSelect }, //
   { label: "position", value: "position", type: OptionSelect }, //
   { label: "vertical-align", value: "vertical-align", type: OptionSelect }, //
-  { label: "z-index", value: "z-index", type: Option },
+  {
+    label: "z-index",
+    value: "z-index",
+    type: Option,
+    min: 2147483648,
+    max: 2147483647,
+    pxOption: true,
+    noPx: true
+  },
   {
     label: "letter-spacing",
     value: "letter-spacing",
@@ -79,7 +87,12 @@ export const attributes = [
   { label: "text-decoration", value: "text-decoration", type: OptionSelect }, //
   { label: "text-indent", value: "text-indent", type: Option },
   { label: "text-capitalize", value: "text-capitalize", type: OptionSelect }, //
-  { label: "word-spacing", value: "word-spacing", type: Option, pxOption: true }
+  {
+    label: "word-spacing",
+    value: "word-spacing",
+    type: Option,
+    pxOption: true,
+  }
 ].sort((a, b) => {
   if (a.label < b.label) return -1;
   if (b.label < a.label) return 1;

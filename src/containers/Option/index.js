@@ -164,20 +164,22 @@ class Option extends PureComponent {
               />
             </Col>
             <Col lg="4">
-              <Slider
-                onChange={this.handle.bind(this, option + pseudo)}
-                min={noPx ? min : px ? (min ? min : 0) : 0}
-                max={noPx ? max : px ? (max ? max : 2000) : 100}
-                step={noPx ? step : px ? 10 : 1}
-                value={
-                  noPx
-                    ? isNaN(parseInt(this.state[option + pseudo]))
-                      ? min
+              {max > 10000 ? null : (
+                <Slider
+                  onChange={this.handle.bind(this, option + pseudo)}
+                  min={noPx ? min : px ? (min ? min : 0) : 0}
+                  max={noPx ? max : px ? (max ? max : 2000) : 100}
+                  step={noPx ? step : px ? 10 : 1}
+                  value={
+                    noPx
+                      ? isNaN(parseInt(this.state[option + pseudo]))
+                        ? min
+                        : parseInt(this.state[option + pseudo])
                       : parseInt(this.state[option + pseudo])
-                    : parseInt(this.state[option + pseudo])
-                }
-                handle={handle}
-              />
+                  }
+                  handle={handle}
+                />
+              )}
             </Col>
             <Col className="align-center vertical-center" lg="6">
               {noPx ? (
@@ -212,6 +214,5 @@ Option.propTypes = {
   sendData: PropTypes.func,
   option: PropTypes.string
 };
-
 
 export default Option;
