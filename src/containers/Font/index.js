@@ -3,14 +3,13 @@ import { Row, Col } from "reactstrap";
 import PropTypes from "prop-types";
 import Option from "containers/Option";
 import { fontStyle } from "constants/options";
-import WebFont from "webfontloader";
 import OptionSelect from "containers/OptionSelect";
+import OptionInputSelect from "../OptionInputSelect";
 
 class Font extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      "font-family": ""
     };
   }
 
@@ -19,23 +18,6 @@ class Font extends PureComponent {
     sendData({ ...this.state, ...data.tempState });
   };
 
-  loadFont = e => {
-    WebFont.load({
-      google: {
-        families: [
-          this.state["font-family"] + ":100,200,300,400,500,600,700,800,900",
-          "sans-serif"
-        ]
-      }
-    });
-    this.getData({ tempState: {} });
-  };
-
-  handleFamily = e => {
-    this.setState({
-      "font-family": "'" + e.target.value + "' !important"
-    });
-  };
 
   render() {
     return (
@@ -77,20 +59,11 @@ class Font extends PureComponent {
           </Row>
           <Row>
             <Col lg="12">
-              <Row>
-                <Col className="align-center margin-10" lg="12">
-                  font-family
-                </Col>
-              </Row>
-              <Row>
-                <Col lg="12" className="align-center">
-                  <input
-                    type="text"
-                    onBlur={this.loadFont}
-                    onChange={this.handleFamily}
-                  />
-                </Col>
-              </Row>
+              <OptionInputSelect
+                pseudo={this.props.pseudo}
+                sendData={this.getData}
+                option="font-family"
+              />
             </Col>
           </Row>
         </Col>
