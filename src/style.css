@@ -6,11 +6,10 @@
 body {
   background-color: #eaeeee !important;
   color: black !important;
-  font-family: 'Roboto', sans-serif !important;
+  font-family: 'Roboto' !important;
   font-weight: 300 !important;
   font-style: normal;
   overflow-x: hidden;
-  font-family: "Roboto";
   font-size: 0.8vw !important;
   height: 100%;
   margin: 0;
