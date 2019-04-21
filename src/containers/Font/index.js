@@ -10,7 +10,7 @@ class Font extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      "font-family": "'Roboto'"
+      "font-family": ""
     };
   }
 
@@ -20,10 +20,20 @@ class Font extends PureComponent {
   };
 
   loadFont = e => {
+    console.log("tests");
     WebFont.load({
       google: {
-        families: ["Roboto:100,200,300,400,500,600,700,800,900", "sans-serif"]
+        families: [
+          this.state["font-family"] + ":100,200,300,400,500,600,700,800,900",
+          "sans-serif"
+        ]
       }
+    });
+  };
+
+  handleFamily = e => {
+    this.setState({
+      "font-family": "'" + e.target.value + "' !important"
     });
   };
 
@@ -53,7 +63,7 @@ class Font extends PureComponent {
         </Col>
         <Col lg="6">
           <Row>
-            <Col>
+            <Col lg="12">
               <Option
                 pseudo={this.props.pseudo}
                 step={100}
@@ -63,6 +73,24 @@ class Font extends PureComponent {
                 sendData={this.getData}
                 option="font-weight"
               />
+            </Col>
+          </Row>
+          <Row>
+            <Col lg="12">
+              <Row>
+                <Col className="align-center margin-10" lg="12">
+                  font-family
+                </Col>
+              </Row>
+              <Row>
+                <Col lg="12" className="align-center">
+                  <input
+                    type="text"
+                    onBlur={this.loadFont}
+                    onChange={this.handleFamily}
+                  />
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Col>
