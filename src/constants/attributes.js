@@ -72,7 +72,7 @@ export const attributes = [
     label: "z-index",
     value: "z-index",
     type: Option,
-    min: 2147483648,
+    min: -2147483648,
     max: 2147483647,
     pxOption: true,
     noPx: true

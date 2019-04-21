@@ -82,7 +82,7 @@ class Option extends PureComponent {
   };
 
   handleInput = e => {
-    const { noPx } = this.props;
+    const { noPx, min } = this.props;
     if (e.target.value === "") {
       this.setState({
         [this.props.option + this.props.pseudo]: null
@@ -90,7 +90,7 @@ class Option extends PureComponent {
     } else
       this.setState({
         [this.props.option + this.props.pseudo]:
-          e.target.value.replace(/\D/, "") +
+          Math.max(min ? min : 0, e.target.value) +
           (noPx ? "" : this.state.px ? "px" : "%") +
           (this.state.important ? " !important" : "")
       });
@@ -126,6 +126,7 @@ class Option extends PureComponent {
       className,
       pseudo
     } = this.props;
+    console.log(min);
     return (
       <div className={className}>
         <Row>
@@ -150,6 +151,7 @@ class Option extends PureComponent {
             <Col lg="2">
               <input
                 type="number"
+                min=""
                 className="number-input"
                 value={
                   parseInt(this.state[option + pseudo]) ||
@@ -164,22 +166,20 @@ class Option extends PureComponent {
               />
             </Col>
             <Col lg="4">
-              {max > 10000 ? null : (
-                <Slider
-                  onChange={this.handle.bind(this, option + pseudo)}
-                  min={noPx ? min : px ? (min ? min : 0) : 0}
-                  max={noPx ? max : px ? (max ? max : 2000) : 100}
-                  step={noPx ? step : px ? 10 : 1}
-                  value={
-                    noPx
-                      ? isNaN(parseInt(this.state[option + pseudo]))
-                        ? min
-                        : parseInt(this.state[option + pseudo])
+              <Slider
+                onChange={this.handle.bind(this, option + pseudo)}
+                min={noPx ? min : px ? (min ? min : 0) : 0}
+                max={noPx ? max : px ? (max ? max : 2000) : 100}
+                step={noPx ? step : px ? 10 : 1}
+                value={
+                  noPx
+                    ? isNaN(parseInt(this.state[option + pseudo]))
+                      ? min
                       : parseInt(this.state[option + pseudo])
-                  }
-                  handle={handle}
-                />
-              )}
+                    : parseInt(this.state[option + pseudo])
+                }
+                handle={handle}
+              />
             </Col>
             <Col className="align-center vertical-center" lg="6">
               {noPx ? (
