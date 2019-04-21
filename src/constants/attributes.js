@@ -80,4 +80,8 @@ export const attributes = [
   { label: "text-indent", value: "text-indent", type: Option },
   { label: "text-capitalize", value: "text-capitalize", type: OptionSelect }, //
   { label: "word-spacing", value: "word-spacing", type: Option, pxOption: true }
-];
+].sort((a, b) => {
+  if (a.label < b.label) return -1;
+  if (b.label < a.label) return 1;
+  return 0;
+});

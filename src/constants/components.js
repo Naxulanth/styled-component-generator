@@ -11,4 +11,8 @@ export const components = [
   { label: "a", value: "a", type: "core" },
   { label: "button", value: "button", type: "core" },
   { label: "label", value: "label", type: "core" }
-];
+].sort((a, b) => {
+  if (a.label < b.label) return -1;
+  if (b.label < a.label) return 1;
+  return 0;
+});

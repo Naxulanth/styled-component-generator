@@ -1,9 +1,9 @@
 export const borderStyle = [
+  { label: "none", value: "" },
   { label: "dotted", value: "dotted" },
   { label: "dashed", value: "dashed" },
   { label: "solid", value: "solid" },
-  { label: "double", value: "double" },
-  { label: "none", value: "" }
+  { label: "double", value: "double" }
 ];
 
 export const fontStyle = [
