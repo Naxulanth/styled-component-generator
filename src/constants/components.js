@@ -1,7 +1,9 @@
-import { Button } from "reactstrap";
+import { Button, Alert, Badge } from "reactstrap";
 
 export const components = [
   { label: "Button", value: Button, type: "Bootstrap" },
+  { label: "Alert", value: Alert, type: "Bootstrap" },
+  { label: "Badge", value: Badge, type: "Bootstrap" },
   { label: "div", value: "div", type: "core" },
   { label: "input", value: "input", type: "core", nochildren: true },
   { label: "span", value: "span", type: "core" },
