@@ -8,8 +8,6 @@
 
 - **Code** - Copy the code into your project and you're done!
 
-
-
 [**Try it here!**](http://naxulanth.github.io/styled-component-generator/)
 
-![Demo]()
+![Demo](https://s3.eu-central-1.amazonaws.com/www.deniz.gg/styled.gif)
