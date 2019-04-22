@@ -47,6 +47,7 @@ export const displayStyle = [
   { label: "none", value: "none" },
   { label: "inline", value: "inline" },
   { label: "block", value: "block" },
+  { label: "flex", value: "flex" },
   { label: "list-item", value: "list-item" },
   { label: "table-cell", value: "table-cell" },
   { label: "table-row", value: "table-row" },
@@ -104,4 +105,28 @@ export const textTransformStyle = [
   { label: "capitalize", value: "capitalize" },
   { label: "uppercase", value: "uppercase" },
   { label: "lowercase", value: "lowercase" }
+];
+
+export const alignItemsStyle = [
+  { label: "flex-start", value: "flex-start" },
+  { label: "flex-end", value: "flex-end" },
+  { label: "center", value: "center" },
+  { label: "baseline", value: "baseline" },
+  { label: "stretch", value: "stretch" }
+];
+
+export const justifyContentStyle = [
+  { label: "flex-start", value: "flex-start" },
+  { label: "flex-end", value: "flex-end" },
+  { label: "center", value: "center" },
+  { label: "space-between", value: "space-between" },
+  { label: "space-around", value: "space-around" }
+];
+
+export const textDecorationStyleStyle = [
+  { label: "solid", value: "solid" },
+  { label: "double", value: "double" },
+  { label: "dotted", value: "dotted" },
+  { label: "dashed", value: "dashed" },
+  { label: "wavy", value: "wavy" }
 ];

@@ -13,8 +13,11 @@ import {
   verticalAlignStyle,
   textAlignStyle,
   textDecorationStyle,
-  textTransformStyle
-} from "constants/options";
+  textTransformStyle,
+  alignItemsStyle,
+  justifyContentStyle,
+  textDecorationStyleStyle
+} from "./options";
 
 export const attributes = [
   { label: "border-left-width", value: "border-left-width", type: Option },
@@ -121,15 +124,48 @@ export const attributes = [
     type: OptionSelect,
     option: textAlignStyle
   },
-  { label: "text-decoration", value: "text-decoration", type: OptionSelect, option: textDecorationStyle },
+  {
+    label: "text-decoration",
+    value: "text-decoration",
+    type: OptionSelect,
+    option: textDecorationStyle
+  },
   { label: "text-indent", value: "text-indent", type: Option },
-  { label: "text-transform", value: "text-transform", type: OptionSelect, option: textTransformStyle },
+  {
+    label: "text-transform",
+    value: "text-transform",
+    type: OptionSelect,
+    option: textTransformStyle
+  },
   {
     label: "word-spacing",
     value: "word-spacing",
     type: Option,
     pxOption: true
-  }
+  },
+  {
+    label: "align-items",
+    value: "align-items",
+    type: OptionSelect,
+    option: alignItemsStyle
+  },
+  {
+    label: "justify-content",
+    value: "justify-content",
+    type: OptionSelect,
+    option: justifyContentStyle
+  },
+  {
+    label: "text-decoration-color",
+    value: "text-decoration-color",
+    type: OptionColor
+  },
+  {
+    label: "text-decoration-style",
+    value: "text-decoration-style",
+    type: OptionSelect,
+    option: textDecorationStyleStyle
+  },
 ].sort((a, b) => {
   if (a.label < b.label) return -1;
   if (b.label < a.label) return 1;
