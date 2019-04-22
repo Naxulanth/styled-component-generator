@@ -43,7 +43,9 @@ class OptionSelect extends PureComponent {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { pseudo, data, options } = this.props;
+    const { pseudo, options, option } = this.props;
+    let data = this.props.data;
+    if (!data) data = this.state[option + pseudo];
     if (prevProps.pseudo !== pseudo) {
       this.setState({
         optionSelect: data

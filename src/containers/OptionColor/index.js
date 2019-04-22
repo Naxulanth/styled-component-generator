@@ -41,7 +41,9 @@ class OptionColor extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { dummy, pseudo, data } = this.props;
+    const { dummy, pseudo, option } = this.props;
+    let data = this.props.data
+    if (!data) data = this.state[option + pseudo]
     if (prevProps.pseudo !== pseudo) {
       let colorSplit = data ? data.split("(")[1].split("@") : null;
       this.setState({
