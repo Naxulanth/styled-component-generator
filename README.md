@@ -8,6 +8,8 @@
 
 - **Code** - Copy the code into your project and you're done!
 
+
+
 [**Try it here!**](http://naxulanth.github.io/styled-component-generator/)
 
-##
+![Demo]()

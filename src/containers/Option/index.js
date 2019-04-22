@@ -45,6 +45,7 @@ class Option extends PureComponent {
         this.props.option + this.props.pseudo
       ];
       let tempHiders = {};
+      tempHiders[this.props.option + this.props.pseudo] = this.state.hide;
       sendData({ tempState, tempHiders });
     }
   }

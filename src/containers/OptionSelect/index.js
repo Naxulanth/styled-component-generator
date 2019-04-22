@@ -46,7 +46,6 @@ class OptionSelect extends PureComponent {
     const { pseudo, data, options } = this.props;
     if (prevProps.pseudo !== pseudo) {
       this.setState({
-        [this.props.option + this.props.pseudo]: data ? data : null,
         optionSelect: data
           ? options.find(option => {
               return data.includes(option.label);
