@@ -1,6 +1,8 @@
 import { Button, Alert, Badge } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const components = [
+  { label: "FontAwesomeIcon", value: FontAwesomeIcon, type: "FontAwesome", nochildren: true},
   { label: "Button", value: Button, type: "Bootstrap" },
   { label: "Alert", value: Alert, type: "Bootstrap" },
   { label: "Badge", value: Badge, type: "Bootstrap" },

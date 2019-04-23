@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Row, Col } from "reactstrap";
 import styled from "styled-components";
 import _ from "lodash/core";
@@ -196,6 +196,7 @@ ${tempSplitParams[tempParams]}
       params,
       nochildren
     } = this.state;
+    console.log(selected);
     return (
       <div>
         <Row>
@@ -242,6 +243,18 @@ ${tempSplitParams[tempParams]}
                     />
                   </Col>
                 </Row>
+                {selected && selected.type === "FontAwesome" ? (
+                  <Fragment>
+                    <Row className="margin-20">
+                      <Col className="vertical-center" lg={{ size: 6 }}>
+                        <span>Identifier</span>
+                      </Col>
+                      <Col lg={{ size: 6 }}>
+                        <input type="text" />
+                      </Col>
+                    </Row>
+                  </Fragment>
+                ) : null}
                 <Row className="margin-20">
                   <Col className="vertical-center" lg={{ size: 6 }}>
                     <span>Component/Class Name</span>
