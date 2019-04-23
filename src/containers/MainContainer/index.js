@@ -3,7 +3,10 @@ import { Row, Col } from "reactstrap";
 import styled from "styled-components";
 import _ from "lodash/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faQuestionCircle,
+  faExternalLinkAlt
+} from "@fortawesome/free-solid-svg-icons";
 import { ChromePicker } from "react-color";
 import { prefix } from "constants/fontawesome";
 import Select from "react-select";
@@ -314,7 +317,7 @@ ${tempSplitParams[tempParams]}
                           </div>
                         </ReactTooltip>
                       </Col>
-                      <Col lg={{ size: 6 }}>
+                      <Col lg={{ size: 5 }}>
                         <input
                           onFocus={this.focus}
                           onBlur={this.submitIdentifier}
@@ -323,6 +326,14 @@ ${tempSplitParams[tempParams]}
                           style={{ width: "100%" }}
                           type="text"
                         />
+                      </Col>
+                      <Col lg="1">
+                        <a
+                          href="https://fontawesome.com/icons?d=gallery&m=free"
+                          target="_blank"
+                        >
+                          <FontAwesomeIcon style={{color: "gray"}} icon={faExternalLinkAlt} />
+                        </a>
                       </Col>
                     </Row>
                   </Fragment>
