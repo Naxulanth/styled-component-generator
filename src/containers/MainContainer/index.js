@@ -247,10 +247,31 @@ ${tempSplitParams[tempParams]}
                   <Fragment>
                     <Row className="margin-20">
                       <Col className="vertical-center" lg={{ size: 6 }}>
-                        <span>Identifier</span>
+                        <span>Identifier</span>{" "}
+                        <span
+                          className="tooltip-select no-margin"
+                          data-tip
+                          data-for="identifier"
+                        >
+                          <FontAwesomeIcon icon={faQuestionCircle} />
+                        </span>
+                        <ReactTooltip
+                          id="identifier"
+                          place="top"
+                          type="dark"
+                          effect="float"
+                        >
+                          <div style={{ maxWidth: "800px" }}>
+                            <div>
+                              Find the icon you'd like to import from
+                              FontAwesome, and simply copy its class name here.
+                            </div>
+                            <div>Example: fas fa-question-circle</div>
+                          </div>
+                        </ReactTooltip>
                       </Col>
                       <Col lg={{ size: 6 }}>
-                        <input type="text" />
+                        <input style={{width: "100%"}} type="text" />
                       </Col>
                     </Row>
                   </Fragment>
