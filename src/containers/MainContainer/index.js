@@ -5,6 +5,7 @@ import _ from "lodash/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { ChromePicker } from "react-color";
+import { prefix } from "constants/fontawesome";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import ReactTooltip from "react-tooltip";
@@ -22,7 +23,7 @@ class MainContainer extends Component {
       selected: null,
       nochildren: false,
       identifier: "",
-      identifierSubmit: "",
+      identifierSubmit: faQuestionCircle,
       identifierFocus: false,
       name: "MyComponent",
       inputText: "Test",
@@ -193,10 +194,29 @@ ${tempSplitParams[tempParams]}
   };
 
   submitIdentifier = e => {
-    this.setState({
-      identifierFocus: false
-    });
-    let submit = this.state.identifier;
+    if (this.state.identifier.split(" ")[1]) {
+      let imported = null;
+      this.setState({
+        identifierFocus: false
+      });
+      let submit = this.state.identifier.split(" ");
+      let pre = prefix[submit[0]];
+      let icon = submit[1]
+        .split("-")
+        .slice(1)
+        .map(p => p.charAt(0).toUpperCase() + p.slice(1))
+        .join("");
+      console.log(icon);
+      let result = "fa" + icon;
+      try {
+        imported = require("@fortawesome/" + pre)[result];
+      } catch (e) {}
+      if (imported) {
+        this.setState({
+          identifierSubmit: imported
+        });
+      }
+    }
   };
 
   focus = () => {
@@ -221,7 +241,6 @@ ${tempSplitParams[tempParams]}
       identifier,
       identifierSubmit
     } = this.state;
-    console.log(selected);
     return (
       <div>
         <Row>
