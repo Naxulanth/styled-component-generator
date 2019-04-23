@@ -21,6 +21,9 @@ class MainContainer extends Component {
       Component: null,
       selected: null,
       nochildren: false,
+      identifier: "",
+      identifierSubmit: "",
+      identifierFocus: false,
       name: "MyComponent",
       inputText: "Test",
       selectComponents: [],
@@ -43,6 +46,7 @@ class MainContainer extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (
+      !this.state.identifierFocus &&
       (!_.isEqual(prevState.params, this.state.params) ||
         !_.isEqual(prevState.selected, this.state.selected) ||
         this.state.name !== prevState.name) &&
@@ -182,6 +186,25 @@ ${tempSplitParams[tempParams]}
     });
   };
 
+  handleIdentifier = e => {
+    this.setState({
+      identifier: e.target.value
+    });
+  };
+
+  submitIdentifier = e => {
+    this.setState({
+      identifierFocus: false
+    });
+    let submit = this.state.identifier;
+  };
+
+  focus = () => {
+    this.setState({
+      identifierFocus: true
+    });
+  };
+
   render() {
     const {
       styled,
@@ -194,7 +217,9 @@ ${tempSplitParams[tempParams]}
       testBackground,
       testBackgroundState,
       params,
-      nochildren
+      nochildren,
+      identifier,
+      identifierSubmit
     } = this.state;
     console.log(selected);
     return (
@@ -271,7 +296,14 @@ ${tempSplitParams[tempParams]}
                         </ReactTooltip>
                       </Col>
                       <Col lg={{ size: 6 }}>
-                        <input style={{width: "100%"}} type="text" />
+                        <input
+                          onFocus={this.focus}
+                          onBlur={this.submitIdentifier}
+                          onChange={this.handleIdentifier}
+                          value={identifier}
+                          style={{ width: "100%" }}
+                          type="text"
+                        />
                       </Col>
                     </Row>
                   </Fragment>
@@ -395,7 +427,11 @@ ${tempSplitParams[tempParams]}
                   }}
                   className="backdrop"
                 >
-                  <Component />
+                  <Component
+                    icon={
+                      selected.type === "FontAwesome" ? identifierSubmit : null
+                    }
+                  />
                 </div>
               ) : (
                 <div
