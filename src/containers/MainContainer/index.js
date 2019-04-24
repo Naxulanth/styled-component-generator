@@ -8,12 +8,14 @@ import {
   faExternalLinkAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { ChromePicker } from "react-color";
-import { prefix } from "constants/fontawesome";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import ReactTooltip from "react-tooltip";
 import Customizer from "containers/Customizer";
 import { components } from "constants/components";
+import * as fas from "@fortawesome/free-solid-svg-icons";
+import * as fab from "@fortawesome/free-brands-svg-icons";
+import * as far from "@fortawesome/free-regular-svg-icons";
 
 class MainContainer extends Component {
   constructor(props) {
@@ -203,16 +205,16 @@ ${tempSplitParams[tempParams]}
         identifierFocus: false
       });
       let submit = this.state.identifier.split(" ");
-      let pre = prefix[submit[0]];
+      let pre = submit[0];
       let icon = submit[1]
         .split("-")
         .slice(1)
         .map(p => p.charAt(0).toUpperCase() + p.slice(1))
         .join("");
       let result = "fa" + icon;
-      try {
-        imported = require("@fortawesome/" + pre)[result];
-      } catch (e) {}
+      if (pre === "fas") imported = fas[result];
+      else if (pre === "fab") imported = fab[result];
+      else imported = far[result];
       if (imported) {
         this.setState({
           identifierSubmit: imported
@@ -329,9 +331,13 @@ ${tempSplitParams[tempParams]}
                       <Col lg="1">
                         <a
                           href="https://fontawesome.com/icons?d=gallery&m=free"
-                          target="_blank" rel="noopener noreferrer"
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
-                          <FontAwesomeIcon style={{color: "gray"}} icon={faExternalLinkAlt} />
+                          <FontAwesomeIcon
+                            style={{ color: "gray" }}
+                            icon={faExternalLinkAlt}
+                          />
                         </a>
                       </Col>
                     </Row>
