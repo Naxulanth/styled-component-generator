@@ -329,7 +329,7 @@ ${tempSplitParams[tempParams]}
                       <Col lg="1">
                         <a
                           href="https://fontawesome.com/icons?d=gallery&m=free"
-                          target="_blank"
+                          target="_blank" rel="noopener noreferrer"
                         >
                           <FontAwesomeIcon style={{color: "gray"}} icon={faExternalLinkAlt} />
                         </a>
