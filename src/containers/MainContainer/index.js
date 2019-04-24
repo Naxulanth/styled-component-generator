@@ -209,7 +209,6 @@ ${tempSplitParams[tempParams]}
         .slice(1)
         .map(p => p.charAt(0).toUpperCase() + p.slice(1))
         .join("");
-      console.log(icon);
       let result = "fa" + icon;
       try {
         imported = require("@fortawesome/" + pre)[result];

@@ -127,7 +127,6 @@ class Option extends PureComponent {
       className,
       pseudo
     } = this.props;
-    console.log(min);
     return (
       <div className={className}>
         <Row>

@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import WebFont from "webfontloader";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
+import * as serviceWorker from './serviceWorker';
 
 //const { whyDidYouUpdate } = require("why-did-you-update");
 //whyDidYouUpdate(React);
@@ -23,3 +24,5 @@ ReactDOM.render(
   </Fragment>,
   document.getElementById("root")
 );
+
+serviceWorker.register();
