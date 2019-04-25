@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Row, Col } from "reactstrap";
+import { Row, Col, Button } from "reactstrap";
 import styled from "styled-components";
 import _ from "lodash/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -40,8 +40,7 @@ class MainContainer extends Component {
         hover: {},
         disabled: {},
         focus: {},
-        active: {},
-        visited: {}
+        active: {}
       }
     };
     this.cssArea = React.createRef();
@@ -231,6 +230,12 @@ ${tempSplitParams[tempParams]}
     });
   };
 
+  disable = () => {
+    this.setState({
+      disabled: !this.state.disabled
+    });
+  };
+
   render() {
     const {
       styled,
@@ -245,7 +250,8 @@ ${tempSplitParams[tempParams]}
       params,
       nochildren,
       identifier,
-      identifierSubmit
+      identifierSubmit,
+      disabled
     } = this.state;
     return (
       <div>
@@ -465,6 +471,7 @@ ${tempSplitParams[tempParams]}
                   className="backdrop"
                 >
                   <Component
+                    disabled={disabled}
                     icon={
                       selected.type === "FontAwesome" ? identifierSubmit : null
                     }
@@ -477,12 +484,21 @@ ${tempSplitParams[tempParams]}
                   }}
                   className="backdrop"
                 >
-                  <Component>{inputText}</Component>
+                  <Component disabled={disabled}>{inputText}</Component>
                 </div>
               )
             ) : null}
           </Col>
         </Row>
+        {Component ? (
+          <Row className="margin-20">
+            <Col className="align-center" lg={{ offset: 1, size: 10 }}>
+              <Button onClick={this.disable}>
+                Set {disabled ? '"enabled"' : '"disabled"'}
+              </Button>
+            </Col>
+          </Row>
+        ) : null}
         <Row>
           <Col lg={{ offset: 2, size: 10 }}>
             <span>
