@@ -39,7 +39,10 @@ class Custom extends PureComponent {
     let l = [];
     let r = [];
     Object.keys(tempComponents).forEach(key => {
-      let c = tempComponents[key].type.name;
+      let c = tempComponents[key];
+      if (c.option) c = "OptionSelect";
+      else if (key.includes("color")) c = "OptionColor";
+      else c = "Option";
       if (!map[c]) map[c] = {};
       map[c][key] = tempComponents[key];
     });
