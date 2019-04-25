@@ -14,7 +14,9 @@ class Custom extends PureComponent {
       "": Object.assign({}, model),
       "-hover": Object.assign({}, model),
       "-disabled": Object.assign({}, model),
-      "-focus": Object.assign({}, model)
+      "-focus": Object.assign({}, model),
+      "-active": Object.assign({}, model),
+      "-visited": Object.assign({}, model)
     };
   }
 

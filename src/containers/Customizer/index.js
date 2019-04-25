@@ -129,6 +129,32 @@ class Customizer extends Component {
                   Disabled
                 </NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink
+                  disabled={!selected}
+                  className={classnames({
+                    active: activeTabPseudo === "-active"
+                  })}
+                  onClick={() => {
+                    this.togglePseudo("-active");
+                  }}
+                >
+                  Active
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  disabled={!selected}
+                  className={classnames({
+                    active: activeTabPseudo === "-visited"
+                  })}
+                  onClick={() => {
+                    this.togglePseudo("-visited");
+                  }}
+                >
+                  Visited
+                </NavLink>
+              </NavItem>
             </Nav>
           </Col>
         </Row>

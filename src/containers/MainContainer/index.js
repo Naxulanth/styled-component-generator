@@ -39,7 +39,9 @@ class MainContainer extends Component {
         "": {},
         hover: {},
         disabled: {},
-        focus: {}
+        focus: {},
+        active: {},
+        visited: {}
       }
     };
     this.cssArea = React.createRef();
