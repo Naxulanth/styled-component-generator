@@ -13,4 +13,4 @@ A playground to customize and preview [styled components](https://github.com/sty
 [**Try it here!**](http://naxulanth.github.io/styled-component-generator/)
 
 ## Demo
-![Demo](https://s3.eu-central-1.amazonaws.com/www.deniz.gg/styled.gif)
+<img src="https://s3.eu-central-1.amazonaws.com/www.deniz.gg/styled.gif">
