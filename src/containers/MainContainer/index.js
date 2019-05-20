@@ -85,7 +85,8 @@ class MainContainer extends Component {
   generateComponent = () => {
     const { selected, params, name, splitParams } = this.state;
     let tempParams = Object.assign({}, params);
-    let tempSplitParams = Object.assign({}, splitParams);
+    let tempSplitParams = JSON.parse(JSON.stringify(splitParams))
+
     Object.keys(tempParams).forEach(key => {
       if (
         tempParams[key] == null ||
@@ -251,7 +252,8 @@ ${tempSplitParams[tempParams]}
       nochildren,
       identifier,
       identifierSubmit,
-      disabled
+      disabled,
+      splitParams
     } = this.state;
     return (
       <div>
