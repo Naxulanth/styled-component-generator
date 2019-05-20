@@ -253,7 +253,6 @@ ${tempSplitParams[tempParams]}
       identifier,
       identifierSubmit,
       disabled,
-      splitParams
     } = this.state;
     return (
       <div>
